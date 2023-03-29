@@ -1,10 +1,14 @@
 package project.backend.model;
 
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name="KLASIFIKATOR")
-public class Klasifikator extends UredajZaPrikupljanjePodataka{
+public class Klasifikator extends Uredaj{
 
+	public Klasifikator(Long uredajId) {
+		super(uredajId);
+		// TODO Auto-generated constructor stub
+	}
+	
 }

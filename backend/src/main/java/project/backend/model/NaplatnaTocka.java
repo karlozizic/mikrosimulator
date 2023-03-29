@@ -28,10 +28,10 @@ public class NaplatnaTocka {
 	private String usmjerenje; 
 	
 	@ManyToOne
-	private UredajZaPrikupljanjePodataka uredajZaPodatke;
+	private Uredaj uredajZaPodatke;
 
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
-			int geografskaSirina, String usmjerenje, UredajZaPrikupljanjePodataka uredajZaPodatke) {
+			int geografskaSirina, String usmjerenje, Uredaj uredajZaPodatke) {
 		super();
 		this.naplatnaTockaId = naplatnaTockaId;
 		this.oznaka = oznaka;
@@ -103,11 +103,11 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 	}
 
-	public UredajZaPrikupljanjePodataka getUredajZaPodatke() {
+	public Uredaj getUredajZaPodatke() {
 		return uredajZaPodatke;
 	}
 
-	public void setUredajZaPodatke(UredajZaPrikupljanjePodataka uredajZaPodatke) {
+	public void setUredajZaPodatke(Uredaj uredajZaPodatke) {
 		this.uredajZaPodatke = uredajZaPodatke;
 	}
 	
