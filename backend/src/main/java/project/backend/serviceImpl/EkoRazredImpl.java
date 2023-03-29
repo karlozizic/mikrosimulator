@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import project.backend.model.EkoRazred;
 import project.backend.repository.EkoRazredRepository;
 import project.backend.service.EkoRazredServis;
 
+@Service
 public class EkoRazredImpl implements EkoRazredServis {
 	
 	EkoRazredRepository ekoRazredRepository;
