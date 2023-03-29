@@ -17,6 +17,8 @@ public interface VoziloServis {
 	
 	Vozilo stvoriVozilo(Vozilo novoVozilo); 
 	
+	Vozilo obrisiVozilo(Long voziloId); 
+	
 	List<Vozilo> dohvatiSvaVozila(); 
 	
 }

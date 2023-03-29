@@ -38,6 +38,16 @@ public class DionicaImpl implements DionicaServis{
 	public Dionica stvoriDionicu(Dionica novaDionica) {
 		return dionicaRepository.save(novaDionica);
 	}
+	
+	@Override
+	public Dionica obrisiDionicu(Long dionicaId) {
+		Optional<Dionica> dohvatiDionicu = dionicaRepository.findById(dionicaId);
+		if(dohvatiDionicu.isPresent()) {
+			dionicaRepository.deleteById(dionicaId);
+			return dohvatiDionicu.get();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Dionica> dohvatiSveDionice() {

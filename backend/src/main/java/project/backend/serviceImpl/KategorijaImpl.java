@@ -40,6 +40,16 @@ public class KategorijaImpl implements KategorijaServis {
 	}
 
 	@Override
+	public Kategorija obrisiKategoriju(Long kategorijaId) {
+		Optional<Kategorija> dohvatiKategoriju = kategorijaRepository.findById(kategorijaId);
+		if(dohvatiKategoriju.isPresent()) {
+			kategorijaRepository.deleteById(kategorijaId);
+			return dohvatiKategoriju.get();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Kategorija> dohvatiSveKategorije() {
 		List<Kategorija> listaKategorija = kategorijaRepository.findAll();
 		if(listaKategorija != null) {

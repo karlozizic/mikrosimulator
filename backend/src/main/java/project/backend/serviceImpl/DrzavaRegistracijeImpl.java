@@ -1,5 +1,6 @@
 package project.backend.serviceImpl;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,16 @@ public class DrzavaRegistracijeImpl implements DrzavaRegistracijeServis{
 	@Override
 	public DrzavaRegistracije stvoriDrzavuRegistracije(DrzavaRegistracije novaDrzavaRegistracije) {
 		return drzavaRegistracijeRepository.save(novaDrzavaRegistracije);
+	}
+	
+	@Override
+	public DrzavaRegistracije obrisiDrzavuRegistracije(Long drzavaRegistracijeId) {
+		Optional<DrzavaRegistracije> dohvatiDrzavuRegistracije = drzavaRegistracijeRepository.findById(drzavaRegistracijeId);
+		if(dohvatiDrzavuRegistracije.isPresent()) {
+			drzavaRegistracijeRepository.deleteById(drzavaRegistracijeId);
+			return dohvatiDrzavuRegistracije.get();
+		}
+		return null;
 	}
 
 	@Override

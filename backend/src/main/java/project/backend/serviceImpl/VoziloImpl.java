@@ -40,6 +40,16 @@ public class VoziloImpl implements VoziloServis {
 	}
 
 	@Override
+	public Vozilo obrisiVozilo(Long voziloId) {
+		Optional<Vozilo> dohvatiVozilo = voziloRepository.findById(voziloId);
+		if(dohvatiVozilo.isPresent()) {
+			voziloRepository.deleteById(voziloId);
+			return dohvatiVozilo.get();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<Vozilo> dohvatiSvaVozila() {
 		List<Vozilo> listaVozila = voziloRepository.findAll();
 		if(listaVozila != null) {
@@ -47,5 +57,5 @@ public class VoziloImpl implements VoziloServis {
 		}
 		return null;
 	}
-
+	
 }

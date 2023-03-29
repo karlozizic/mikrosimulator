@@ -38,6 +38,16 @@ public class UredajImpl implements UredajServis{
 	public Uredaj stvoriUredaj(Uredaj noviUredaj) {
 		return uredajRepository.save(noviUredaj);
 	}
+	
+	@Override
+	public Uredaj obrisiUredaj(Long uredajId) {
+		Optional<Uredaj> dohvatiUredaj = uredajRepository.findById(uredajId);
+		if(dohvatiUredaj.isPresent()) {
+			uredajRepository.deleteById(uredajId);
+			return dohvatiUredaj.get();
+		}
+		return null;
+	}
 
 	@Override
 	public List<Uredaj> dohvatiSveUredaje() {

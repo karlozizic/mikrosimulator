@@ -17,6 +17,8 @@ public interface DionicaServis {
 	
 	Dionica stvoriDionicu(Dionica novaDionica);
 	
+	Dionica obrisiDionicu(Long dionicaId); 
+	
 	List<Dionica> dohvatiSveDionice(); 
 	
 }

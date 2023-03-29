@@ -1,11 +1,14 @@
 package project.backend.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,6 +74,20 @@ public class DionicaController {
 			ResponseDionica data = new ResponseDionica(dionicaFromDB, null, true, "Uspjesno stvaranje dionice!");
 			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
 		}
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ResponseDionica> deleteDionicu(@PathVariable(name = "id") String idParam){
+		Long dionicaId = Long.parseLong(idParam);
+		Dionica dionica = dionicaService.obrisiDionicu(dionicaId);
+		if(dionica == null) {
+			ResponseDionica data = new ResponseDionica(null, null, false, "Neuspjesno brisanje dionice!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}else {
+			ResponseDionica data = new ResponseDionica(dionica, null, true, "Uspjesno brisanje dionice!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}
+	
 	}
 	
 	

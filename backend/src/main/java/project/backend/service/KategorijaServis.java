@@ -17,6 +17,8 @@ public interface KategorijaServis {
 	
 	Kategorija stvoriKategoriju(Kategorija novaKategorija);
 	
+	Kategorija obrisiKategoriju(Long kategorijaId); 
+	
 	List<Kategorija> dohvatiSveKategorije(); 
 	
 }

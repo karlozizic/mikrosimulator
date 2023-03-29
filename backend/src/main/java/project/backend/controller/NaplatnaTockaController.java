@@ -1,11 +1,14 @@
 package project.backend.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,6 +74,20 @@ public class NaplatnaTockaController {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(naplatnaTockaFromDB, null, true, "Uspjesno stvaranje naplatne tocke!");
 			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
 		}
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ResponseNaplatnaTocka> deleteNaplatnaTocka(@PathVariable(name = "id") String idParam){
+		Long naplatnaTockaId = Long.parseLong(idParam);
+		NaplatnaTocka naplatnaTocka = naplatnaTockaService.obrisiNaplatnuTocku(naplatnaTockaId);
+		if(naplatnaTocka == null) {
+			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, null, false, "Neuspjesno brisanje naplatne tocke!");
+			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
+		}else {
+			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(naplatnaTocka, null, true, "Uspjesno brisanje naplatne tocke!");
+			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
+		}
+	
 	}
 	
 	

@@ -40,6 +40,16 @@ public class EkoRazredImpl implements EkoRazredServis {
 	}
 
 	@Override
+	public EkoRazred obrisiEkoRazred(Long ekoRazredId) {
+		Optional<EkoRazred> dohvatiEkoRazred = ekoRazredRepository.findById(ekoRazredId);
+		if(dohvatiEkoRazred.isPresent()) {
+			ekoRazredRepository.deleteById(ekoRazredId);
+			return dohvatiEkoRazred.get();
+		}
+		return null;
+	}
+	
+	@Override
 	public List<EkoRazred> dohvatiSveEkoRazrede() {
 		List<EkoRazred> listaEkoRazreda = ekoRazredRepository.findAll();
 		if(listaEkoRazreda != null) {

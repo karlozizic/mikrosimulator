@@ -17,6 +17,8 @@ public interface DrzavaRegistracijeServis {
 	
 	DrzavaRegistracije stvoriDrzavuRegistracije(DrzavaRegistracije novaDrzavaRegistracije);
 	
+	DrzavaRegistracije obrisiDrzavuRegistracije(Long drzavaRegistracijeId); 
+	
 	List<DrzavaRegistracije> dohvatiSveDrzaveRegistracije();
 	
 }

@@ -17,6 +17,8 @@ public interface UredajServis {
 	
 	Uredaj stvoriUredaj(Uredaj noviUredaj);
 	
+	Uredaj obrisiUredaj(Long uredajId); 
+	
 	List<Uredaj> dohvatiSveUredaje(); 
 	
 }

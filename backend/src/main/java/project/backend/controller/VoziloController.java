@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,6 +74,19 @@ public class VoziloController {
 		}
 	}
 	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ResponseVozilo> deleteVozilo(@PathVariable(name = "id") String idParam){
+		Long voziloId = Long.parseLong(idParam);
+		Vozilo vozilo = voziloService.obrisiVozilo(voziloId);
+		if(vozilo == null) {
+			ResponseVozilo data = new ResponseVozilo(null, null, false, "Neuspješno brisanje vozila");
+			return new ResponseEntity<ResponseVozilo>(data, HttpStatus.OK);
+		}else{
+			ResponseVozilo data = new ResponseVozilo(vozilo, null, true, "Uspješno brisanje vozila");
+			return new ResponseEntity<ResponseVozilo>(data, HttpStatus.OK);
+		}
+	
+	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<ResponseVozilo> getAllVozila(){

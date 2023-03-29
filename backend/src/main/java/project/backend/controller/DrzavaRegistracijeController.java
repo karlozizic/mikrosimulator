@@ -1,11 +1,14 @@
 package project.backend.controller;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +73,20 @@ public class DrzavaRegistracijeController {
 			ResponseDrzavaRegistracije data = new ResponseDrzavaRegistracije(drzavaRegistracijeFromDB, null, true, "Uspjesno stvaranje drzave registracije!");
 			return new ResponseEntity<ResponseDrzavaRegistracije>(data, HttpStatus.OK);
 		}
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ResponseDrzavaRegistracije> deleteDrzavaRegistracije(@PathVariable(name = "id") String idParam){
+		Long drzavaRegistracijeId = Long.parseLong(idParam);
+		DrzavaRegistracije drzava = drzavaRegistracijeService.obrisiDrzavuRegistracije(drzavaRegistracijeId);
+		if(drzava == null) {
+			ResponseDrzavaRegistracije data = new ResponseDrzavaRegistracije(null, null, false, "Neuspjesno brisanje drzave registracije!");
+			return new ResponseEntity<ResponseDrzavaRegistracije>(data, HttpStatus.OK);
+		}else {
+			ResponseDrzavaRegistracije data = new ResponseDrzavaRegistracije(drzava, null, true, "Uspjesno brisanje drzave registracije!");
+			return new ResponseEntity<ResponseDrzavaRegistracije>(data, HttpStatus.OK);
+		}
+	
 	}
 	
 	@GetMapping("/all")

@@ -1,5 +1,6 @@
 package project.backend.serviceImpl;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -37,6 +38,16 @@ public class NaplatnaTockaImpl implements NaplatnaTockaServis{
 	@Override
 	public NaplatnaTocka stvoriNaplatnuTocku(NaplatnaTocka novaNaplatnaTocka) {
 		return naplatnaTockaRepository.save(novaNaplatnaTocka);
+	}
+	
+	@Override
+	public NaplatnaTocka obrisiNaplatnuTocku(Long naplatnaTockaId) {
+		Optional<NaplatnaTocka> dohvatiNaplatnuTocku = naplatnaTockaRepository.findById(naplatnaTockaId);
+		if(dohvatiNaplatnuTocku.isPresent()) {
+			naplatnaTockaRepository.deleteById(naplatnaTockaId);
+			return dohvatiNaplatnuTocku.get();
+		}
+		return null;
 	}
 
 	@Override

@@ -12,6 +12,8 @@ public interface EkoRazredServis {
 	
 	EkoRazred stvoriEkoRazred(EkoRazred noviEkoRazred);
 	
+	EkoRazred obrisiEkoRazred(Long voziloId); 
+	
 	List<EkoRazred> dohvatiSveEkoRazrede(); 
 	
 }

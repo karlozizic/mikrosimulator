@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,8 +71,22 @@ public class EkoRazredController {
 			ResponseEkoRazred data = new ResponseEkoRazred(ekoRazredFromDB, null, true, "Uspjesno stvaranje eko razreda!");
 			return new ResponseEntity<ResponseEkoRazred>(data, HttpStatus.OK);
 		}
+		
 	}
 	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<ResponseEkoRazred> deleteEkoRazred(@PathVariable(name = "id") String idParam){
+		Long ekoRazredId = Long.parseLong(idParam);
+		EkoRazred ekoRazred = ekoRazredService.obrisiEkoRazred(ekoRazredId);
+		if(ekoRazred == null) {
+			ResponseEkoRazred data = new ResponseEkoRazred(null, null, false, "Neuspjesno brisanje eko razreda!");
+			return new ResponseEntity<ResponseEkoRazred>(data, HttpStatus.OK);
+		}else {
+			ResponseEkoRazred data = new ResponseEkoRazred(ekoRazred, null, true, "Uspjesno brisanje eko razreda!");
+			return new ResponseEntity<ResponseEkoRazred>(data, HttpStatus.OK);
+		}
+	
+	}
 	
 	@GetMapping("/all")
 	public ResponseEntity<ResponseEkoRazred> getAllEkoRazredi(){

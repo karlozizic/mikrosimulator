@@ -1,5 +1,7 @@
 package project.backend.service;
 
+
+
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -16,6 +18,8 @@ public interface NaplatnaTockaServis {
 	NaplatnaTocka updateNaplatneTocke(NaplatnaTocka updatedNaplatnaTocka);
 	
 	NaplatnaTocka stvoriNaplatnuTocku(NaplatnaTocka novaNaplatnaTocka);
+	
+	NaplatnaTocka obrisiNaplatnuTocku(Long naplatnaTockaId); 
 	
 	List<NaplatnaTocka> dohvatiSveNaplatneTocke(); 
 	
