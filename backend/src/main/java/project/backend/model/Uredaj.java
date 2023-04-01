@@ -22,19 +22,19 @@ public class Uredaj {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long uredajId;
+	public Long id;
 
 	public Uredaj(Long uredajId) {
 		super();
-		this.uredajId = uredajId;
+		this.id = uredajId;
 	}
 
 	public Long getUredajId() {
-		return uredajId;
+		return id;
 	}
 
 	public void setUredajId(Long uredajId) {
-		this.uredajId = uredajId;
+		this.id = uredajId;
 	} 
 	
 }

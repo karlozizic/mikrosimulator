@@ -14,7 +14,7 @@ public class Dionica {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long dionicaId;
+	private Long id;
 	
 	private String smjer;
 	
@@ -40,7 +40,7 @@ public class Dionica {
 	public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza,
 			int zavrsnaStacionaza, NaplatnaTocka naplatnaTocka) {
 		super();
-		this.dionicaId = dionicaId;
+		this.id = dionicaId;
 		this.smjer = smjer;
 		this.najvecaBrzina = najvecaBrzina;
 		this.brojTraka = brojTraka;
@@ -55,11 +55,11 @@ public class Dionica {
 	}
 
 	public Long getDionicaId() {
-		return dionicaId;
+		return id;
 	}
 
 	public void setDionicaId(Long dionicaId) {
-		this.dionicaId = dionicaId;
+		this.id = dionicaId;
 	}
 
 	public String getSmjer() {

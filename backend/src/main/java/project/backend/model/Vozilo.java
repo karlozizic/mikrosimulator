@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Vozilo { 
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long voziloId;
+	private Long id;
 	
 	private String nacinNaplate;
 	
@@ -41,7 +41,7 @@ public class Vozilo {
 			String registracijskaOznaka, EkoRazred ekoRazred, Kategorija kategorija,
 			DrzavaRegistracije drzavaRegistracije) {
 		super();
-		this.voziloId = voziloId;
+		this.id = voziloId;
 		this.nacinNaplate = nacinNaplate;
 		this.boja = boja;
 		this.brojOsovina = brojOsovina;
@@ -58,11 +58,11 @@ public class Vozilo {
 	}
 	
 	public Long getVoziloId() {
-		return voziloId;
+		return id;
 	}
 
 	public void setVoziloId(Long voziloId) {
-		this.voziloId = voziloId;
+		this.id = voziloId;
 	}
 
 	public String getNacinNaplate() {
@@ -140,7 +140,7 @@ public class Vozilo {
 	@Override
 	public int hashCode() {
 		return Objects.hash(VIN, boja, brojOsovina, drzavaRegistracije, ekoRazred, idENC, kategorija, nacinNaplate,
-				registracijskaOznaka, voziloId);
+				registracijskaOznaka, id);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class Vozilo {
 				&& Objects.equals(ekoRazred, other.ekoRazred) && idENC == other.idENC
 				&& Objects.equals(kategorija, other.kategorija) && Objects.equals(nacinNaplate, other.nacinNaplate)
 				&& Objects.equals(registracijskaOznaka, other.registracijskaOznaka)
-				&& Objects.equals(voziloId, other.voziloId);
+				&& Objects.equals(id, other.id);
 	}
 	
 	
