@@ -1,10 +1,9 @@
 import React from "react";
 
-function Ekorazred(){
-    const {id, naziv} = props.Ekorazred; 
-
+function Ekorazred(props){
+    const {id, naziv} = props.ekorazred; 
     return(
-    <p>Eko razred 1</p>
+    <p>{id} {naziv}</p>
     );
 }
 

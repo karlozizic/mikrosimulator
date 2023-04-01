@@ -5,7 +5,7 @@ function Card(props) {
   const {children, title} = props;
 
   return (
-    <div className="Card">
+    <div className="EkorazredList">
       {title && <h2>{title}</h2>}
       {children}
     </div>

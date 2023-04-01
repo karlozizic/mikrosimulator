@@ -1,12 +1,12 @@
 import './App.css';
-import EkoRazred from './components/Ekorazred';
+import EkorazredList from "./components/EkorazredList";
 
 function App() {
-  return (
-    <div className='App'>
-      <EkoRazred/>
-    </div>
-  );
+    return(
+      <div>
+          <EkorazredList></EkorazredList>
+      </div>
+    );
 }
 
 export default App;
