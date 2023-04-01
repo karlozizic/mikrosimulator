@@ -1,11 +1,15 @@
 import './App.css';
-import EkorazredList from "./components/EkorazredList";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import EkorazredPageWrapper from "./components/components/wrappers/EkorazredPageWrapper";
 
 function App() {
     return(
-      <div>
-          <EkorazredList></EkorazredList>
-      </div>
+        <div className="App">
+            <Routes>
+                <Route path={"/ekorazredi"} element={<EkorazredPageWrapper/>}/>
+            </Routes>
+        </div>
     );
 }
 
