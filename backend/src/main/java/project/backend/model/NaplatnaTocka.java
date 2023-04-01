@@ -13,7 +13,7 @@ public class NaplatnaTocka {
 
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long naplatnaTockaId;
+	private Long id;
 	
 	private String oznaka;
 	
@@ -33,7 +33,7 @@ public class NaplatnaTocka {
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
 			int geografskaSirina, String usmjerenje, Uredaj uredajZaPodatke) {
 		super();
-		this.naplatnaTockaId = naplatnaTockaId;
+		this.id = naplatnaTockaId;
 		this.oznaka = oznaka;
 		this.naziv = naziv;
 		this.stacionaza = stacionaza;
@@ -48,11 +48,11 @@ public class NaplatnaTocka {
 	}
 
 	public Long getNaplatnaTockaId() {
-		return naplatnaTockaId;
+		return id;
 	}
 
 	public void setNaplatnaTockaId(Long naplatnaTockaId) {
-		this.naplatnaTockaId = naplatnaTockaId;
+		this.id = naplatnaTockaId;
 	}
 
 	public String getOznaka() {

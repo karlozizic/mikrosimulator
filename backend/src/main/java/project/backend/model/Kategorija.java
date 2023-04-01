@@ -14,13 +14,13 @@ public class Kategorija {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long kategorijaId;
+	public Long id;
 	
 	public String naziv;
 
 	public Kategorija(Long kategorijaId, String naziv) {
 		super();
-		this.kategorijaId = kategorijaId;
+		this.id = kategorijaId;
 		this.naziv = naziv;
 	}
 	
@@ -29,11 +29,11 @@ public class Kategorija {
 	}
 
 	public Long getKategorijaId() {
-		return kategorijaId;
+		return id;
 	}
 
 	public void setKategorijaId(Long kategorijaId) {
-		this.kategorijaId = kategorijaId;
+		this.id = kategorijaId;
 	}
 
 	public String getNaziv() {
@@ -46,7 +46,7 @@ public class Kategorija {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(kategorijaId, naziv);
+		return Objects.hash(id, naziv);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class Kategorija {
 		if (getClass() != obj.getClass())
 			return false;
 		Kategorija other = (Kategorija) obj;
-		return Objects.equals(kategorijaId, other.kategorijaId) && Objects.equals(naziv, other.naziv);
+		return Objects.equals(id, other.id) && Objects.equals(naziv, other.naziv);
 	}
 	
 	
