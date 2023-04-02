@@ -4,7 +4,7 @@ import EkorazredComponent from "../../../container/ekorazredPage/EkorazredCompon
 const EkorazredPageWrapper = () => {
     return (
         <>
-            <EkorazredPage/>
+            <EkorazredComponent/>
         </>
     );
 };

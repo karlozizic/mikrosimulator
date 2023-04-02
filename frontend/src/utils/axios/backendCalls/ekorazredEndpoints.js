@@ -27,9 +27,8 @@ export const ekorazredRegister = async (ekorazred) => {
 };
 
 export const deleteEkorazred = async (id) => {
-    const response = await axios.delete("/spring/ekorazred/delete", {
+    const response = await axios.delete("/spring/ekorazred/delete/" + id, {
         params: {
-            id: id
         }
     });
     return response.data;
