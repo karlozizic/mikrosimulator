@@ -1,7 +1,8 @@
 import React from "react";
 import Ekorazred from "./Ekorazred";
-import {getAllEkorazredi} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import "../../utils/axios/backendCalls/ekorazredEndpoints";
 import "bootstrap/dist/css/bootstrap.min.css";
+import {getAllEkorazredi} from "../../utils/axios/backendCalls/ekorazredEndpoints";
 const EkorazredPage = () => {
 
     const [allEkorazredi, setAllEkorazredi] = React.useState([]);
