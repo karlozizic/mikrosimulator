@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, Row, Table } from 'reactstrap';
 import Ekorazred from "./Ekorazred";
 import {getAllEkorazredi, getEkorazred, ekorazredEdit, ekorazredRegister, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
-
+import { useNavigate } from "react-router-dom";
 
 export default class EkorazredComponent extends Component {
 
@@ -12,7 +12,6 @@ export default class EkorazredComponent extends Component {
         this.state = {
             ekorazredi: []
         }
-
         this.addEkorazred = this.addEkorazred.bind(this);
         this.editEkorazred = this.editEkorazred.bind(this);
         this.ekorazredDelete = this.ekorazredDelete.bind(this);

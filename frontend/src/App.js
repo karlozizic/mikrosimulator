@@ -1,11 +1,13 @@
 import './App.css';
-import React from "react";
+import React, { Component }  from 'react';
 import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppHeader from "./container/appHeader/appHeader";
 
 import HomePageWrapper from "./components/components/wrappers/HomePageWrapper";
-import EkorazredPageWrapper from "./components/components/wrappers/EkorazredPageWrapper";
+import EkorazredComponent from "./container/ekorazredPage/EkorazredComponent";
+import CreateEkorazredComponent from "./container/ekorazredPage/CreateEkorazredComponent";
+// import UpdateEkorazredComponent from "./container/ekorazredPage/UpdateEkorazredComponent";
 
 function App() {
     return(
@@ -13,7 +15,9 @@ function App() {
             <AppHeader/>
             <Routes>
                 <Route path={"/"} element={<HomePageWrapper/>}/>
-                <Route path={"/ekorazredi"} element={<EkorazredPageWrapper/>}/>
+                <Route path={"/ekorazredi"} element={<EkorazredComponent/>}/>
+                <Route path={"/add-ekorazred"} element={<CreateEkorazredComponent/>}/>
+                {/*<Route path={"/update-ekorazred/:id"} element={<UpdateEkorazredComponent/>}/>*/}
             </Routes>
         </div>
     );
