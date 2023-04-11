@@ -1,85 +1,70 @@
 import React, { Component } from 'react'
+import { useEffect, useState } from 'react';
 import { Button, Row, Table } from 'reactstrap';
 import Ekorazred from "./Ekorazred";
 import {getAllEkorazredi, getEkorazred, ekorazredEdit, ekorazredRegister, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
 import { useNavigate } from "react-router-dom";
 
-export default class EkorazredComponent extends Component {
+const EkorazredComponent = () => {
 
-    constructor(props) {
-        super(props)
+    const [ekorazredi, setEkorazredi] = useState([]);
+    const navigate = useNavigate();
 
-        this.state = {
-            ekorazredi: []
-        }
-        this.addEkorazred = this.addEkorazred.bind(this);
-        this.editEkorazred = this.editEkorazred.bind(this);
-        this.ekorazredDelete = this.ekorazredDelete.bind(this);
-    }
-
-    componentDidMount(){
+    useEffect(() => {
         getAllEkorazredi().then((res) => {
-            this.setState({
-                ekorazredi: res.listaEkoRazreda
-            });
+            setEkorazredi(res.listaEkoRazreda);
         });
-    }
+    }, []);
 
-    addEkorazred()
-    {
-        this.props.history.push('/register');
-    }
+    const addEkorazred = () => {
+        navigate('/add-ekorazred');
+    };
 
-    editEkorazred(id)
-    {
+    const editEkorazred = (id) => {
+        navigate(`/update-ekorazred/${id}`);
+    };
 
-        this.props.history.push(`/update/${id}`);
-    }
-
-    ekorazredDelete(id)
-    {
+    const ekorazredDelete = (id) => {
         deleteEkorazred(id).then(res => {
-            this.setState({ekorazredi : this.state.ekorazredi.filter(ekorazred => ekorazred.id !== id)});
-        })
+            setEkorazredi(prevEkorazredi => prevEkorazredi.filter(ekorazred => ekorazred.id !== id));
+        });
+    };
 
-    }
-
-
-    render() {
-        return (
-            <div>
-                <h2 className="text-center" style={{padding:"1em"}}>Ekorazred List</h2>
-                <div style={{textAlign:'left'}}>
-                    <Button color="primary" onClick={this.addEkorazred}>Add Ekorazred</Button>
-                </div>
-                <Row>
-                    <Table striped bordered responsive hover>
-                        <thead>
-                        <tr>
-                            <th>Ekorazred ID</th>
-                            <th>Ekorazred Naziv</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {
-                            this.state.ekorazredi.map(
-                                ekorazred =>
-                                    <tr key = {ekorazred.id}>
-                                        <td> {ekorazred.id} </td>
-                                        <td> {ekorazred.naziv} </td>
-                                        <td>
-                                            <Button onClick={ ()=> this.editEkorazred(ekorazred.id) } color="primary">Update</Button>
-                                            <Button style={{marginLeft: "1em"}} onClick={ ()=> this.ekorazredDelete(ekorazred.id) } color="danger">Delete</Button>
-                                        </td>
-                                    </tr>
-                            )
-                        }
-                        </tbody>
-                    </Table>
-                </Row>
-
+    return (
+        <div>
+            <h2 className="text-center" style={{padding:"1em"}}>Ekorazred List</h2>
+            <div style={{textAlign:'left'}}>
+                <Button color="primary" onClick={addEkorazred}>Add Ekorazred</Button>
             </div>
-        )
-    }
+            <Row>
+                <Table striped bordered responsive hover>
+                    <thead>
+                    <tr>
+                        <th>Ekorazred ID</th>
+                        <th>Ekorazred Naziv</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {ekorazredi.map((ekorazred) => (
+                        <tr key={ekorazred.id}>
+                            <td>{ekorazred.id}</td>
+                            <td>{ekorazred.naziv}</td>
+                            <td>
+                                <Button onClick={() => editEkorazred(ekorazred.id)} color="primary">
+                                    Update
+                                </Button>
+                                <Button style={{marginLeft: "1em"}} onClick={() => ekorazredDelete(ekorazred.id)} color="danger">
+                                    Delete
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </Table>
+            </Row>
+        </div>
+    );
+};
 
-}
+
+export default EkorazredComponent;

@@ -1,65 +1,57 @@
-import React, { Component } from 'react'
-import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap'
-import {getAllEkorazredi, getEkorazred, ekorazredEdit, ekorazredRegister, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
+import { ekorazredRegister } from '../../utils/axios/backendCalls/ekorazredEndpoints';
 
+const CreateEkorazredComponent = () => {
+    const [naziv, setNaziv] = useState('');
+    const navigate = useNavigate();
 
-export default class CreateEkorazredComponent extends Component {
-    constructor(props){
-        super(props)
-
-        this.state = {
-            naziv: ''
-        }
-
-        this.changeHandler = this.changeHandler.bind(this);
-        this.saveEkorazred = this.saveEkorazred.bind(this);
-    }
-
-    saveEkorazred = (e) => {
+    const saveEkorazred = (e) => {
         e.preventDefault();
-        let ekorazred = {naziv: this.state.naziv};
-        console.log('employee = '+ JSON.stringify(ekorazred));
+        const ekorazred = { naziv };
+        console.log('ekorazred = ' + JSON.stringify(ekorazred));
 
-        //tu treba pozvati ekorazredRegister iz endpointova!
-        // EmployeeService.createEmployee(employee).then(res => {
-        //     this.props.history.push('/employees');
-        // });
+        ekorazredRegister(ekorazred).then(() => {
+            navigate('/ekorazredi');
+        });
+    };
 
-    }
+    const changeHandler = (event) => {
+        setNaziv(event.target.value);
+    };
 
-    changeHandler = (event)=>{
-        this.setState({ [event.target.name]: event.target.value });
-    }
+    const cancel = () => {
+        navigate('/ekorazredi');
+    };
 
-    //u slucaju da je neuspjesna registracija
-    cancel()
-    {
-        this.props.history.push('/ekorazredi')
-    }
+    return (
+        <div>
+            <Container>
+                <Row>
+                    <Card>
+                        <Col>
+                            <h3>Add Ekorazred</h3>
+                            <CardBody>
+                                <Form>
+                                    <FormGroup style={{ padding: '1em' }}>
+                                        <label>Naziv:</label>
+                                        <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
+                                    </FormGroup>
+                                    <Button color="success" onClick={saveEkorazred}>
+                                        Save
+                                    </Button>
+                                    <Button color="danger" onClick={cancel}>
+                                        Cancel
+                                    </Button>
+                                </Form>
+                            </CardBody>
+                        </Col>
+                    </Card>
+                </Row>
+            </Container>
+        </div>
+    );
+};
 
-    render() {
-        return (
-            <div>
-                <Container>
-                    <Row>
-                        <Card>
-                            <Col>
-                                <h3>Add Ekorazred</h3>
-                                <CardBody>
-                                    <Form>
-                                        <FormGroup style={{padding:"1em"}}>
-                                            <label>Naziv:</label>
-                                            <input name="naziv" className='form-control' value={this.state.naziv} onChange={this.changeHandler}></input>
-                                        </FormGroup>
-                                        <Button color="success" onClick={this.saveEkorazred}>Save</Button>
-                                        <Button color="danger"onClick={this.cancel.bind(this)}>Cancel</Button>
-                                    </Form>
-                                </CardBody>
-                            </Col>
-                        </Card>
-                    </Row>
-                </Container>
-            </div>
-        )
-    }
-}
+export default CreateEkorazredComponent;
