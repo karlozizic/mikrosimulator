@@ -11,10 +11,8 @@ export const getEkorazred = async (id) => {
 
 export const ekorazredEdit = async (ekorazred) => {
     const response = await axios.put("/spring/ekorazred/update", {
-        ekorazred: {
-            id: ekorazred.id,
-            naziv: ekorazred.naziv,
-        }
+        id: ekorazred.id,
+        naziv: ekorazred.naziv,
     });
     return response.data;
 };

@@ -9,16 +9,18 @@ const UpdateEkorazredComponent = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //       const result = await getEkorazred(id);
-    //         ekorazredEdit(result.data);
-    //     };
-    // }, [id]);
+    useEffect(() => {
+        getEkorazred(id).then((res) => {
+           setNaziv(res.ekoRazred.naziv);
+        });
+    }, [id]);
 
     const updateFunction = (e) => {
         e.preventDefault();
-        let ekorazred = { id, naziv };
+        const ekorazred = {
+            id: id,
+            naziv: naziv
+        }
         console.log('ekorazred = ' + JSON.stringify(ekorazred));
 
         ekorazredEdit(ekorazred).then(() => {
