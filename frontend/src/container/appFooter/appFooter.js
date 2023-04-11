@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import { Container, Nav, Navbar } from 'reactstrap'
 
-export default class FooterComponent extends Component {
+export default class AppFooter extends Component {
     render() {
         return (
             <div>
