@@ -1,17 +1,46 @@
-import React, { Component } from 'react'
-import { Container, Nav, Navbar } from 'reactstrap'
+import React, {useState} from 'react'
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-export default class AppHeader extends Component {
-    render() {
-        return (
-            <div>
-                <header>
-                    <nav className="navbar navbar-expand-md navbar-dark bg-dark" style={{padding:"1em"}} >
-                        <div><a href="/" className="navbar-brand">Mikrosimulator naplacivanja cestarine</a></div>
-                        <div><a href="/ekorazredi" className="navbar-brand">Ekorazredi</a></div>
-                    </nav>
-                </header>
-            </div>
-        )
-    };
+const AppHeader = () =>  {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggle = () => setIsOpen(!isOpen);
+
+    return (
+        <div>
+            <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">Mikrosimulator naplacivanja cestarine</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="ml-auto" navbar>
+                        {/*<NavItem>*/}
+                        {/*    <NavLink href="/components/">Components</NavLink>*/}
+                        {/*</NavItem>*/}
+                        {/*<NavItem>*/}
+                        {/*    <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>*/}
+                        {/*</NavItem>*/}
+                        <UncontrolledDropdown nav inNavbar>
+                            <DropdownToggle nav caret>
+                                CRUD
+                            </DropdownToggle>
+                            <DropdownMenu right>
+                                <DropdownItem href="/ekorazredi">
+                                   Ekorazred
+                                </DropdownItem>
+                                {/*<DropdownItem>*/}
+                                {/*    Option 2*/}
+                                {/*</DropdownItem>*/}
+                                {/*<DropdownItem divider />*/}
+                                {/*<DropdownItem>*/}
+                                {/*    Reset*/}
+                                {/*</DropdownItem>*/}
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                    </Nav>
+                </Collapse>
+            </Navbar>
+        </div>
+    );
 }
+
+export default AppHeader;

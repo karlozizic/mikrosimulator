@@ -1,14 +1,20 @@
-import React, { Component } from 'react'
-import { Container, Nav, Navbar } from 'reactstrap'
+import React from 'react'
+import { Container, Row, Col } from 'reactstrap';
 
-export default class AppFooter extends Component {
-    render() {
-        return (
-            <div>
-                <footer className="footer" >
-                    <span className="text-muted">Zavrsni rad - 2023</span>
-                </footer>
-            </div>
-        )
-    }
+const AppFooter = () => {
+    return (
+        <div>
+            <footer className="footer bg-light" >
+                <Container fluid >
+                    <Row>
+                        <Col>
+                            <span className="text-muted">Zavrsni rad - 2023</span>
+                        </Col>
+                    </Row>
+                </Container>
+            </footer>
+        </div>
+    )
 }
+
+export default AppFooter;
