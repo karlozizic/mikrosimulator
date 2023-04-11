@@ -28,8 +28,7 @@ public class EkoRazredImpl implements EkoRazredServis {
 	public EkoRazred updateEkoRazreda(EkoRazred updatedEkoRazred) {
 		Optional<EkoRazred> ekoRazredOptional = ekoRazredRepository.findById(updatedEkoRazred.getEkoRazredId());
 		if(ekoRazredOptional.isPresent()) {
-			EkoRazred ekoRazred = ekoRazredOptional.get(); 
-			return ekoRazredRepository.saveAndFlush(ekoRazred); 
+			return ekoRazredRepository.saveAndFlush(updatedEkoRazred); 
 		}
 		return null;
 	}
