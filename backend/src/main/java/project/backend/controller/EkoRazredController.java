@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import project.backend.model.EkoRazred;
 import project.backend.model.ResponseEkoRazred;
@@ -28,8 +29,8 @@ public class EkoRazredController {
 		this.ekoRazredService = ekoRazredService;
 	}
 	
-	@GetMapping("/fetch/{id}")
-	public ResponseEntity<ResponseEkoRazred> getEkoRazred(@PathVariable(name = "id") String id){
+	@GetMapping("/fetch")
+	public ResponseEntity<ResponseEkoRazred> getEkoRazred(@RequestParam(name = "id") String id){
 		
 		Long longId = Long.parseLong(id);
 		EkoRazred ekoRazredFromDB = ekoRazredService.dohvatiEkoRazredPoId(longId);

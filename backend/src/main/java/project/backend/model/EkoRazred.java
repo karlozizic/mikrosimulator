@@ -14,13 +14,13 @@ public class EkoRazred {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long ekoRazredId;
+	public Long id;
 	
 	public String naziv;
 
 	public EkoRazred(Long ekoRazredId, String naziv) {
 		super();
-		this.ekoRazredId = ekoRazredId;
+		this.id = ekoRazredId;
 		this.naziv = naziv;
 	}
 	
@@ -29,11 +29,11 @@ public class EkoRazred {
 	}
 
 	public Long getEkoRazredId() {
-		return ekoRazredId;
+		return id;
 	}
 
 	public void setEkoRazredId(Long ekoRazredId) {
-		this.ekoRazredId = ekoRazredId;
+		this.id = ekoRazredId;
 	}
 
 	public String getNaziv() {
@@ -46,7 +46,7 @@ public class EkoRazred {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ekoRazredId, naziv);
+		return Objects.hash(id, naziv);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class EkoRazred {
 		if (getClass() != obj.getClass())
 			return false;
 		EkoRazred other = (EkoRazred) obj;
-		return Objects.equals(ekoRazredId, other.ekoRazredId) && Objects.equals(naziv, other.naziv);
+		return Objects.equals(id, other.id) && Objects.equals(naziv, other.naziv);
 	} 
 	
 	

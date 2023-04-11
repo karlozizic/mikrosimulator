@@ -14,13 +14,13 @@ public class DrzavaRegistracije {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long drzavaRegistracijeId;
+	public Long id;
 	
 	public String naziv;
 
 	public DrzavaRegistracije(Long drzavaRegistracijeId, String naziv) {
 		super();
-		this.drzavaRegistracijeId = drzavaRegistracijeId;
+		this.id = drzavaRegistracijeId;
 		this.naziv = naziv;
 	}
 	
@@ -29,11 +29,11 @@ public class DrzavaRegistracije {
 	}
 
 	public Long getDrzavaRegistracijeId() {
-		return drzavaRegistracijeId;
+		return id;
 	}
 
 	public void setDrzavaRegistracijeId(Long drzavaRegistracijeId) {
-		this.drzavaRegistracijeId = drzavaRegistracijeId;
+		this.id = drzavaRegistracijeId;
 	}
 
 	public String getNaziv() {
@@ -46,7 +46,7 @@ public class DrzavaRegistracije {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(drzavaRegistracijeId, naziv);
+		return Objects.hash(id, naziv);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class DrzavaRegistracije {
 		if (getClass() != obj.getClass())
 			return false;
 		DrzavaRegistracije other = (DrzavaRegistracije) obj;
-		return Objects.equals(drzavaRegistracijeId, other.drzavaRegistracijeId) && Objects.equals(naziv, other.naziv);
+		return Objects.equals(id, other.id) && Objects.equals(naziv, other.naziv);
 	}
 	
 	

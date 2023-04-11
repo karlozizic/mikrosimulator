@@ -6,8 +6,8 @@ import jakarta.persistence.Entity;
 @Entity
 public class Primopredajnik extends Uredaj{
 
-	public Primopredajnik(Long uredajId) {
-		super(uredajId);
+	public Primopredajnik(Long id) {
+		super(id);
 		// TODO Auto-generated constructor stub
 	}
 	
