@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import {getEkorazred, ekorazredEdit} from "../../utils/axios/backendCalls/ekorazredEndpoints";
-import ekorazred from "./Ekorazred";
 
 const UpdateEkorazredComponent = () => {
     const [naziv, setNaziv] = useState('');

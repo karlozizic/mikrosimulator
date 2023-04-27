@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useEffect, useState } from 'react';
 import { Button, Row, Table } from 'reactstrap';
-import Ekorazred from "./Ekorazred";
-import {getAllEkorazredi, getEkorazred, ekorazredEdit, ekorazredRegister, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getAllEkorazredi, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
 import { useNavigate } from "react-router-dom";
 
 const EkorazredComponent = () => {
