@@ -28,8 +28,7 @@ public class VoziloImpl implements VoziloServis {
 	public Vozilo updateVozila(Vozilo updatedVozilo) {
 		Optional<Vozilo> voziloOptional = voziloRepository.findById(updatedVozilo.getVoziloId());
 		if(voziloOptional.isPresent()) {
-			Vozilo vozilo = voziloOptional.get(); 
-			return voziloRepository.saveAndFlush(vozilo); 
+			return voziloRepository.saveAndFlush(updatedVozilo);
 		}
 		return null;
 	}

@@ -29,8 +29,7 @@ public class NaplatnaTockaImpl implements NaplatnaTockaServis{
 	public NaplatnaTocka updateNaplatneTocke(NaplatnaTocka updatedNaplatnaTocka) {
 		Optional<NaplatnaTocka> naplatnaTockaOptional = naplatnaTockaRepository.findById(updatedNaplatnaTocka.getNaplatnaTockaId());
 		if(naplatnaTockaOptional.isPresent()) {
-			NaplatnaTocka naplatnaTocka = naplatnaTockaOptional.get(); 
-			return naplatnaTockaRepository.saveAndFlush(naplatnaTocka); 
+			return naplatnaTockaRepository.saveAndFlush(updatedNaplatnaTocka);
 		}
 		return null;
 	}

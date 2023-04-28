@@ -28,8 +28,7 @@ public class DionicaImpl implements DionicaServis{
 	public Dionica updateDionice(Dionica updatedDionica) {
 		Optional<Dionica> dionicaOptional = dionicaRepository.findById(updatedDionica.getDionicaId());
 		if(dionicaOptional.isPresent()) {
-			Dionica dionica = dionicaOptional.get(); 
-			return dionicaRepository.saveAndFlush(dionica); 
+			return dionicaRepository.saveAndFlush(updatedDionica);
 		}
 		return null;
 	}

@@ -14,6 +14,9 @@ import DionicaComponent from "./container/dionicaPage/DionicaComponent";
 import CreateDionicaComponent from "./container/dionicaPage/CreateDionicaComponent";
 import UpdateDionicaComponent from "./container/dionicaPage/UpdateDionicaComponent";
 
+import DrzavaComponent from "./container/drzavaPage/DrzavaComponent";
+import CreateDrzavaComponent from "./container/drzavaPage/CreateDrzavaComponent";
+import UpdateDrzavaComponent from "./container/drzavaPage/UpdateDrzavaComponent";
 
 function App() {
     return(
@@ -30,13 +33,17 @@ function App() {
                 <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
                 <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
 
-                {/*<Route path={"/drzave"} element={<DrzavaComponent/>}/>*/}
-                {/*<Route path={"/add-drzava"} element={<CreateDrzavaComponent/>}/>*/}
-                {/*<Route path={"/update-drzava/:id"} element={<UpdateDrzavaComponent/>}/>*/}
+                <Route path={"/drzave"} element={<DrzavaComponent/>}/>
+                <Route path={"/add-drzava"} element={<CreateDrzavaComponent/>}/>
+                <Route path={"/update-drzava/:id"} element={<UpdateDrzavaComponent/>}/>
 
                 {/*<Route path={"/kategorije"} element={<KategorijaComponent/>}/>*/}
                 {/*<Route path={"/add-kategorija"} element={<CreateKategorijaComponent/>}/>*/}
                 {/*<Route path={"/update-kategorija/:id"} element={<UpdateKategorijaComponent/>}/>*/}
+
+                {/*<Route path={"/vozila"} element={<VoziloComponent/>}/>*/}
+                {/*<Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>*/}
+                {/*<Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>*/}
 
                 {/*<Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>*/}
                 {/*<Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>*/}
@@ -45,10 +52,6 @@ function App() {
                 {/*<Route path={"/uredaj"} element={<UredajComponent/>}/>*/}
                 {/*<Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>*/}
                 {/*<Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>*/}
-
-                {/*<Route path={"/vozila"} element={<VoziloComponent/>}/>*/}
-                {/*<Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>*/}
-                {/*<Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>*/}
 
             </Routes>
             <AppFooter/>

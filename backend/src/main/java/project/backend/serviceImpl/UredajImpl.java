@@ -28,8 +28,7 @@ public class UredajImpl implements UredajServis{
 	public Uredaj updateUredaja(Uredaj updatedUredaj) {
 		Optional<Uredaj> uredajOptional = uredajRepository.findById(updatedUredaj.getUredajId());
 		if(uredajOptional.isPresent()) {
-			Uredaj uredaj = uredajOptional.get(); 
-			return uredajRepository.saveAndFlush(uredaj); 
+			return uredajRepository.saveAndFlush(updatedUredaj);
 		}
 		return null;
 	}
