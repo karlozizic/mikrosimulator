@@ -10,9 +10,9 @@ const UpdateEkorazredComponent = () => {
     const [brojOsovina, setBrojOsovina] = useState('');
     const [idENC, setIDEnc] = useState('');
     const [registracijskaOznaka, setRegistracijskaOznaka] = useState('');
-    const [ekoRazred, setEkoRazred] = useState('');
-    const [kategorija, setKategorija] = useState('');
-    const [drzavaRegistracije, setDrzavaRegistracije] = useState('');
+    const [ekoRazredId, setEkoRazred] = useState('');
+    const [kategorijaId, setKategorija] = useState('');
+    const [drzavaRegistracijeId, setDrzavaRegistracije] = useState('');
     const [vin, setVin] = useState('');
 
     const navigate = useNavigate();
@@ -25,9 +25,9 @@ const UpdateEkorazredComponent = () => {
             res.vozilo.brojOsovina === null ? setBrojOsovina('') : setBrojOsovina(res.vozilo.brojOsovina);
             res.vozilo.idENC === null ? setIDEnc('') : setIDEnc(res.vozilo.idENC);
             res.vozilo.registracijskaOznaka === null ? setRegistracijskaOznaka('') : setRegistracijskaOznaka(res.vozilo.registracijskaOznaka);
-            res.vozilo.ekoRazred === null ? setEkoRazred('') : setEkoRazred(res.vozilo.ekoRazred);
-            res.vozilo.kategorija === null ? setKategorija('') : setKategorija(res.vozilo.kategorija);
-            res.vozilo.drzavaRegistracije === null ? setDrzavaRegistracije('') : setDrzavaRegistracije(res.vozilo.drzavaRegistracije);
+            res.vozilo.ekoRazredId === null ? setEkoRazred('') : setEkoRazred(res.vozilo.ekoRazred.id);
+            res.vozilo.kategorijaId === null ? setKategorija('') : setKategorija(res.vozilo.kategorija.id);
+            res.vozilo.drzavaRegistracijeId === null ? setDrzavaRegistracije('') : setDrzavaRegistracije(res.vozilo.drzavaRegistracije.id);
             res.vozilo.vin === null ? setVin('') : setVin(res.vozilo.vin);
 
             // setBoja(res.vozilo.nacinNaplate);
@@ -45,15 +45,15 @@ const UpdateEkorazredComponent = () => {
     const updateFunction = (e) => {
         e.preventDefault();
         const vozilo = {
-            id: id,
+            voziloId: id,
             nacinNaplate: nacinNaplate,
             boja: boja,
             brojOsovina: brojOsovina,
             idENC: idENC,
             registracijskaOznaka: registracijskaOznaka,
-            ekoRazred: ekoRazred,
-            kategorija: kategorija,
-            drzavaRegistracije: drzavaRegistracije,
+            ekoRazredId: ekoRazredId,
+            kategorijaId: kategorijaId,
+            drzavaRegistracijeId: drzavaRegistracijeId,
             vin: vin,
         }
         console.log('vozilo = ' + JSON.stringify(vozilo));
@@ -81,13 +81,13 @@ const UpdateEkorazredComponent = () => {
             case 'registracijskaOznaka':
                 setRegistracijskaOznaka(value);
                 break;
-            case 'ekoRazred':
+            case 'ekoRazredId':
                 setEkoRazred(value);
                 break;
-            case 'kategorija':
+            case 'kategorijaId':
                 setKategorija(value);
                 break;
-            case 'drzavaRegistracije':
+            case 'drzavaRegistracijeId':
                 setDrzavaRegistracije(value);
                 break;
             case 'vin':
@@ -123,12 +123,12 @@ const UpdateEkorazredComponent = () => {
                                         <input name="idENC" className="form-control" value={idENC} onChange={changeHandler}></input>
                                         <label>Registracijska oznaka:</label>
                                         <input name="registracijskaOznaka" className="form-control" value={registracijskaOznaka} onChange={changeHandler}></input>
-                                        <label>Eko razred:</label>
-                                        <input name="ekoRazred" className="form-control" value={ekoRazred} onChange={changeHandler}></input>
-                                        <label>Kategorija:</label>
-                                        <input name="kategorija" className="form-control" value={kategorija} onChange={changeHandler}></input>
-                                        <label>Drzava Registracije:</label>
-                                        <input name="drzavaRegistracije" className="form-control" value={drzavaRegistracije} onChange={changeHandler}></input>
+                                        <label>Eko razred Id:</label>
+                                        <input name="ekoRazredId" className="form-control" value={ekoRazredId} onChange={changeHandler}></input>
+                                        <label>Kategorija Id:</label>
+                                        <input name="kategorijaId" className="form-control" value={kategorijaId} onChange={changeHandler}></input>
+                                        <label>Drzava Registracije Id:</label>
+                                        <input name="drzavaRegistracijeId" className="form-control" value={drzavaRegistracijeId} onChange={changeHandler}></input>
                                         <label>VIN:</label>
                                         <input name="vin" className="form-control" value={vin} onChange={changeHandler}></input>
                                     </FormGroup>

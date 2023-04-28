@@ -37,10 +37,24 @@ public class VoziloImpl implements VoziloServis {
 	}
 
 	@Override
-	public Vozilo updateVozila(Vozilo updatedVozilo) {
-
+	public Vozilo updateVozila(Vozilo updatedVozilo, Long ekoRazredId, Long kategorijaId, Long drzavaId) {
 		Optional<Vozilo> voziloOptional = voziloRepository.findById(updatedVozilo.getVoziloId());
 		if(voziloOptional.isPresent()) {
+			Optional<EkoRazred> ekoRazredOptional = ekoRazredRepository.findById(ekoRazredId);
+			if (ekoRazredOptional.isPresent()) {
+				EkoRazred ekoRazred = ekoRazredOptional.get();
+				updatedVozilo.setEkoRazred(ekoRazred);
+			}
+			Optional<Kategorija> kategorijaOptional = kategorijaRepository.findById(kategorijaId);
+			if (kategorijaOptional.isPresent()) {
+				Kategorija kategorija = kategorijaOptional.get();
+				updatedVozilo.setKategorija(kategorija);
+			}
+			Optional<DrzavaRegistracije> drzavaRegistracijeOptional = drzavaRegistracijeRepository.findById(drzavaId);
+			if (drzavaRegistracijeOptional.isPresent()) {
+				DrzavaRegistracije drzavaRegistracije = drzavaRegistracijeOptional.get();
+				updatedVozilo.setDrzavaRegistracije(drzavaRegistracije);
+			}
 			return voziloRepository.saveAndFlush(updatedVozilo);
 		}
 		return null;

@@ -9,16 +9,16 @@ const CreateVoziloComponent = () => {
     const [brojOsovina, setBrojOsovina] = useState('');
     const [idENC, setIDEnc] = useState('');
     const [registracijskaOznaka, setRegistracijskaOznaka] = useState('');
-    const [ekoRazred, setEkoRazred] = useState('');
-    const [kategorija, setKategorija] = useState('');
-    const [drzavaRegistracije, setDrzavaRegistracije] = useState('');
+    const [ekoRazredId, setEkoRazred] = useState('');
+    const [kategorijaId, setKategorija] = useState('');
+    const [drzavaRegistracijeId, setDrzavaRegistracije] = useState('');
     const [vin, setVin] = useState('');
 
     const navigate = useNavigate();
 
-    const saveEkorazred = (e) => {
+    const saveVozilo = (e) => {
         e.preventDefault();
-        const vozilo = { nacinNaplate, boja, brojOsovina, idENC, registracijskaOznaka, ekoRazred, kategorija, drzavaRegistracije, vin };
+        const vozilo = { nacinNaplate, boja, brojOsovina, idENC, registracijskaOznaka, ekoRazredId, kategorijaId, drzavaRegistracijeId, vin };
         console.log('ekorazred = ' + JSON.stringify(vozilo));
 
         voziloRegister(vozilo).then(() => {
@@ -44,13 +44,13 @@ const CreateVoziloComponent = () => {
             case 'registracijskaOznaka':
                 setRegistracijskaOznaka(value);
                 break;
-            case 'ekoRazred':
+            case 'ekoRazredId':
                 setEkoRazred(value);
                 break;
-            case 'kategorija':
+            case 'kategorijaId':
                 setKategorija(value);
                 break;
-            case 'drzavaRegistracije':
+            case 'drzavaRegistracijeId':
                 setDrzavaRegistracije(value);
                 break;
             case 'vin':
@@ -85,16 +85,16 @@ const CreateVoziloComponent = () => {
                                         <input name="idENC" className="form-control" value={idENC} onChange={changeHandler}></input>
                                         <label>Registracijska oznaka:</label>
                                         <input name="registracijskaOznaka" className="form-control" value={registracijskaOznaka} onChange={changeHandler}></input>
-                                        <label>Eko razred:</label>
-                                        <input name="ekoRazred" className="form-control" value={ekoRazred} onChange={changeHandler}></input>
-                                        <label>Kategorija:</label>
-                                        <input name="kategorija" className="form-control" value={kategorija} onChange={changeHandler}></input>
-                                        <label>Drzava Registracije:</label>
-                                        <input name="drzavaRegistracije" className="form-control" value={drzavaRegistracije} onChange={changeHandler}></input>
+                                        <label>Eko razred Id:</label>
+                                        <input name="ekoRazredId" className="form-control" value={ekoRazredId} onChange={changeHandler}></input>
+                                        <label>Kategorija Id:</label>
+                                        <input name="kategorijaId" className="form-control" value={kategorijaId} onChange={changeHandler}></input>
+                                        <label>Drzava Registracije Id:</label>
+                                        <input name="drzavaRegistracijeId" className="form-control" value={drzavaRegistracijeId} onChange={changeHandler}></input>
                                         <label>VIN:</label>
                                         <input name="vin" className="form-control" value={vin} onChange={changeHandler}></input>
                                     </FormGroup>
-                                    <Button color="success" onClick={saveEkorazred}>
+                                    <Button color="success" onClick={saveVozilo}>
                                         Save
                                     </Button>
                                     <Button color="danger" onClick={cancel}>

@@ -10,33 +10,30 @@ export const getVozilo = async (id) => {
 }
 
 export const voziloEdit = async (vozilo) => {
-    const response = await axios.put("/spring/vozilo/update", {
-        id: vozilo.voziloId,
+    console.log(vozilo);
+    const response = await axios.put("/spring/vozilo/update?ekorazredId=" + vozilo.ekoRazredId + "&drzavaId=" + vozilo.drzavaRegistracijeId + "&kategorijaId=" + vozilo.kategorijaId, {
+        voziloId: vozilo.voziloId,
         nacinNaplate: vozilo.nacinNaplate,
         boja: vozilo.boja,
         brojOsovina: vozilo.brojOsovina,
         idENC: vozilo.idENC,
-        registracijaOznaka: vozilo.registracijaOznaka,
-        ekoRazred: vozilo.ekoRazred,
-        kategorija: vozilo.kategorija,
-        drzavaRegistracije: vozilo.drzavaRegistracije,
+        registracijskaOznaka: vozilo.registracijskaOznaka,
         vin: vozilo.vin,
     });
     return response.data;
 };
 
 export const voziloRegister = async (vozilo) => {
-    const response = await axios.post("/spring/vozilo/register", {
-        nacinNaplate: vozilo.nacinNaplate,
-        boja: vozilo.boja,
-        brojOsovina: vozilo.brojOsovina,
-        idENC: vozilo.idENC,
-        registracijaOznaka: vozilo.registracijaOznaka,
-        ekoRazred: vozilo.ekoRazred,
-        kategorija: vozilo.kategorija,
-        drzavaRegistracije: vozilo.drzavaRegistracije,
-        vin: vozilo.vin,
-    });
+
+    const response = await axios.post("/spring/vozilo/register?ekorazredId=" + vozilo.ekoRazredId + "&drzavaId=" + vozilo.drzavaRegistracijeId + "&kategorijaId=" + vozilo.kategorijaId , {
+            id: vozilo.voziloId,
+            nacinNaplate: vozilo.nacinNaplate,
+            boja: vozilo.boja,
+            brojOsovina: vozilo.brojOsovina,
+            idENC: vozilo.idENC,
+            registracijskaOznaka: vozilo.registracijskaOznaka,
+            vin: vozilo.vin,
+        });
     return response.data;
 };
 

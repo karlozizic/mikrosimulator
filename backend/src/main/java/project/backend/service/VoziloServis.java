@@ -13,7 +13,7 @@ public interface VoziloServis {
 	
 	Vozilo dohvatiVoziloPoId(Long voziloId);
 	
-	Vozilo updateVozila(Vozilo updatedVozilo);
+	Vozilo updateVozila(Vozilo updatedVozilo, Long ekoRazredId, Long kategorijaId, Long drzavaId);
 	
 	Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId, Long kategorijaId, Long drzavaId);
 	
