@@ -18,6 +18,7 @@ const CreateEkorazredComponent = () => {
     };
 
     const changeHandler = (event) => {
+        console.log(event.target);
         setNaziv(event.target.value);
     };
 

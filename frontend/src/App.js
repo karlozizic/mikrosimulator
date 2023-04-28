@@ -11,6 +11,8 @@ import CreateEkorazredComponent from "./container/ekorazredPage/CreateEkorazredC
 import UpdateEkorazredComponent from "./container/ekorazredPage/UpdateEkorazredComponent";
 
 import DionicaComponent from "./container/dionicaPage/DionicaComponent";
+import CreateDionicaComponent from "./container/dionicaPage/CreateDionicaComponent";
+import UpdateDionicaComponent from "./container/dionicaPage/UpdateDionicaComponent";
 
 
 function App() {
@@ -24,9 +26,9 @@ function App() {
                 <Route path={"/add-ekorazred"} element={<CreateEkorazredComponent/>}/>
                 <Route path={"/update-ekorazred/:id"} element={<UpdateEkorazredComponent/>}/>
 
-                {/*<Route path={"/dionice"} element={<DionicaComponent/>}/>*/}
-                {/*<Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>*/}
-                {/*<Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>*/}
+                <Route path={"/dionice"} element={<DionicaComponent/>}/>
+                <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
+                <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
 
                 {/*<Route path={"/drzave"} element={<DrzavaComponent/>}/>*/}
                 {/*<Route path={"/add-drzava"} element={<CreateDrzavaComponent/>}/>*/}

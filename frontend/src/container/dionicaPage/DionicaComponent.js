@@ -48,7 +48,7 @@ const DionicaComponent = () => {
                         <th>Dionica zavrsna stacionaza</th>
                         <th>Dionica naplatna tocka</th>
                         <th>Slijedi Dionica</th>
-                        <th>Prethodi Dionici</th>
+                        <th>Prethodi Dionica</th>
                     </tr>
                     </thead>
                     <tbody>

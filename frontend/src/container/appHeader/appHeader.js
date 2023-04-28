@@ -23,9 +23,12 @@ const AppHeader = () =>  {
                             <DropdownToggle nav caret>
                                 CRUD
                             </DropdownToggle>
-                            <DropdownMenu right>
+                            <DropdownMenu end>
                                 <DropdownItem href="/ekorazredi">
                                    Ekorazred
+                                </DropdownItem>
+                                <DropdownItem href="/dionice">
+                                    Dionica
                                 </DropdownItem>
                                 {/*<DropdownItem>*/}
                                 {/*    Option 2*/}
