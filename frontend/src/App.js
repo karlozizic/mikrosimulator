@@ -48,17 +48,17 @@ function App() {
                 <Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>
                 <Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>
 
-                <Route path={"/dionice"} element={<DionicaComponent/>}/>
-                <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
-                <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
+                {/*<Route path={"/uredaj"} element={<UredajComponent/>}/>*/}
+                {/*<Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>*/}
+                {/*<Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>*/}
 
                 {/*<Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>*/}
                 {/*<Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>*/}
                 {/*<Route path={"/update-naplatnatocka/:id"} element={<UpdateNaplatnaTockaComponent/>}/>*/}
 
-                {/*<Route path={"/uredaj"} element={<UredajComponent/>}/>*/}
-                {/*<Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>*/}
-                {/*<Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>*/}
+                <Route path={"/dionice"} element={<DionicaComponent/>}/>
+                <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
+                <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
 
             </Routes>
             <AppFooter/>

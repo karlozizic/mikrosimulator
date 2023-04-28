@@ -9,8 +9,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 
-//Za UredajZaPrikupljanjePodataka, Kameru, Primopredajnik, Klasifikator sam koristio strategiju 
-//Single Table - dakle svi Entiteti ce se nalaziti u jednoj tablici unutar baze
+//Za UredajZaPrikupljanjePodataka, Kameru, Primopredajnik, Klasifikator sam koristio strategiju Single Table - dakle svi Entiteti ce se nalaziti u jednoj tablici unutar baze
 //vidi jos je li to dobro? - medutim strategije Table Per Class, MappedSupperClass nisam uspio implementirati
 //https:www.baeldung.com/hibernate-inheritance
 //https://thorben-janssen.com/complete-guide-inheritance-strategies-jpa-hibernate/
@@ -28,6 +27,8 @@ public class Uredaj {
 		super();
 		this.id = uredajId;
 	}
+
+	public Uredaj(){}
 
 	public Long getUredajId() {
 		return id;
