@@ -15,7 +15,7 @@ public interface VoziloServis {
 	
 	Vozilo updateVozila(Vozilo updatedVozilo);
 	
-	Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId);
+	Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId, Long kategorijaId, Long drzavaId);
 	
 	Vozilo obrisiVozilo(Long voziloId); 
 	

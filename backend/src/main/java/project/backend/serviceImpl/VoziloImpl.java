@@ -6,9 +6,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.backend.model.DrzavaRegistracije;
 import project.backend.model.EkoRazred;
+import project.backend.model.Kategorija;
 import project.backend.model.Vozilo;
+import project.backend.repository.DrzavaRegistracijeRepository;
 import project.backend.repository.EkoRazredRepository;
+import project.backend.repository.KategorijaRepository;
 import project.backend.repository.VoziloRepository;
 import project.backend.service.VoziloServis;
 
@@ -17,10 +21,14 @@ public class VoziloImpl implements VoziloServis {
 	
 	VoziloRepository voziloRepository;
 	EkoRazredRepository ekoRazredRepository;
+	KategorijaRepository kategorijaRepository;
+	DrzavaRegistracijeRepository drzavaRegistracijeRepository;
 	
-	public VoziloImpl(@Autowired VoziloRepository voziloRepository, @Autowired EkoRazredRepository ekoRazredRepository) {
+	public VoziloImpl(@Autowired VoziloRepository voziloRepository, @Autowired EkoRazredRepository ekoRazredRepository, @Autowired KategorijaRepository kategorijaRepository, @Autowired DrzavaRegistracijeRepository drzavaRegistracijeRepository) {
 		this.voziloRepository = voziloRepository;
 		this.ekoRazredRepository = ekoRazredRepository;
+		this.kategorijaRepository = kategorijaRepository;
+		this.drzavaRegistracijeRepository = drzavaRegistracijeRepository;
 	}
 
 	@Override
@@ -39,11 +47,21 @@ public class VoziloImpl implements VoziloServis {
 	}
 
 	@Override
-	public Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId) {
+	public Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId, Long kategorijaId, Long drzavaId) {
 		Optional<EkoRazred> ekoRazredOptional = ekoRazredRepository.findById(ekoRazredId);
 		if(ekoRazredOptional.isPresent()) {
 			EkoRazred ekoRazred = ekoRazredOptional.get();
 			novoVozilo.setEkoRazred(ekoRazred);
+		}
+		Optional<Kategorija> kategorijaOptional = kategorijaRepository.findById(kategorijaId);
+		if(kategorijaOptional.isPresent()) {
+			Kategorija kategorija = kategorijaOptional.get();
+			novoVozilo.setKategorija(kategorija);
+		}
+		Optional<DrzavaRegistracije> drzavaRegistracijeOptional = drzavaRegistracijeRepository.findById(drzavaId);
+		if(drzavaRegistracijeOptional.isPresent()) {
+			DrzavaRegistracije drzavaRegistracije = drzavaRegistracijeOptional.get();
+			novoVozilo.setDrzavaRegistracije(drzavaRegistracije);
 		}
 		return voziloRepository.save(novoVozilo);
 	}

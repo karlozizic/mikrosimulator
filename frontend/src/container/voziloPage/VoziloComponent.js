@@ -61,11 +61,11 @@ const VoziloComponent = () => {
                             <td>{vozilo.boja}</td>
                             <td>{vozilo.brojOsovina}</td>
                             <td>{vozilo.idENC}</td>
-                            <td>{vozilo.registracijaOznaka}</td>
+                            <td>{vozilo.registracijskaOznaka}</td>
                             <td>{vozilo.ekoRazred.naziv}</td>
-                            {/*<td>{vozilo.kategorija}</td>*/}
-                            {/*<td>{vozilo.drzavaRegistracije}</td>*/}
-                            {/*<td>{vozilo.vin}</td>*/}
+                            <td>{vozilo.kategorija.naziv}</td>
+                            <td>{vozilo.drzavaRegistracije.naziv}</td>
+                            <td>{vozilo.vin}</td>
                             <td>
                                 <Button onClick={() => editVozilo(vozilo.voziloId)} color="primary">
                                     Update
