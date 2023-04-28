@@ -27,19 +27,24 @@ const AppHeader = () =>  {
                                 <DropdownItem href="/ekorazredi">
                                    Ekorazred
                                 </DropdownItem>
-                                <DropdownItem href="/dionice">
-                                    Dionica
-                                </DropdownItem>
                                 <DropdownItem href="/drzave">
                                     Drzava
                                 </DropdownItem>
-                                {/*<DropdownItem>*/}
-                                {/*    Option 2*/}
-                                {/*</DropdownItem>*/}
-                                {/*<DropdownItem divider />*/}
-                                {/*<DropdownItem>*/}
-                                {/*    Reset*/}
-                                {/*</DropdownItem>*/}
+                                <DropdownItem href="/kategorije">
+                                    Kategorija
+                                </DropdownItem>
+                                <DropdownItem href="/vozila">
+                                    Vozilo
+                                </DropdownItem>
+                                <DropdownItem href="/dionice">
+                                    Dionica
+                                </DropdownItem>
+                                <DropdownItem href="/naplatnetocke">
+                                    Naplatne Tocke
+                                </DropdownItem>
+                                <DropdownItem href="/uredaji">
+                                    Uredaj
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </Nav>

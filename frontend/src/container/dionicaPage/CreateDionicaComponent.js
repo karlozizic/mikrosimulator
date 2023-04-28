@@ -59,7 +59,6 @@ const CreateDionicaComponent = () => {
             default:
                 break;
         }
-        console.log(event.target);
     };
 
     const cancel = () => {

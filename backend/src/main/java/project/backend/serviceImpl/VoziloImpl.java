@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.backend.model.EkoRazred;
 import project.backend.model.Vozilo;
+import project.backend.repository.EkoRazredRepository;
 import project.backend.repository.VoziloRepository;
 import project.backend.service.VoziloServis;
 
@@ -14,9 +16,11 @@ import project.backend.service.VoziloServis;
 public class VoziloImpl implements VoziloServis {
 	
 	VoziloRepository voziloRepository;
+	EkoRazredRepository ekoRazredRepository;
 	
-	public VoziloImpl(@Autowired VoziloRepository voziloRepository) {
-		this.voziloRepository = voziloRepository; 
+	public VoziloImpl(@Autowired VoziloRepository voziloRepository, @Autowired EkoRazredRepository ekoRazredRepository) {
+		this.voziloRepository = voziloRepository;
+		this.ekoRazredRepository = ekoRazredRepository;
 	}
 
 	@Override
@@ -26,6 +30,7 @@ public class VoziloImpl implements VoziloServis {
 
 	@Override
 	public Vozilo updateVozila(Vozilo updatedVozilo) {
+
 		Optional<Vozilo> voziloOptional = voziloRepository.findById(updatedVozilo.getVoziloId());
 		if(voziloOptional.isPresent()) {
 			return voziloRepository.saveAndFlush(updatedVozilo);
@@ -34,7 +39,12 @@ public class VoziloImpl implements VoziloServis {
 	}
 
 	@Override
-	public Vozilo stvoriVozilo(Vozilo novoVozilo) {
+	public Vozilo stvoriVozilo(Vozilo novoVozilo, Long ekoRazredId) {
+		Optional<EkoRazred> ekoRazredOptional = ekoRazredRepository.findById(ekoRazredId);
+		if(ekoRazredOptional.isPresent()) {
+			EkoRazred ekoRazred = ekoRazredOptional.get();
+			novoVozilo.setEkoRazred(ekoRazred);
+		}
 		return voziloRepository.save(novoVozilo);
 	}
 

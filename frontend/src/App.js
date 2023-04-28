@@ -18,6 +18,13 @@ import DrzavaComponent from "./container/drzavaPage/DrzavaComponent";
 import CreateDrzavaComponent from "./container/drzavaPage/CreateDrzavaComponent";
 import UpdateDrzavaComponent from "./container/drzavaPage/UpdateDrzavaComponent";
 
+import KategorijaComponent from "./container/kategorijaPage/KategorijaComponent";
+import CreateKategorijaComponent from "./container/kategorijaPage/CreateKategorijaComponent";
+import UpdateKategorijaComponent from "./container/kategorijaPage/UpdateKategorijaComponent";
+
+import VoziloComponent from "./container/voziloPage/VoziloComponent";
+import CreateVoziloComponent from "./container/voziloPage/CreateVoziloComponent";
+import UpdateVoziloComponent from "./container/voziloPage/UpdateVoziloComponent";
 function App() {
     return(
         <div className="App">
@@ -29,21 +36,21 @@ function App() {
                 <Route path={"/add-ekorazred"} element={<CreateEkorazredComponent/>}/>
                 <Route path={"/update-ekorazred/:id"} element={<UpdateEkorazredComponent/>}/>
 
-                <Route path={"/dionice"} element={<DionicaComponent/>}/>
-                <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
-                <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
-
                 <Route path={"/drzave"} element={<DrzavaComponent/>}/>
                 <Route path={"/add-drzava"} element={<CreateDrzavaComponent/>}/>
                 <Route path={"/update-drzava/:id"} element={<UpdateDrzavaComponent/>}/>
 
-                {/*<Route path={"/kategorije"} element={<KategorijaComponent/>}/>*/}
-                {/*<Route path={"/add-kategorija"} element={<CreateKategorijaComponent/>}/>*/}
-                {/*<Route path={"/update-kategorija/:id"} element={<UpdateKategorijaComponent/>}/>*/}
+                <Route path={"/kategorije"} element={<KategorijaComponent/>}/>
+                <Route path={"/add-kategorija"} element={<CreateKategorijaComponent/>}/>
+                <Route path={"/update-kategorija/:id"} element={<UpdateKategorijaComponent/>}/>
 
-                {/*<Route path={"/vozila"} element={<VoziloComponent/>}/>*/}
-                {/*<Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>*/}
-                {/*<Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>*/}
+                <Route path={"/vozila"} element={<VoziloComponent/>}/>
+                <Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>
+                <Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>
+
+                <Route path={"/dionice"} element={<DionicaComponent/>}/>
+                <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
+                <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
 
                 {/*<Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>*/}
                 {/*<Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>*/}

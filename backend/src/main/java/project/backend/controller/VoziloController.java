@@ -55,9 +55,10 @@ public class VoziloController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseVozilo> newVozilo(@RequestBody Vozilo novoVozilo){
-		
-		Vozilo voziloFromDB = voziloService.stvoriVozilo(novoVozilo);
+	public ResponseEntity<ResponseVozilo> newVozilo(@RequestBody Vozilo novoVozilo, @RequestParam(name="ekoRazredId") String idEkoRazred){
+
+		Long ekoRazredId = Long.parseLong(idEkoRazred);
+		Vozilo voziloFromDB = voziloService.stvoriVozilo(novoVozilo, ekoRazredId);
 		
 		if(voziloFromDB == null) {
 			ResponseVozilo data = new ResponseVozilo(null, null, false, "Neuspjesno stvaranje vozila!");
