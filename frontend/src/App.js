@@ -30,6 +30,10 @@ import UredajComponent from "./container/uredajPage/UredajComponent";
 import CreateUredajComponent from "./container/uredajPage/CreateUredajComponent";
 import UpdateUredajComponent from "./container/uredajPage/UpdateUredajComponent";
 
+import NaplatnaTockaComponent from "./container/naplatnaTockaPage/NaplatnaTockaComponent";
+import CreateNaplatnaTockaComponent from "./container/naplatnaTockaPage/CreateNaplatnaTockaComponent";
+import UpdateNaplatnaTockaComponent from "./container/naplatnaTockaPage/UpdateNaplatnaTockaComponent";
+
 function App() {
     return(
         <div className="App">
@@ -57,9 +61,9 @@ function App() {
                 <Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>
                 <Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>
 
-                {/*<Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>*/}
-                {/*<Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>*/}
-                {/*<Route path={"/update-naplatnatocka/:id"} element={<UpdateNaplatnaTockaComponent/>}/>*/}
+                <Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>
+                <Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>
+                <Route path={"/update-naplatnatocka/:id"} element={<UpdateNaplatnaTockaComponent/>}/>
 
                 <Route path={"/dionice"} element={<DionicaComponent/>}/>
                 <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>

@@ -1,7 +1,7 @@
 import axios from "../apiClient"
 
-export const getEkorazred = async (id) => {
-    const response = await axios.get("/spring/ekorazred/fetch", {
+export const getNaplatnaTocka = async (id) => {
+    const response = await axios.get("/spring/naplatnatocka/fetch", {
         params: {
             id: id
         }
@@ -9,31 +9,41 @@ export const getEkorazred = async (id) => {
     return response.data;
 }
 
-export const ekorazredEdit = async (ekorazred) => {
-    const response = await axios.put("/spring/ekorazred/update", {
-        id: ekorazred.id,
-        naziv: ekorazred.naziv,
+export const naplatnaTockaEdit = async (naplatnaTocka) => {
+    const response = await axios.put("/spring/naplatnatocka/update?id=" + naplatnaTocka.naplatnaTockaId, {
+        naplatnatockaId: naplatnaTocka.naplatnatockaId,
+        oznaka: naplatnaTocka.oznaka,
+        naziv: naplatnaTocka.naziv,
+        stacionaza: naplatnaTocka.stacionaza,
+        geografskaDuzina: naplatnaTocka.geografskaDuzina,
+        geografskaSirina: naplatnaTocka.geografskaSirina,
+        usmjerenje: naplatnaTocka.usmjerenje,
     });
     return response.data;
 };
 
-export const ekorazredRegister = async (ekorazred) => {
-    const response = await axios.post("/spring/ekorazred/register", {
-        naziv: ekorazred.naziv
+export const naplatnaTockaRegister = async (naplatnaTocka) => {
+    const response = await axios.post("/spring/naplatnatocka/register", {
+        oznaka: naplatnaTocka.oznaka,
+        naziv: naplatnaTocka.naziv,
+        stacionaza: naplatnaTocka.stacionaza,
+        geografskaDuzina: naplatnaTocka.geografskaDuzina,
+        geografskaSirina: naplatnaTocka.geografskaSirina,
+        usmjerenje: naplatnaTocka.usmjerenje,
     });
     return response.data;
 };
 
-export const deleteEkorazred = async (id) => {
-    const response = await axios.delete("/spring/ekorazred/delete/" + id, {
+export const deleteNaplatnaTocka = async (id) => {
+    const response = await axios.delete("/spring/naplatnatocka/delete/" + id, {
         params: {
         }
     });
     return response.data;
 }
 
-export const getAllEkorazredi = async () => {
-    const response = await axios.get("/spring/ekorazred/all");
+export const getAllNaplatneTocke = async () => {
+    const response = await axios.get("/spring/naplatnatocka/all");
     return response.data;
 }
 

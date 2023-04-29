@@ -1,58 +1,69 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Button, Row, Table } from 'reactstrap';
-import {getAllEkorazredi, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
+import {deleteNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import { useNavigate } from "react-router-dom";
 
-const EkorazredComponent = () => {
+const NaplatnaTockaComponent = () => {
 
-    const [ekorazredi, setEkorazredi] = useState([]);
+    const [naplatneTocke, setNaplatneTocke] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllEkorazredi().then((res) => {
-            setEkorazredi(res.listaEkoRazreda);
+        getAllNaplatneTocke().then((res) => {
+            setNaplatneTocke(res.listaNaplatnihTocki);
         });
     }, []);
 
-    const addEkorazred = () => {
-        navigate('/add-ekorazred');
+    const addNaplatnaTocka = () => {
+        navigate('/add-naplatnatocka');
     };
 
-    const editEkorazred = (id) => {
-        navigate(`/update-ekorazred/${id}`);
+    const editNaplatnaTocka = (id) => {
+        navigate(`/update-naplatnatocka/${id}`);
     };
 
-    const ekorazredDelete = (id) => {
-        deleteEkorazred(id).then(res => {
-            setEkorazredi(prevEkorazredi => prevEkorazredi.filter(ekorazred => ekorazred.id !== id));
+    const naplatnaTockaDelete = (id) => {
+        deleteNaplatnaTocka(id).then(res => {
+            setNaplatneTocke(prevNaplatneTocke => prevNaplatneTocke.filter(naplatnaTocka => naplatnaTocka.naplatnaTockaId !== id));
         });
     };
 
     return (
         <div>
-            <h2 className="text-center" style={{padding:"1em"}}>Ekorazred List</h2>
+            <h2 className="text-center" style={{padding:"1em"}}>Naplatna Tocka List</h2>
             <div style={{textAlign:'left'}}>
-                <Button color="primary" onClick={addEkorazred}>Add Ekorazred</Button>
+                <Button color="primary" onClick={addNaplatnaTocka}>Add Naplatna Tocka</Button>
             </div>
             <Row>
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>
-                        <th>Ekorazred ID</th>
-                        <th>Ekorazred Naziv</th>
+                        <th>Naplatna Tocka ID</th>
+                        <th>Oznaka</th>
+                        <th>Naziv</th>
+                        <th>Stacionaza</th>
+                        <th>Geografska Duzina</th>
+                        <th>Geografska Sirina</th>
+                        <th>Usmjerenje</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {ekorazredi.map((ekorazred) => (
-                        <tr key={ekorazred.id}>
-                            <td>{ekorazred.id}</td>
-                            <td>{ekorazred.naziv}</td>
+                    {naplatneTocke.map((naplatnaTocka) => (
+                        <tr key={naplatnaTocka.naplatnaTockaId}>
+                            <td>{naplatnaTocka.naplatnaTockaId}</td>
+                            <td>{naplatnaTocka.oznaka}</td>
+                            <td>{naplatnaTocka.naziv}</td>
+                            <td>{naplatnaTocka.stacionaza}</td>
+                            <td>{naplatnaTocka.geografskaDuzina}</td>
+                            <td>{naplatnaTocka.geografskaSirina}</td>
+                            <td>{naplatnaTocka.usmjerenje}</td>
                             <td>
-                                <Button onClick={() => editEkorazred(ekorazred.id)} color="primary">
+                                <Button onClick={() => editNaplatnaTocka(naplatnaTocka.naplatnaTockaId)} color="primary">
                                     Update
                                 </Button>
-                                <Button style={{marginLeft: "1em"}} onClick={() => ekorazredDelete(ekorazred.id)} color="danger">
+                                <Button style={{marginLeft: "1em"}} onClick={() => naplatnaTockaDelete(naplatnaTocka.naplatnaTockaId)} color="danger">
                                     Delete
                                 </Button>
                             </td>
@@ -66,4 +77,4 @@ const EkorazredComponent = () => {
 };
 
 
-export default EkorazredComponent;
+export default NaplatnaTockaComponent;

@@ -1,38 +1,77 @@
 import { useState, useEffect } from 'react';
 import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import {getEkorazred, ekorazredEdit} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
+import {naplatnaTockaEdit} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 
-const UpdateEkorazredComponent = () => {
+const UpdateNaplatnaTocka = () => {
+    const [oznaka, setOznaka] = useState('');
     const [naziv, setNaziv] = useState('');
+    const [stacionaza, setStacionaza] = useState('');
+    const [geografskaDuzina, setGeografskaDuzina] = useState('');
+    const [geografskaSirina, setGeografskaSirina] = useState('');
+    const [usmjerenje, setUsmjerenje] = useState('');
+
     const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
-        getEkorazred(id).then((res) => {
-            setNaziv(res.ekoRazred.naziv);
+        getNaplatnaTocka(id).then((res) => {
+            setOznaka(res.naplatnaTocka.oznaka);
+            setNaziv(res.naplatnaTocka.naziv);
+            setStacionaza(res.naplatnaTocka.stacionaza);
+            setGeografskaDuzina(res.naplatnaTocka.geografskaDuzina);
+            setGeografskaSirina(res.naplatnaTocka.geografskaSirina);
+            setUsmjerenje(res.naplatnaTocka.usmjerenje);
         });
     }, [id]);
 
     const updateFunction = (e) => {
         e.preventDefault();
-        const ekorazred = {
-            id: id,
-            naziv: naziv
+        const naplatnaTocka   = {
+            naplatnaTockaId: id,
+            oznaka: oznaka,
+            naziv: naziv,
+            stacionaza: stacionaza,
+            geografskaDuzina: geografskaDuzina,
+            geografskaSirina: geografskaSirina,
+            usmjerenje: usmjerenje
         }
-        console.log('ekorazred = ' + JSON.stringify(ekorazred));
+        console.log('naplatna tocka = ' + JSON.stringify(naplatnaTocka));
 
-        ekorazredEdit(ekorazred).then(() => {
-            navigate('/ekorazredi')
+        naplatnaTockaEdit(naplatnaTocka).then(() => {
+            navigate('/naplatnetocke');
         });
     };
 
     const changeHandler = (event) => {
-        setNaziv(event.target.value);
+        const { name, value } = event.target;
+        switch (name) {
+            case 'oznaka':
+                setOznaka(value);
+                break;
+            case 'naziv':
+                setNaziv(value);
+                break;
+            case 'stacionaza':
+                setStacionaza(value);
+                break;
+            case 'geografskaDuzina':
+                setGeografskaDuzina(value);
+                break;
+            case 'geografskaSirina':
+                setGeografskaSirina(value);
+                break;
+            case 'usmjerenje':
+                setUsmjerenje(value);
+                break;
+            default:
+                break;
+        }
     };
 
     const cancel = () => {
-        navigate('/ekorazredi');
+        navigate('/naplatnetocke');
     };
 
 
@@ -42,12 +81,22 @@ const UpdateEkorazredComponent = () => {
                 <Row>
                     <Card>
                         <Col>
-                            <h3>Update Ekorazred</h3>
+                            <h3>Update Naplatna Tocka</h3>
                             <CardBody>
                                 <Form>
                                     <FormGroup style={{ padding: '1em' }}>
+                                        <label>Oznaka:</label>
+                                        <input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler}></input>
                                         <label>Naziv:</label>
                                         <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
+                                        <label>Stacionaza:</label>
+                                        <input name="stacionaza" className="form-control" value={stacionaza} onChange={changeHandler}></input>
+                                        <label>Geografska duzina:</label>
+                                        <input name="geografskaDuzina" className="form-control" value={geografskaDuzina} onChange={changeHandler}></input>
+                                        <label>Geografska Sirina:</label>
+                                        <input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>
+                                        <label>Usmjerenje:</label>
+                                        <input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler}></input>
                                     </FormGroup>
                                     <Button color="success" onClick={updateFunction}>
                                         Save
@@ -63,6 +112,7 @@ const UpdateEkorazredComponent = () => {
             </Container>
         </div>
     );
+
 };
 
-export default UpdateEkorazredComponent;
+export default UpdateNaplatnaTocka;

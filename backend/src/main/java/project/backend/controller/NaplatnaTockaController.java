@@ -42,8 +42,10 @@ public class NaplatnaTockaController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka){
-		
+	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
+
+		Long longId = Long.parseLong(id);
+		updatedNaplatnaTocka.setNaplatnaTockaId(longId);
 		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(updatedNaplatnaTocka); 
 		
 		if(naplatnaTockaFromDB == null) {
