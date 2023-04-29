@@ -1,38 +1,38 @@
 import { useState, useEffect } from 'react';
 import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import {getEkorazred, ekorazredEdit} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getUredaj, uredajEdit} from "../../utils/axios/backendCalls/uredajEndpoints";
 
-const UpdateEkorazredComponent = () => {
-    const [naziv, setNaziv] = useState('');
+const UpdateUredajComponent = () => {
+    const [name, setName] = useState('');
     const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
-        getEkorazred(id).then((res) => {
-            setNaziv(res.ekoRazred.naziv);
+        getUredaj(id).then((res) => {
+            setName(res.uredaj.name);
         });
     }, [id]);
 
     const updateFunction = (e) => {
         e.preventDefault();
-        const ekorazred = {
+        const uredaj = {
             id: id,
-            naziv: naziv
+            name: name
         }
-        console.log('ekorazred = ' + JSON.stringify(ekorazred));
+        console.log('uredaj = ' + JSON.stringify(uredaj));
 
-        ekorazredEdit(ekorazred).then(() => {
-            navigate('/ekorazredi')
+        uredajEdit(uredaj).then(() => {
+            navigate('/uredaji')
         });
     };
 
     const changeHandler = (event) => {
-        setNaziv(event.target.value);
+        setName(event.target.value);
     };
 
     const cancel = () => {
-        navigate('/ekorazredi');
+        navigate('/uredaji');
     };
 
 
@@ -42,12 +42,12 @@ const UpdateEkorazredComponent = () => {
                 <Row>
                     <Card>
                         <Col>
-                            <h3>Update Ekorazred</h3>
+                            <h3>Update Uredaj</h3>
                             <CardBody>
                                 <Form>
                                     <FormGroup style={{ padding: '1em' }}>
-                                        <label>Naziv:</label>
-                                        <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
+                                        <label>Name:</label>
+                                        <input name="name" className="form-control" value={name} onChange={changeHandler}></input>
                                     </FormGroup>
                                     <Button color="success" onClick={updateFunction}>
                                         Save
@@ -65,4 +65,4 @@ const UpdateEkorazredComponent = () => {
     );
 };
 
-export default UpdateEkorazredComponent;
+export default UpdateUredajComponent;

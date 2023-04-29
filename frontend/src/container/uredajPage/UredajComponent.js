@@ -1,58 +1,61 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Button, Row, Table } from 'reactstrap';
-import {getAllEkorazredi, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getAllUredaji} from "../../utils/axios/backendCalls/uredajEndpoints";
+import {deleteUredaj} from "../../utils/axios/backendCalls/uredajEndpoints";
 import { useNavigate } from "react-router-dom";
 
-const EkorazredComponent = () => {
+const UredajComponent = () => {
 
-    const [ekorazredi, setEkorazredi] = useState([]);
+    const [uredaji, setUredaji] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAllEkorazredi().then((res) => {
-            setEkorazredi(res.listaEkoRazreda);
+        getAllUredaji().then((res) => {
+            setUredaji(res.listaUredaja);
         });
     }, []);
 
-    const addEkorazred = () => {
-        navigate('/add-ekorazred');
+    const addUredaj = () => {
+        navigate('/add-uredaj');
     };
 
-    const editEkorazred = (id) => {
-        navigate(`/update-ekorazred/${id}`);
+    const editUredaj = (id) => {
+        navigate(`/update-uredaj/${id}`);
     };
 
-    const ekorazredDelete = (id) => {
-        deleteEkorazred(id).then(res => {
-            setEkorazredi(prevEkorazredi => prevEkorazredi.filter(ekorazred => ekorazred.id !== id));
+    const uredajDelete = (id) => {
+        deleteUredaj(id).then(res => {
+            setUredaji(prevUredaji => prevUredaji.filter(uredaj => uredaj.id !== id));
         });
     };
 
     return (
         <div>
-            <h2 className="text-center" style={{padding:"1em"}}>Ekorazred List</h2>
+            <h2 className="text-center" style={{padding:"1em"}}>Uredaj List</h2>
             <div style={{textAlign:'left'}}>
-                <Button color="primary" onClick={addEkorazred}>Add Ekorazred</Button>
+                <Button color="primary" onClick={addUredaj}>Add Uredaj</Button>
             </div>
             <Row>
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>
-                        <th>Ekorazred ID</th>
-                        <th>Ekorazred Naziv</th>
+                        <th>Uredaj ID</th>
+                        <th>Uredaj Name</th>
+                        <th>Uredaj Type</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {ekorazredi.map((ekorazred) => (
-                        <tr key={ekorazred.id}>
-                            <td>{ekorazred.id}</td>
-                            <td>{ekorazred.naziv}</td>
+                    {uredaji.map((uredaj) => (
+                        <tr key={uredaj.id}>
+                            <td>{uredaj.id}</td>
+                            <td>{uredaj.name}</td>
+                            <td>{uredaj.uredajtype === 1 ? 'Kamera' : uredaj.uredajtype === 2 ? 'Primopredajnik' : 'Klasifikator'}</td>
                             <td>
-                                <Button onClick={() => editEkorazred(ekorazred.id)} color="primary">
+                                <Button onClick={() => editUredaj(uredaj.id)} color="primary">
                                     Update
                                 </Button>
-                                <Button style={{marginLeft: "1em"}} onClick={() => ekorazredDelete(ekorazred.id)} color="danger">
+                                <Button style={{marginLeft: "1em"}} onClick={() => uredajDelete(uredaj.id)} color="danger">
                                     Delete
                                 </Button>
                             </td>
@@ -66,4 +69,4 @@ const EkorazredComponent = () => {
 };
 
 
-export default EkorazredComponent;
+export default UredajComponent;

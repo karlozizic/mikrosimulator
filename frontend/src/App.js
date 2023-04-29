@@ -25,6 +25,11 @@ import UpdateKategorijaComponent from "./container/kategorijaPage/UpdateKategori
 import VoziloComponent from "./container/voziloPage/VoziloComponent";
 import CreateVoziloComponent from "./container/voziloPage/CreateVoziloComponent";
 import UpdateVoziloComponent from "./container/voziloPage/UpdateVoziloComponent";
+
+import UredajComponent from "./container/uredajPage/UredajComponent";
+import CreateUredajComponent from "./container/uredajPage/CreateUredajComponent";
+import UpdateUredajComponent from "./container/uredajPage/UpdateUredajComponent";
+
 function App() {
     return(
         <div className="App">
@@ -48,9 +53,9 @@ function App() {
                 <Route path={"/add-vozilo"} element={<CreateVoziloComponent/>}/>
                 <Route path={"/update-vozilo/:id"} element={<UpdateVoziloComponent/>}/>
 
-                {/*<Route path={"/uredaj"} element={<UredajComponent/>}/>*/}
-                {/*<Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>*/}
-                {/*<Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>*/}
+                <Route path={"/uredaji"} element={<UredajComponent/>}/>
+                <Route path={"/add-uredaj"} element={<CreateUredajComponent/>}/>
+                <Route path={"/update-uredaj/:id"} element={<UpdateUredajComponent/>}/>
 
                 {/*<Route path={"/naplatnetocke"} element={<NaplatnaTockaComponent/>}/>*/}
                 {/*<Route path={"/add-naplatnatocka"} element={<CreateNaplatnaTockaComponent/>}/>*/}

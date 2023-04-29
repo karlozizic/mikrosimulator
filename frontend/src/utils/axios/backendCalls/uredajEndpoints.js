@@ -1,7 +1,7 @@
 import axios from "../apiClient"
 
-export const getEkorazred = async (id) => {
-    const response = await axios.get("/spring/ekorazred/fetch", {
+export const getUredaj = async (id) => {
+    const response = await axios.get("/spring/uredaj/fetch", {
         params: {
             id: id
         }
@@ -9,31 +9,32 @@ export const getEkorazred = async (id) => {
     return response.data;
 }
 
-export const ekorazredEdit = async (ekorazred) => {
-    const response = await axios.put("/spring/ekorazred/update", {
-        id: ekorazred.id,
-        naziv: ekorazred.naziv,
+export const uredajEdit = async (uredaj) => {
+    const response = await axios.put("/spring/uredaj/update", {
+        id: uredaj.id,
+        name: uredaj.name,
     });
     return response.data;
 };
 
-export const ekorazredRegister = async (ekorazred) => {
-    const response = await axios.post("/spring/ekorazred/register", {
-        naziv: ekorazred.naziv
+export const uredajRegister = async (uredaj) => {
+    const response = await axios.post("/spring/uredaj/register", {
+        uredajtype: uredaj.uredajtype,
+        name: uredaj.name,
     });
     return response.data;
 };
 
-export const deleteEkorazred = async (id) => {
-    const response = await axios.delete("/spring/ekorazred/delete/" + id, {
+export const deleteUredaj = async (id) => {
+    const response = await axios.delete("/spring/uredaj/delete/" + id, {
         params: {
         }
     });
     return response.data;
 }
 
-export const getAllEkorazredi = async () => {
-    const response = await axios.get("/spring/ekorazred/all");
+export const getAllUredaji = async () => {
+    const response = await axios.get("/spring/uredaj/all");
     return response.data;
 }
 
