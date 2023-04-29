@@ -2,8 +2,12 @@ package project.backend.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Query;
+import project.backend.model.NoviUredaj;
 import project.backend.model.Uredaj;
 
 public interface UredajRepository extends JpaRepository<Uredaj, Long>{
 
+    @Query("select uredajType from uredaj where id=?1")
+    int dohvatiTipUredaja(long uredajId);
 }

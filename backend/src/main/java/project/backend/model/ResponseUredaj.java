@@ -3,28 +3,28 @@ package project.backend.model;
 import java.util.List;
 
 public class ResponseUredaj {
-	Uredaj uredaj;
-	List<Uredaj> listaUredaja;
+	NoviUredaj uredaj;
+	List<NoviUredaj> listaUredaja;
 	boolean success;
 	String message;
 	
-	public ResponseUredaj(Uredaj uredaj, List<Uredaj> listaUredaja, boolean success, String message) {
+	public ResponseUredaj(NoviUredaj uredaj, List<NoviUredaj> listaUredaja, boolean success, String message) {
 		super();
 		this.uredaj = uredaj;
 		this.listaUredaja = listaUredaja;
 		this.success = success;
 		this.message = message;
 	}
-	public Uredaj getUredaj() {
+	public NoviUredaj getUredaj() {
 		return uredaj;
 	}
-	public void setUredaj(Uredaj uredaj) {
+	public void setUredaj(NoviUredaj uredaj) {
 		this.uredaj = uredaj;
 	}
-	public List<Uredaj> getListaUredaja() {
+	public List<NoviUredaj> getListaUredaja() {
 		return listaUredaja;
 	}
-	public void setListaUredaja(List<Uredaj> listaUredaja) {
+	public void setListaUredaja(List<NoviUredaj> listaUredaja) {
 		this.listaUredaja = listaUredaja;
 	}
 	public boolean isSuccess() {

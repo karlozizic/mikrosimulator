@@ -1,27 +1,25 @@
 package project.backend.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 //Za UredajZaPrikupljanjePodataka, Kameru, Primopredajnik, Klasifikator sam koristio strategiju Single Table - dakle svi Entiteti ce se nalaziti u jednoj tablici unutar baze
 //vidi jos je li to dobro? - medutim strategije Table Per Class, MappedSupperClass nisam uspio implementirati
 //https:www.baeldung.com/hibernate-inheritance
 //https://thorben-janssen.com/complete-guide-inheritance-strategies-jpa-hibernate/
 
-@Entity
+@Entity(name="uredaj")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name="UREDAJ")
+@DiscriminatorColumn(name="uredaj_type",
+		discriminatorType = DiscriminatorType.INTEGER)
 public class Uredaj {
 	
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
+
+	@Column(name="uredaj_type", insertable = false, updatable = false)
+	protected int uredajType;
 
 	public Uredaj(Long uredajId) {
 		super();
@@ -36,6 +34,18 @@ public class Uredaj {
 
 	public void setUredajId(Long uredajId) {
 		this.id = uredajId;
-	} 
-	
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public int getUredajType() {
+		return uredajType;
+	}
+
 }
