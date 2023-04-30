@@ -8,13 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import project.backend.model.NaplatnaTocka;
 import project.backend.model.ResponseNaplatnaTocka;
@@ -30,8 +24,8 @@ public class NaplatnaTockaController {
 		this.naplatnaTockaService = naplatnaTockaService; 
 	}
 	
-	@GetMapping("/fetch/{id}")
-	public ResponseEntity<ResponseNaplatnaTocka> getNaplatnaTocka(@PathVariable(name = "id") String id){
+	@GetMapping("/fetch")
+	public ResponseEntity<ResponseNaplatnaTocka> getNaplatnaTocka(@RequestParam(name = "id") String id){
 		
 		Long longId = Long.parseLong(id);
 		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.dohvatiNaplatnuTockuPoId(longId);
@@ -48,8 +42,10 @@ public class NaplatnaTockaController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka){
-		
+	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
+
+		Long longId = Long.parseLong(id);
+		updatedNaplatnaTocka.setNaplatnaTockaId(longId);
 		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(updatedNaplatnaTocka); 
 		
 		if(naplatnaTockaFromDB == null) {

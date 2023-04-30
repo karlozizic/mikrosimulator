@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const AppHeader = () =>  {
     const [isOpen, setIsOpen] = useState(false);
@@ -23,17 +23,28 @@ const AppHeader = () =>  {
                             <DropdownToggle nav caret>
                                 CRUD
                             </DropdownToggle>
-                            <DropdownMenu right>
+                            <DropdownMenu end>
                                 <DropdownItem href="/ekorazredi">
                                    Ekorazred
                                 </DropdownItem>
-                                {/*<DropdownItem>*/}
-                                {/*    Option 2*/}
-                                {/*</DropdownItem>*/}
-                                {/*<DropdownItem divider />*/}
-                                {/*<DropdownItem>*/}
-                                {/*    Reset*/}
-                                {/*</DropdownItem>*/}
+                                <DropdownItem href="/drzave">
+                                    Drzava
+                                </DropdownItem>
+                                <DropdownItem href="/kategorije">
+                                    Kategorija
+                                </DropdownItem>
+                                <DropdownItem href="/vozila">
+                                    Vozilo
+                                </DropdownItem>
+                                <DropdownItem href="/dionice">
+                                    Dionica
+                                </DropdownItem>
+                                <DropdownItem href="/naplatnetocke">
+                                    Naplatne Tocke
+                                </DropdownItem>
+                                <DropdownItem href="/uredaji">
+                                    Uredaj
+                                </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
                     </Nav>

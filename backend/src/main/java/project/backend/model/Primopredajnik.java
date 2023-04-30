@@ -1,14 +1,28 @@
 package project.backend.model;
 
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("2")
 public class Primopredajnik extends Uredaj{
 
-	public Primopredajnik(Long id) {
-		super(id);
-		// TODO Auto-generated constructor stub
+	private String name;
+	public Primopredajnik(String name) {
+		super();
+		this.name = name;
 	}
-	
+
+	public Primopredajnik() {
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

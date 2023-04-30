@@ -8,13 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import project.backend.model.Dionica;
 import project.backend.model.ResponseDionica;
@@ -30,8 +24,8 @@ public class DionicaController {
 		this.dionicaService = dionicaService; 
 	}
 	
-	@GetMapping("/fetch/{id}")
-	public ResponseEntity<ResponseDionica> getDionica(@PathVariable(name = "id") String id){
+	@GetMapping("/fetch")
+	public ResponseEntity<ResponseDionica> getDionica(@RequestParam(name = "id") String id){
 		
 		Long longId = Long.parseLong(id);
 		Dionica dionicaFromDB = dionicaService.dohvatiDionicuPoId(longId);

@@ -29,8 +29,7 @@ public class DrzavaRegistracijeImpl implements DrzavaRegistracijeServis{
 	public DrzavaRegistracije updateDrzaveRegistracije(DrzavaRegistracije updatedDrzavaRegistracije) {
 		Optional<DrzavaRegistracije> drzavaRegistracijeOptional = drzavaRegistracijeRepository.findById(updatedDrzavaRegistracije.getDrzavaRegistracijeId());
 		if(drzavaRegistracijeOptional.isPresent()) {
-			DrzavaRegistracije drzavaRegistracije = drzavaRegistracijeOptional.get(); 
-			return drzavaRegistracijeRepository.saveAndFlush(drzavaRegistracije); 
+			return drzavaRegistracijeRepository.saveAndFlush(updatedDrzavaRegistracije);
 		}
 		return null;
 	}

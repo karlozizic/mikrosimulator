@@ -6,16 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import project.backend.model.ResponseVozilo;
-import project.backend.model.Vozilo;
+import project.backend.model.*;
 import project.backend.serviceImpl.VoziloImpl;
 
 @Controller
@@ -28,8 +21,8 @@ public class VoziloController {
 		this.voziloService = voziloService; 
 	}
 	
-	@GetMapping("/fetch/{id}")
-	public ResponseEntity<ResponseVozilo> getVozilo(@PathVariable(name = "id") String id){
+	@GetMapping("/fetch")
+	public ResponseEntity<ResponseVozilo> getVozilo(@RequestParam(name = "id") String id){
 		
 		Long longId = Long.parseLong(id);
 		Vozilo voziloFromDB = voziloService.dohvatiVoziloPoId(longId);
@@ -46,9 +39,13 @@ public class VoziloController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseVozilo> updateVozilo(@RequestBody Vozilo updatedVozilo){
-		
-		Vozilo voziloFromDB = voziloService.updateVozila(updatedVozilo); 
+	public ResponseEntity<ResponseVozilo> updateVozilo(@RequestBody Vozilo updatedVozilo, @RequestParam(name="ekorazredId") String idEkoRazred, @RequestParam(name="kategorijaId") String idKategorija, @RequestParam(name="drzavaId") String idDrzava){
+
+		Long ekoRazredId = Long.parseLong(idEkoRazred);
+		Long kategorijaId = Long.parseLong(idKategorija);
+		Long drzavaId = Long.parseLong(idDrzava);
+
+		Vozilo voziloFromDB = voziloService.updateVozila(updatedVozilo, ekoRazredId, kategorijaId, drzavaId);
 		
 		if(voziloFromDB == null) {
 			ResponseVozilo data = new ResponseVozilo(null, null, false, "Neuspjesno updateanje vozila!");
@@ -61,9 +58,13 @@ public class VoziloController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseVozilo> newVozilo(@RequestBody Vozilo novoVozilo){
-		
-		Vozilo voziloFromDB = voziloService.stvoriVozilo(novoVozilo);
+	public ResponseEntity<ResponseVozilo> newVozilo(@RequestBody Vozilo novoVozilo, @RequestParam(name="ekorazredId") String idEkoRazred, @RequestParam(name="kategorijaId") String idKategorija, @RequestParam(name="drzavaId") String idDrzava){
+
+		Long ekoRazredId = Long.parseLong(idEkoRazred);
+		Long kategorijaId = Long.parseLong(idKategorija);
+		Long drzavaId = Long.parseLong(idDrzava);
+
+		Vozilo voziloFromDB = voziloService.stvoriVozilo(novoVozilo, ekoRazredId, kategorijaId, drzavaId);
 		
 		if(voziloFromDB == null) {
 			ResponseVozilo data = new ResponseVozilo(null, null, false, "Neuspjesno stvaranje vozila!");

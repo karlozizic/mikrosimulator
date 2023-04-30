@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { useEffect, useState } from 'react';
 import { Button, Row, Table } from 'reactstrap';
-import Ekorazred from "./Ekorazred";
-import {getAllEkorazredi, getEkorazred, ekorazredEdit, ekorazredRegister, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import {getAllEkorazredi, deleteEkorazred} from "../../utils/axios/backendCalls/ekorazredEndpoints";
 import { useNavigate } from "react-router-dom";
-
 const EkorazredComponent = () => {
 
     const [ekorazredi, setEkorazredi] = useState([]);
@@ -31,12 +29,12 @@ const EkorazredComponent = () => {
     };
 
     return (
-        <div>
+        <div style={{ margin: '0 4em' }}>
             <h2 className="text-center" style={{padding:"1em"}}>Ekorazred List</h2>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addEkorazred}>Add Ekorazred</Button>
             </div>
-            <Row>
+            <Row className="my-4">
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>

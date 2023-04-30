@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import { ekorazredRegister } from '../../utils/axios/backendCalls/ekorazredEndpoints';
-
+import "../allCss/create-update.css"
 const CreateEkorazredComponent = () => {
     const [naziv, setNaziv] = useState('');
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ const CreateEkorazredComponent = () => {
     };
 
     const changeHandler = (event) => {
+        console.log(event.target);
         setNaziv(event.target.value);
     };
 
@@ -41,7 +42,7 @@ const CreateEkorazredComponent = () => {
                                     <Button color="success" onClick={saveEkorazred}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button color="danger" onClick={cancel} style={{marginLeft: "1em"}}>
                                         Cancel
                                     </Button>
                                 </Form>

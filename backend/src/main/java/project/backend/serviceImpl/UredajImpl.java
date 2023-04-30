@@ -1,14 +1,14 @@
 package project.backend.serviceImpl;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import project.backend.model.Uredaj;
+import project.backend.model.*;
 import project.backend.repository.UredajRepository;
 import project.backend.service.UredajServis;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UredajImpl implements UredajServis{
@@ -25,20 +25,18 @@ public class UredajImpl implements UredajServis{
 	}
 
 	@Override
+	public int dohvatiTipUredaja(long uredajId){return uredajRepository.dohvatiTipUredaja(uredajId);}
+
+	@Override
 	public Uredaj updateUredaja(Uredaj updatedUredaj) {
-		Optional<Uredaj> uredajOptional = uredajRepository.findById(updatedUredaj.getUredajId());
-		if(uredajOptional.isPresent()) {
-			Uredaj uredaj = uredajOptional.get(); 
-			return uredajRepository.saveAndFlush(uredaj); 
-		}
-		return null;
+		return uredajRepository.saveAndFlush(updatedUredaj);
 	}
 
 	@Override
 	public Uredaj stvoriUredaj(Uredaj noviUredaj) {
 		return uredajRepository.save(noviUredaj);
 	}
-	
+
 	@Override
 	public Uredaj obrisiUredaj(Long uredajId) {
 		Optional<Uredaj> dohvatiUredaj = uredajRepository.findById(uredajId);
@@ -53,10 +51,9 @@ public class UredajImpl implements UredajServis{
 	public List<Uredaj> dohvatiSveUredaje() {
 		List<Uredaj> listaUredaja = uredajRepository.findAll();
 		if(listaUredaja != null) {
-			return listaUredaja; 
+			return listaUredaja;
 		}
 		return null;
 	}
-
 	
 }

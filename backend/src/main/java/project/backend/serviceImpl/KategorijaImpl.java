@@ -28,8 +28,7 @@ public class KategorijaImpl implements KategorijaServis {
 	public Kategorija updateKategorija(Kategorija updatedKategorija) {
 		Optional<Kategorija> kategorijaOptional = kategorijaRepository.findById(updatedKategorija.getKategorijaId());
 		if(kategorijaOptional.isPresent()) {
-			Kategorija kategorija = kategorijaOptional.get(); 
-			return kategorijaRepository.saveAndFlush(kategorija); 
+			return kategorijaRepository.saveAndFlush(updatedKategorija);
 		}
 		return null;
 	}
