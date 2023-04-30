@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import { dionicaRegister } from '../../utils/axios/backendCalls/dionicaEndpoints';
-
+import "../allCss/create-update.css"
 const CreateDionicaComponent = () => {
     const [smjer, setSmjer] = useState('');
     const [najvecaBrzina, setNajvecaBrzina] = useState('');
@@ -88,16 +88,16 @@ const CreateDionicaComponent = () => {
                                         <label>Zavrsna stacionaza:</label>
                                         <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
                                         <label>Naplatna Tocka:</label>
-                                        <input name="naplatnaTocka" className="form-control" value={naplatnaTocka} onChange={changeHandler}></input>
+                                        <input name="naplatnaTocka" className="form-control" value={naplatnaTocka === "" ? null : naplatnaTocka} onChange={changeHandler}></input>
                                         <label>Sljedi dionica:</label>
-                                        <input name="slijediDionica" className="form-control" value={slijediDionica} onChange={changeHandler}></input>
+                                        <input name="slijediDionica" className="form-control" value={slijediDionica === "" ? null : slijediDionica} onChange={changeHandler}></input>
                                         <label>Prethodi dionica:</label>
-                                        <input name="prethodiDionica" className="form-control" value={prethodiDionica} onChange={changeHandler}></input>
+                                        <input name="prethodiDionica" className="form-control" value={prethodiDionica === "" ? null : prethodiDionica} onChange={changeHandler}></input>
                                     </FormGroup>
                                     <Button color="success" onClick={saveDionica}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

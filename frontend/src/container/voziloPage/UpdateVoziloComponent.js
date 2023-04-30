@@ -3,7 +3,7 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getVozilo} from "../../utils/axios/backendCalls/voziloEndpoints";
 import {voziloEdit} from "../../utils/axios/backendCalls/voziloEndpoints";
-
+import "../allCss/create-update.css"
 const UpdateEkorazredComponent = () => {
     const [nacinNaplate, setNacinNaplate] = useState('');
     const [boja, setBoja] = useState('');
@@ -135,7 +135,7 @@ const UpdateEkorazredComponent = () => {
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

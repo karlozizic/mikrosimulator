@@ -30,12 +30,12 @@ const DionicaComponent = () => {
     };
 
     return (
-        <div>
+        <div style={{ margin: '0 4em' }}>
             <h2 className="text-center" style={{padding:"1em"}}>Dionica List</h2>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addDionica}>Add Dionica</Button>
             </div>
-            <Row>
+            <Row className="my-4">
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>
@@ -53,8 +53,8 @@ const DionicaComponent = () => {
                     </thead>
                     <tbody>
                     {dionice.map((dionica) => (
-                        <tr key={dionica.id}>
-                            <td>{dionica.id}</td>
+                        <tr key={dionica.dionicaId}>
+                            <td>{dionica.dionicaId}</td>
                             <td>{dionica.smjer}</td>
                             <td>{dionica.najvecaBrzina}</td>
                             <td>{dionica.brojTraka}</td>
@@ -65,7 +65,7 @@ const DionicaComponent = () => {
                             <td>{dionica.slijedi}</td>
                             <td>{dionica.prethodi}</td>
                             <td>
-                                <Button onClick={() => editEkorazred(dionica.id)} color="primary">
+                                <Button onClick={() => editEkorazred(dionica.dionicaId)} color="primary">
                                     Update
                                 </Button>
                                 <Button style={{marginLeft: "1em"}} onClick={() => dionicaDelete(dionica.id)} color="danger">

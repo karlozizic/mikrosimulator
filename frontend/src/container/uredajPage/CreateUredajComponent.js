@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import { uredajRegister } from '../../utils/axios/backendCalls/uredajEndpoints';
-
+import "../allCss/create-update.css"
 const CreateUredajComponent = () => {
     const [name, setName] = useState('');
     const [uredajtype, setUredajtype] = useState(1);
@@ -54,7 +54,7 @@ const CreateUredajComponent = () => {
                                     <Button color="success" onClick={saveUredaj}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

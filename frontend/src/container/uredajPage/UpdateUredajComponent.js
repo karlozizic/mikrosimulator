@@ -37,9 +37,9 @@ const UpdateUredajComponent = () => {
 
 
     return (
-        <div>
+        <div style={{ margin: '0 4em' }}>
             <Container>
-                <Row>
+                <Row className="my-4">
                     <Card>
                         <Col>
                             <h3>Update Uredaj</h3>

@@ -31,12 +31,12 @@ const NaplatnaTockaComponent = () => {
     };
 
     return (
-        <div>
+        <div style={{ margin: '0 4em' }}>
             <h2 className="text-center" style={{padding:"1em"}}>Naplatna Tocka List</h2>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addNaplatnaTocka}>Add Naplatna Tocka</Button>
             </div>
-            <Row>
+            <Row className="my-4">
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>

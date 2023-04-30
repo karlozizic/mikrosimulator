@@ -53,7 +53,7 @@ const UpdateKategorijaComponent = () => {
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

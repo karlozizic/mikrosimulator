@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import {voziloRegister} from "../../utils/axios/backendCalls/voziloEndpoints";
-
+import "../allCss/create-update.css"
 const CreateVoziloComponent = () => {
     const [nacinNaplate, setNacinNaplate] = useState('');
     const [boja, setBoja] = useState('');
@@ -97,7 +97,7 @@ const CreateVoziloComponent = () => {
                                     <Button color="success" onClick={saveVozilo}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

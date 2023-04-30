@@ -4,7 +4,7 @@ import { Button, Row, Table } from 'reactstrap';
 import {getAllUredaji} from "../../utils/axios/backendCalls/uredajEndpoints";
 import {deleteUredaj} from "../../utils/axios/backendCalls/uredajEndpoints";
 import { useNavigate } from "react-router-dom";
-
+import "../allCss/create-update.css"
 const UredajComponent = () => {
 
     const [uredaji, setUredaji] = useState([]);

@@ -3,7 +3,7 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getDrzava} from "../../utils/axios/backendCalls/drzavaEndpoints";
 import {drzavaEdit} from "../../utils/axios/backendCalls/drzavaEndpoints";
-
+import "../allCss/create-update.css"
 const UpdateDrzavaComponent = () => {
     const [naziv, setNaziv] = useState('');
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ const UpdateDrzavaComponent = () => {
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

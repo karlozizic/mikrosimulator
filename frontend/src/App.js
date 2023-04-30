@@ -3,7 +3,6 @@ import React  from 'react';
 import { Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppHeader from "./container/appHeader/appHeader";
-import AppFooter from "./container/appFooter/appFooter";
 
 import HomePageWrapper from "./components/components/wrappers/HomePageWrapper";
 import EkorazredComponent from "./container/ekorazredPage/EkorazredComponent";
@@ -70,7 +69,6 @@ function App() {
                 <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
 
             </Routes>
-            <AppFooter/>
         </div>
     );
 }

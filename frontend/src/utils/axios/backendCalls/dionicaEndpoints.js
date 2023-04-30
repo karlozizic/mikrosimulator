@@ -11,7 +11,7 @@ export const getDionica = async (id) => {
 
 export const dionicaEdit = async (dionica) => {
     const response = await axios.put("/spring/dionica/update", {
-        id: dionica.id,
+        dionicaId: dionica.dionicaId,
         smjer: dionica.smjer,
         najvecaBrzina: dionica.najvecaBrzina,
         brojTraka: dionica.brojTraka,
@@ -35,7 +35,7 @@ export const dionicaRegister = async (dionica) => {
         zavrsnaStacionaza: dionica.zavrsnaStacionaza,
         naplatnaTocka: dionica.naplatnaTocka,
         slijedi: dionica.slijedi,
-        prethodi:dionica.prethodi,
+        prethodi: dionica.prethodi,
     });
     return response.data;
 };

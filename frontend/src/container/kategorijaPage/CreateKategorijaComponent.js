@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import {kategorijaRegister} from "../../utils/axios/backendCalls/kategorijaEndpoints";
-
+import "../allCss/create-update.css"
 const CreateKategorijaComponent = () => {
     const [naziv, setNaziv] = useState('');
     const navigate = useNavigate();
@@ -42,7 +42,7 @@ const CreateKategorijaComponent = () => {
                                     <Button color="success" onClick={saveKategorija}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

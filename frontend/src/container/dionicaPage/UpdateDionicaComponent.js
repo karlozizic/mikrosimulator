@@ -3,7 +3,7 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import {dionicaEdit} from "../../utils/axios/backendCalls/dionicaEndpoints";
-
+import "../allCss/create-update.css"
 const UpdateDionicaComponent = () => {
 
     const [smjer, setSmjer] = useState('');
@@ -36,7 +36,7 @@ const UpdateDionicaComponent = () => {
     const updateFunction = (e) => {
         e.preventDefault();
         const dionica = {
-            id: id,
+            dionicaId: id,
             smjer: smjer,
             najvecaBrzina: najvecaBrzina,
             brojTraka: brojTraka,
@@ -127,7 +127,7 @@ const UpdateDionicaComponent = () => {
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

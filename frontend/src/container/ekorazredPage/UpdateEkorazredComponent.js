@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import {getEkorazred, ekorazredEdit} from "../../utils/axios/backendCalls/ekorazredEndpoints";
+import "../allCss/create-update.css"
 
 const UpdateEkorazredComponent = () => {
     const [naziv, setNaziv] = useState('');
@@ -37,7 +38,7 @@ const UpdateEkorazredComponent = () => {
 
 
     return (
-        <div>
+        <div className="component">
             <Container>
                 <Row>
                     <Card>
@@ -49,12 +50,14 @@ const UpdateEkorazredComponent = () => {
                                         <label>Naziv:</label>
                                         <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
                                     </FormGroup>
-                                    <Button color="success" onClick={updateFunction}>
-                                        Save
-                                    </Button>
-                                    <Button color="danger" onClick={cancel}>
-                                        Cancel
-                                    </Button>
+                                    <div className="buttonGroup">
+                                        <Button color="success" onClick={updateFunction}>
+                                            Save
+                                        </Button>
+                                        <Button color="danger" onClick={cancel} style={{marginLeft: "1em"}}>
+                                            Cancel
+                                        </Button>
+                                    </div>
                                 </Form>
                             </CardBody>
                         </Col>

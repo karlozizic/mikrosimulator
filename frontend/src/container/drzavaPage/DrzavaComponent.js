@@ -4,6 +4,7 @@ import { Button, Row, Table } from 'reactstrap';
 import {getAllDrzave} from "../../utils/axios/backendCalls/drzavaEndpoints";
 import {deleteDrzava} from "../../utils/axios/backendCalls/drzavaEndpoints";
 import { useNavigate } from "react-router-dom";
+import "../allCss/create-update.css"
 
 const DrzavaComponent = () => {
 
@@ -31,12 +32,12 @@ const DrzavaComponent = () => {
     };
 
     return (
-        <div>
+        <div style={{ margin: '0 4em' }}>
             <h2 className="text-center" style={{padding:"1em"}}>Drzava List</h2>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addDrzava}>Add Drzava</Button>
             </div>
-            <Row>
+            <Row className="my-4">
                 <Table striped bordered responsive hover>
                     <thead>
                     <tr>

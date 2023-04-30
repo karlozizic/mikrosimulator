@@ -3,7 +3,7 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import {naplatnaTockaEdit} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
-
+import "../allCss/create-update.css"
 const UpdateNaplatnaTocka = () => {
     const [oznaka, setOznaka] = useState('');
     const [naziv, setNaziv] = useState('');
@@ -101,7 +101,7 @@ const UpdateNaplatnaTocka = () => {
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>

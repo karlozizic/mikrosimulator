@@ -79,7 +79,7 @@ const CreateNaplatnaTockaComponent = () => {
                                     <Button color="success" onClick={saveNaplatnaTocka}>
                                         Save
                                     </Button>
-                                    <Button color="danger" onClick={cancel}>
+                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
                                         Cancel
                                     </Button>
                                 </Form>
