@@ -37,7 +37,7 @@ public class Vozilo {
 	@ManyToOne()
 	private DrzavaRegistracije drzavaRegistracije;
 
-	public Vozilo(Long voziloId, String nacinNaplate, String boja, int brojOsovina, int vIN, int idENC,
+	public Vozilo(Long voziloId, String nacinNaplate, String boja, int brojOsovina, int VIN, int idENC,
 			String registracijskaOznaka, EkoRazred ekoRazred, Kategorija kategorija,
 			DrzavaRegistracije drzavaRegistracije) {
 		super();
@@ -45,7 +45,22 @@ public class Vozilo {
 		this.nacinNaplate = nacinNaplate;
 		this.boja = boja;
 		this.brojOsovina = brojOsovina;
-		VIN = vIN;
+		this.VIN = VIN;
+		this.idENC = idENC;
+		this.registracijskaOznaka = registracijskaOznaka;
+		this.ekoRazred = ekoRazred;
+		this.kategorija = kategorija;
+		this.drzavaRegistracije = drzavaRegistracije;
+	}
+
+	public Vozilo(String nacinNaplate, String boja, int brojOsovina, int VIN, int idENC,
+				  String registracijskaOznaka, EkoRazred ekoRazred, Kategorija kategorija,
+				  DrzavaRegistracije drzavaRegistracije) {
+		super();
+		this.nacinNaplate = nacinNaplate;
+		this.boja = boja;
+		this.brojOsovina = brojOsovina;
+		this.VIN = VIN;
 		this.idENC = idENC;
 		this.registracijskaOznaka = registracijskaOznaka;
 		this.ekoRazred = ekoRazred;

@@ -102,5 +102,6 @@ public class VoziloController {
 			return new ResponseEntity<ResponseVozilo>(data, HttpStatus.OK);
 		}
 	}
-	
+
+
 }
