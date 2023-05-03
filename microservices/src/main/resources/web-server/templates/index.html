@@ -2,15 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="header :: copy"></head>
+
 <body>
-	<h1>Microservices Demo - Vehicles Server</h1>
 
-	<p>Vehicles Server Microservice is running.</p>
+	<h1>Microservices Demo - Web Server</h1>
+	<h3>Overview</h3>
+	<ul>
+		<li>Demo defines a simple web-application for accessing vehicles
+			data.</li>
+		<li>All the account information is fetched via a RESTful
+			interface to a Vehicles microservice.</li>
+	</ul>
 
-<!--	<p>-->
-<!--		This account should exist: <a href="/accounts/123456789">123456789</a>.-->
-<!--		Look in <code>data.sql</code> to see the rest-->
-<!--	</p>-->
+	<h3>The Demo</h3>
+
+	<ul class="openlist">
+		<li>Eureka Dashboard: <a
+			href="http://localhost:1111">http://localhost:1111</a></li>
+		<li>Check applications registered: <a
+			href="http://localhost:1111/eureka/apps/">http://localhost:1111/eureka/apps/</a></li>
+		<li>Fetch vehicle #1: <a th:href="@{/vehicles/1}">/vehicles/1</a></li>
+
+	</ul>
 
 	<h3>Spring Boot URLs</h3>
 	<p>For those interested, Spring Boot provides RESTful URLs for
@@ -21,12 +35,14 @@
 		<li><a th:href="@{/actuator/env}">The environment</a></li>
 		<li><a th:href="@{/actuator/health}">Application health</a></li>
 		<li><a th:href="@{/actuator/mappings}">URL Mappings</a> - including
-		     the /vehicle mappings</li>
+		     the /account mappings</li>
 		<li><a th:href="@{/actuator/metrics}">Application metrics</a> - add any 
 		     metric name to the end of this URL, for example 
 		     <a th:href="@{/actuator/metrics/http.server.requests}">/actuator/metrics/http.server.requests</a></li>
 		<li><a th:href="@{/actuator}">List of actuator endpoints</a></li>
 	</ul>
+
+	<div th:replace="footer :: copy"></div>
 
 </body>
 </html>
