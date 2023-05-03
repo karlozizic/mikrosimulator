@@ -28,7 +28,7 @@ eureka:
     serviceUrl:
       defaultZone: http://${registration.server.hostname}:1111/eureka/
   instance:
-    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+    leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION - smanjeno sa 5
 
 # Enable actuator access without security checks - DEVELOPEMENT ONLY
 # Spring Boot 1.5

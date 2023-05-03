@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
@@ -34,6 +35,14 @@ public class VehiclesController {
         else {
             return vehicle;
         }
+    }
+
+    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Vehicle> all() {
+        logger.info("vehicles-service all() invoked: ");
+        List<Vehicle> vehicles = vehicleRepository.findAll();
+        logger.info("vehicles-service all() found: " + vehicles);
+        return vehicles;
     }
 
 }
