@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name="VEHICLE")
 public class Vehicle implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nacinNaplate;
@@ -33,11 +32,11 @@ public class Vehicle implements Serializable {
 
     private String drzavaRegistracije;
 
-    public Vehicle(Long voziloId, String nacinNaplate, String boja, int brojOsovina, int vIN, int idENC,
+    public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, int vIN, int idENC,
                    String registracijskaOznaka, String ekoRazred, String kategorija,
                    String drzavaRegistracije) {
         super();
-        this.id = voziloId;
+        this.id = id;
         this.nacinNaplate = nacinNaplate;
         this.boja = boja;
         this.brojOsovina = brojOsovina;
@@ -53,12 +52,12 @@ public class Vehicle implements Serializable {
 
     }
 
-    public Long getVoziloId() {
+    public Long getId() {
         return id;
     }
 
-    public void setVoziloId(Long voziloId) {
-        this.id = voziloId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNacinNaplate() {
