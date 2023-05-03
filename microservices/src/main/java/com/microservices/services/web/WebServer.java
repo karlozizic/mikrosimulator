@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan(useDefaultFilters = false) // Disable component scanner
 public class WebServer {
 
-    public static final String VEHICLE_SERVICE_URL = "http://VEHICLE-SERVICE";
+    public static final String VEHICLES_SERVICE_URL = "http://VEHICLES-SERVICE";
 
     public static void main(String[] args) {
 
@@ -36,7 +36,7 @@ public class WebServer {
 
     @Bean
     public WebVehiclesService vehiclesService() {
-        return new WebVehiclesService(VEHICLE_SERVICE_URL);
+        return new WebVehiclesService(VEHICLES_SERVICE_URL);
     }
 
     @Bean

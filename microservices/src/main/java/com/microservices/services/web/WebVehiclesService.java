@@ -32,6 +32,7 @@ public class WebVehiclesService {
     public Vehicle findById(Long id) {
 
         logger.info("findById() invoked: for " + id);
+        logger.info("findById() serviceUrl: " + serviceUrl);
         try {
             return restTemplate.getForObject(serviceUrl + "/vehicles/{id}", Vehicle.class, id);
         } catch (Exception e) {

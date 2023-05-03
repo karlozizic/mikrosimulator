@@ -2,6 +2,7 @@ package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,13 +22,14 @@ public class VehiclesController {
     }
 
     @RequestMapping("/vehicles/{id}")
-    public Vehicle byId(Long id) {
+    public Vehicle byId(@PathVariable("id") String id) {
         logger.info("vehicles-service byId() invoked: " + id);
-        Vehicle vehicle = vehicleRepository.findById(id);
+        Long vehicleId = Long.valueOf(id);
+        Vehicle vehicle = vehicleRepository.findById(vehicleId);
         logger.info("vehicles-service byId() found: " + vehicle);
 
         if (vehicle == null)
-            throw new VehicleNotFoundException(id);
+            throw new VehicleNotFoundException(vehicleId);
         else {
             return vehicle;
         }
