@@ -2,6 +2,7 @@ package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class VehiclesController {
         logger.info("VehicleRepository says system has " + vehicleRepository.countVehicles() + " vehicles");
     }
 
-    @RequestMapping("/vehicles/{id}")
+    @RequestMapping(path = "/vehicles/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Vehicle byId(@PathVariable("id") String id) {
         logger.info("vehicles-service byId() invoked: " + id);
         Long vehicleId = Long.valueOf(id);
