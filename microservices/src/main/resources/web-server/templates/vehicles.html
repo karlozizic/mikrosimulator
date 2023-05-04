@@ -1,0 +1,62 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Vehicles by Id</h1>
+
+	<div th:if="not ${vehicles}">
+		<div class="alert alert-warning m-2">
+			No vehicles found containing '<span th:text="${search}">text</span>'.
+		</div>
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:if="${vehicles}">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Vehicle Id</th>
+					<th>Vehicle Nacin Naplate</th>
+					<th>Vehicle Boja</th>
+					<th>Broj Osovina</th>
+					<th>VIN</th>
+					<th>ID ENC</th>
+					<th>Registracijska Oznaka</th>
+					<th>Eko razred</th>
+					<th>Kategorija</th>
+					<th>Drzava registracije</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="vehicle : ${vehicles}">
+					<td><a href="vehicle.html"
+						th:href="@{|/vehicles/${vehicle.id}|}"
+						th:text="|${vehicle.id}|"></a></td>
+					<td th:text="${vehicle.nacinNaplate}">nacinNaplate</td>
+					<td th:text="${vehicle.boja}">boja</td>
+					<td th:text="${vehicle.brojOsovina}">brojOsovina</td>
+					<td th:text="${vehicle.VIN}">VIN</td>
+					<td th:text="${vehicle.idENC}">idENC</td>
+					<td th:text="${vehicle.registracijskaOznaka}">registracijskaOznaka</td>
+					<td th:text="${vehicle.ekoRazred}">ekoRazred</td>
+					<td th:text="${vehicle.kategorija}">kategorija</td>
+					<td th:text="${vehicle.drzavaRegistracije}">drzavaRegistracije</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: right">
+		Options: <a th:href="@{/}">Home</a>
+<!--		| <a th:href="@{/vehicles/search}">Vehicle-->
+<!--			Search</a>-->
+	</div>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>
