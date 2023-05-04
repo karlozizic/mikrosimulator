@@ -11,7 +11,7 @@ public class Vehicle {
     protected String nacinNaplate;
     protected String boja;
     protected int brojOsovina;
-    protected int VIN;
+    protected String VIN;
     protected int idENC;
     protected String registracijskaOznaka;
     protected String ekoRazred;
@@ -21,7 +21,7 @@ public class Vehicle {
     protected Vehicle() {
     }
 
-    protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, int VIN, int idENC, String registracijskaOznaka,
+    protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
                       String ekoRazred, String kategorija, String drzavaRegistracije) {
         super();
         this.id = id;
@@ -68,11 +68,11 @@ public class Vehicle {
         this.brojOsovina = brojOsovina;
     }
 
-    public int getVIN() {
+    public String getVIN() {
         return VIN;
     }
 
-    public void setVIN(int VIN) {
+    public void setVIN(String VIN) {
         this.VIN = VIN;
     }
 

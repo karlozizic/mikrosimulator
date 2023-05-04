@@ -21,7 +21,7 @@ public class Vehicle implements Serializable {
 
     private int brojOsovina;
 
-    private int VIN;
+    private String VIN;
 
     private int idENC;
 
@@ -32,7 +32,7 @@ public class Vehicle implements Serializable {
 
     private String drzavaRegistracije;
 
-    public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, int vIN, int idENC,
+    public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC,
                    String registracijskaOznaka, String ekoRazred, String kategorija,
                    String drzavaRegistracije) {
         super();
@@ -40,7 +40,7 @@ public class Vehicle implements Serializable {
         this.nacinNaplate = nacinNaplate;
         this.boja = boja;
         this.brojOsovina = brojOsovina;
-        VIN = vIN;
+        this.VIN = VIN;
         this.idENC = idENC;
         this.registracijskaOznaka = registracijskaOznaka;
         this.ekoRazred = ekoRazred;
@@ -84,12 +84,12 @@ public class Vehicle implements Serializable {
         this.brojOsovina = brojOsovina;
     }
 
-    public int getVIN() {
+    public String getVIN() {
         return VIN;
     }
 
-    public void setVIN(int vIN) {
-        VIN = vIN;
+    public void setVIN(String VIN) {
+        this.VIN = VIN;
     }
 
     public int getIdENC() {
@@ -139,20 +139,11 @@ public class Vehicle implements Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Vehicle other = (Vehicle) obj;
-        return VIN == other.VIN && Objects.equals(boja, other.boja) && brojOsovina == other.brojOsovina
-                && Objects.equals(drzavaRegistracije, other.drzavaRegistracije)
-                && Objects.equals(ekoRazred, other.ekoRazred) && idENC == other.idENC
-                && Objects.equals(kategorija, other.kategorija) && Objects.equals(nacinNaplate, other.nacinNaplate)
-                && Objects.equals(registracijskaOznaka, other.registracijskaOznaka)
-                && Objects.equals(id, other.id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicle vehicle = (Vehicle) o;
+        return brojOsovina == vehicle.brojOsovina && idENC == vehicle.idENC && Objects.equals(id, vehicle.id) && Objects.equals(nacinNaplate, vehicle.nacinNaplate) && Objects.equals(boja, vehicle.boja) && Objects.equals(VIN, vehicle.VIN) && Objects.equals(registracijskaOznaka, vehicle.registracijskaOznaka) && Objects.equals(ekoRazred, vehicle.ekoRazred) && Objects.equals(kategorija, vehicle.kategorija) && Objects.equals(drzavaRegistracije, vehicle.drzavaRegistracije);
     }
 
     @Override

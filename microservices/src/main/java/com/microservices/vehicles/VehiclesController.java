@@ -1,8 +1,10 @@
 package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
+import com.microservices.vehicles.Utils.BrojOsovinaUtils;
 import com.microservices.vehicles.Utils.JsonReader;
 import com.microservices.vehicles.Utils.Parser;
+import com.microservices.vehicles.Utils.RegistracijaUtils;
 import com.microservices.vehicles.models.Drzava;
 import com.microservices.vehicles.models.Ekorazred;
 import com.microservices.vehicles.models.Kategorija;
@@ -84,18 +86,26 @@ public class VehiclesController {
             for (int i = 0; i < num; i++) {
                 String nacinNaplate = naciniNaplate.get(new Random().nextInt(naciniNaplate.size()));
                 String boja = boje.get(new Random().nextInt(boje.size()));
-                int VIN = 0;
-                if (nacinNaplate == "ENC") {
-                    int idENC = 1; // mora uzeti najvecu vrijednost i dodat + 1 no nemaju svi idENC
-                } else {
-                    int idENC = 0;
+                //treba dodati VIN generator Utils - importani ne radi!
+                String VIN = "";
+                for (int k = 0; k < 17; k++) {
+                    VIN += ((Integer) new Random().nextInt(10)).toString();
                 }
-                //broj osovina - ovisno o kategoriji (vidi po kategorijama)
-                //registracijska oznaka - ovisno o drzavi registracije (grad?)
+                int idENC = 0;
+                // mora uzeti najvecu vrijednost i dodat + 1 - problem kada imamo veliki skup podataka
+                if (nacinNaplate == "ENC") {
+                    idENC = (Integer) new Random().nextInt(1000000);
+                } else {
+                    idENC = 0;
+                }
                 Ekorazred randomEkoRazred =  ekorazrediArray.get(new Random().nextInt(ekorazrediArray.size()));
                 Kategorija randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));
-                Vehicle generatedVozilo = new Vehicle(id, "", "", 2, 0, 0, "", randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv());
+                //broj osovina - ovisno o kategoriji (vidi po kategorijama)
+                int brojOsovina = BrojOsovinaUtils.generateBrojOsovina(randomKategorija);
+                //registracijska oznaka - ovisno o drzavi registracije (grad?)
+                String registracijskaOznaka = RegistracijaUtils.generateRegistracija(randomDrzavaRegistracije);
+                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv());
                 id += 1;
                 vehicleRepository.save(generatedVozilo);
             }
