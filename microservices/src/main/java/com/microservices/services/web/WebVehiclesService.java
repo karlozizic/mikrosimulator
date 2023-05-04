@@ -5,8 +5,11 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -39,6 +42,21 @@ public class WebVehiclesService {
             logger.severe(e.getClass() + ": " + e.getLocalizedMessage());
             return null;
         }
+
+    }
+
+    public List<Vehicle> findAll() {
+        logger.info("findAll() invoked");
+        Vehicle[] vehicles = null;
+
+        try {
+            vehicles = restTemplate.getForObject(serviceUrl + "/vehicles/all", Vehicle[].class, (Object) null);
+        } catch (HttpClientErrorException e) {
+            // 404 Not Found
+        }
+
+        if(vehicles == null || vehicles.length == 0) return null;
+        else return Arrays.asList(vehicles);
 
     }
 

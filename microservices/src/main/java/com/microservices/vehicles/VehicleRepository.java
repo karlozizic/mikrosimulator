@@ -14,4 +14,8 @@ public interface VehicleRepository extends Repository<Vehicle, Long> {
 
     @Query("SELECT count(*) from Vehicle")
     public int countVehicles();
+
+    public void save(Vehicle vehicle);
+    @Query("SELECT max(id) from Vehicle")
+    public Long lastId();
 }

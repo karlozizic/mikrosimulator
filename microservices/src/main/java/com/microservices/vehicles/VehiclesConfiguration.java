@@ -31,8 +31,10 @@ public class VehiclesConfiguration {
 
         // Create an in-memory H2 relational database containing some demo
         // accounts.
+//        DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
+//                .addScript("classpath:testdb/data.sql").build();
         DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
-                .addScript("classpath:testdb/data.sql").build();
+                .build();
 
         logger.info("dataSource = " + dataSource);
 

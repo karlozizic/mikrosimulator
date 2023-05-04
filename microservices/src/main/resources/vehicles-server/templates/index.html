@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
+<head th:replace="header :: copy"></head>
+
 <body>
 	<h1>Microservices Demo - Vehicles Server</h1>
 
@@ -27,6 +29,8 @@
 		     <a th:href="@{/actuator/metrics/http.server.requests}">/actuator/metrics/http.server.requests</a></li>
 		<li><a th:href="@{/actuator}">List of actuator endpoints</a></li>
 	</ul>
+
+	<div th:replace="footer :: copy"></div>
 
 </body>
 </html>

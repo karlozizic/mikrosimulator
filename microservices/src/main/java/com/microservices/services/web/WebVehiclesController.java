@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -52,7 +53,18 @@ public class WebVehiclesController {
         logger.info("web-service byId() found: " + vehicle);
         model.addAttribute("vehicle", vehicle);
         return "vehicle";
+    }
 
+    @RequestMapping("/vehicles/all")
+    public String all(Model model) {
+        logger.info("web-service all() invoked");
+        List<Vehicle> vehicles = vehiclesService.findAll();
+        logger.info("web-service all() found: " + vehicles.size() + " vehicles");
+
+        if (vehicles != null) {
+            model.addAttribute("vehicles", vehicles);
+        }
+        return "vehicles";
     }
 
     @RequestMapping(value = "vehicles/search, method = RequestMethod.GET")

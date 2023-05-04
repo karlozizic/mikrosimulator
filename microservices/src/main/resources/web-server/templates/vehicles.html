@@ -15,10 +15,6 @@
 	</div>
 
 	<div th:if="${vehicles}">
-		<p>
-			Accounts whose owner contains ' <span th:text="${search}">text</span>'
-			are:
-		</p>
 
 		<table class="table table-striped">
 			<thead>
@@ -56,8 +52,9 @@
 	</div>
 
 	<div style="text-align: right">
-		Options: <a th:href="@{/}">Home</a> | <a th:href="@{/vehicles/search}">Vehicle
-			Search</a>
+		Options: <a th:href="@{/}">Home</a>
+<!--		| <a th:href="@{/vehicles/search}">Vehicle-->
+<!--			Search</a>-->
 	</div>
 
 	<div th:replace="footer :: copy"></div>
