@@ -22,13 +22,17 @@ public class NaplatnaTocka {
 	
 	private int geografskaSirina;
 	
-	private String usmjerenje; 
+	private String usmjerenje;
+
+	@ManyToOne
+	@JoinColumn
+	private Dionica dionica;
 	
 //	@OneToMany
 //	private Set<Uredaj> uredajiZaPodatke;
 
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
-			int geografskaSirina, String usmjerenje) {
+			int geografskaSirina, String usmjerenje, Dionica dionica) {
 		super();
 		this.id = naplatnaTockaId;
 		this.oznaka = oznaka;
@@ -37,6 +41,7 @@ public class NaplatnaTocka {
 		this.geografskaDuzina = geografskaDuzina;
 		this.geografskaSirina = geografskaSirina;
 		this.usmjerenje = usmjerenje;
+		this.dionica = dionica;
 //		this.uredajiZaPodatke = uredajiZaPodatke;
 	} 
 	
@@ -100,7 +105,15 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 	}
 
-//	public Set<Uredaj> getUredajiZaPodatke() {
+	public Dionica getDionica() {
+		return dionica;
+	}
+
+	public void setDionica(Dionica dionica) {
+		this.dionica = dionica;
+	}
+
+	//	public Set<Uredaj> getUredajiZaPodatke() {
 //		return uredajiZaPodatke;
 //	}
 //
