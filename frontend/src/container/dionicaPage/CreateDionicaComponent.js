@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
-import { dionicaRegister } from '../../utils/axios/backendCalls/dionicaEndpoints';
+import {dionicaRegister, getAllDionice} from '../../utils/axios/backendCalls/dionicaEndpoints';
 import "../allCss/create-update.css"
+import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
+import Select from "react-select";
+
 const CreateDionicaComponent = () => {
     const [smjer, setSmjer] = useState('');
     const [najvecaBrzina, setNajvecaBrzina] = useState('');
@@ -10,11 +13,31 @@ const CreateDionicaComponent = () => {
     const [oznaka, setOznaka] = useState('');
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
-    const [naplatnaTocka, setNaplatnaTocka] = useState('');
+    const [naplatnaTocka, setNaplatnaTocka] = useState();
     const [slijediDionica, setSlijediDionica] = useState('');
-    const [prethodiDionica, setPrethodiDionica] = useState('');
+    const [prethodiDionica, setPrethodiDionica] = useState('')
+    const [dionice, setDionice] = useState([]);
+    const [naplatneTocke, setNaplatneTocke] = useState([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getAllDionice().then((res) => {
+            setDionice(res.listaDionica);
+        });
+    }, []);
+
+    useEffect(() => {
+        getAllNaplatneTocke().then((res) => {
+            setNaplatneTocke(res.listaNaplatnihTocki);
+        });
+    }, []);
+
+    const handleNaplatnaTockaChange = (selectedOption) => {
+        console.log(selectedOption);
+        const tocka =  {"naplatnaTockaId": selectedOption.value};
+        setNaplatnaTocka(selectedOption);
+    };
 
     const saveDionica = (e) => {
         e.preventDefault();
@@ -76,19 +99,25 @@ const CreateDionicaComponent = () => {
                                 <Form>
                                     <FormGroup style={{ padding: '1em' }}>
                                         <label>Smjer:</label>
-                                        <input name="smjer" className="form-control" value={smjer} onChange={changeHandler}></input>
+                                        <input name="smjer" className="form-control" value={smjer === "" ? null : smjer} onChange={changeHandler}></input>
                                         <label>Najveca brzina:</label>
-                                        <input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler}></input>
+                                        <input name="najvecaBrzina" className="form-control" value={najvecaBrzina === "" ? null : najvecaBrzina} onChange={changeHandler}></input>
                                         <label>Broj traka:</label>
-                                        <input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler}></input>
+                                        <input name="brojTraka" className="form-control" value={brojTraka === "" ? null : brojTraka} onChange={changeHandler}></input>
                                         <label>Oznaka:</label>
-                                        <input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler}></input>
+                                        <input name="oznaka" className="form-control" value={oznaka === "" ? null : oznaka} onChange={changeHandler}></input>
                                         <label>Pocetna stacionaza:</label>
-                                        <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler}></input>
+                                        <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza ==="" ? null : pocetnaStacionaza} onChange={changeHandler}></input>
                                         <label>Zavrsna stacionaza:</label>
-                                        <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
-                                        <label>Naplatna Tocka:</label>
-                                        <input name="naplatnaTocka" className="form-control" value={naplatnaTocka === "" ? null : naplatnaTocka} onChange={changeHandler}></input>
+                                        <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza === "" ? null : zavrsnaStacionaza} onChange={changeHandler}></input>
+                                        {/*<label>Naplatna Tocka:</label>*/}
+                                        {/*<input name="naplatnaTocka" className="form-control" value={naplatnaTocka === "" ? null : naplatnaTocka} onChange={changeHandler}></input>*/}
+                                        Naplatna Tocka:
+                                        <Select
+                                        name="naplatnaTocka"
+                                        value={naplatnaTocka}
+                                        onChange={handleNaplatnaTockaChange}
+                                        options={naplatneTocke && naplatneTocke.length > 0 ? naplatneTocke.map((naplatnaTocka) => ({ value: naplatnaTocka.naplatnaTockaId, label: naplatnaTocka.oznaka })) : []}                                        />
                                         <label>Sljedi dionica:</label>
                                         <input name="slijediDionica" className="form-control" value={slijediDionica === "" ? null : slijediDionica} onChange={changeHandler}></input>
                                         <label>Prethodi dionica:</label>
