@@ -24,11 +24,11 @@ public class NaplatnaTocka {
 	
 	private String usmjerenje; 
 	
-	@OneToMany
-	private Set<Uredaj> uredajiZaPodatke;
+//	@OneToMany
+//	private Set<Uredaj> uredajiZaPodatke;
 
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
-			int geografskaSirina, String usmjerenje, Set<Uredaj> uredajiZaPodatke) {
+			int geografskaSirina, String usmjerenje) {
 		super();
 		this.id = naplatnaTockaId;
 		this.oznaka = oznaka;
@@ -37,7 +37,7 @@ public class NaplatnaTocka {
 		this.geografskaDuzina = geografskaDuzina;
 		this.geografskaSirina = geografskaSirina;
 		this.usmjerenje = usmjerenje;
-		this.uredajiZaPodatke = uredajiZaPodatke;
+//		this.uredajiZaPodatke = uredajiZaPodatke;
 	} 
 	
 	public NaplatnaTocka() {
@@ -100,12 +100,12 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 	}
 
-	public Set<Uredaj> getUredajiZaPodatke() {
-		return uredajiZaPodatke;
-	}
-
-	public void setUredajiZaPodatke(Set<Uredaj> uredajiZaPodatke) {
-		this.uredajiZaPodatke = uredajiZaPodatke;
-	}
+//	public Set<Uredaj> getUredajiZaPodatke() {
+//		return uredajiZaPodatke;
+//	}
+//
+//	public void setUredajiZaPodatke(Set<Uredaj> uredajiZaPodatke) {
+//		this.uredajiZaPodatke = uredajiZaPodatke;
+//	}
 
 }

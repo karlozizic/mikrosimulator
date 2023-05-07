@@ -37,8 +37,7 @@ public class NaplatnaTockaController {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(naplatnaTockaFromDB, null, true, "Uspjesno dohvacanje naplatne tocke!");
 			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
 		}
-		
-		
+
 	}
 	
 	@PutMapping("/update")

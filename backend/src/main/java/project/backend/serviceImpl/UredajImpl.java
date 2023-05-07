@@ -55,5 +55,15 @@ public class UredajImpl implements UredajServis{
 		}
 		return null;
 	}
+
+	@Override
+	public List<Uredaj> dohvatiUredajeNaplatneTocke(NaplatnaTocka naplatnaTocka) {
+		List<Uredaj> listaUredaja = uredajRepository.dohvatiUredajeNaplatneTocke(naplatnaTocka);
+		if(listaUredaja != null) {
+			return listaUredaja;
+		}
+		return null;
+	}
+
 	
 }

@@ -19,7 +19,8 @@ public class Uredaj {
 	public Long id;
 
 	@ManyToOne
-	@JoinColumn(name="naplatna_tocka_id")
+	@JoinColumn
+//	@JoinColumn(name="naplatna_tocka_id")
 	private NaplatnaTocka naplatnaTocka;
 
 	@Column(name="uredaj_type", insertable = false, updatable = false)
