@@ -18,12 +18,21 @@ public class Uredaj {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
+	@ManyToOne
+	@JoinColumn(name="naplatna_tocka_id")
+	private NaplatnaTocka naplatnaTocka;
+
 	@Column(name="uredaj_type", insertable = false, updatable = false)
 	protected int uredajType;
 
-	public Uredaj(Long uredajId) {
+	public Uredaj(Long uredajId, NaplatnaTocka naplatnaTocka) {
 		super();
 		this.id = uredajId;
+		this.naplatnaTocka = naplatnaTocka;
+	}
+	public Uredaj(NaplatnaTocka naplatnaTocka) {
+		super();
+		this.naplatnaTocka = naplatnaTocka;
 	}
 
 	public Uredaj(){}
@@ -48,4 +57,11 @@ public class Uredaj {
 		return uredajType;
 	}
 
+	public NaplatnaTocka getNaplatnaTocka() {
+		return naplatnaTocka;
+	}
+
+	public void setNaplatnaTocka(NaplatnaTocka naplatnaTocka) {
+		this.naplatnaTocka = naplatnaTocka;
+	}
 }

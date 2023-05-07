@@ -1,11 +1,8 @@
 package project.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name="NAPLATNA_TOCKA")
@@ -27,11 +24,11 @@ public class NaplatnaTocka {
 	
 	private String usmjerenje; 
 	
-	@ManyToOne
-	private Uredaj uredajZaPodatke;
+	@OneToMany
+	private Set<Uredaj> uredajiZaPodatke;
 
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
-			int geografskaSirina, String usmjerenje, Uredaj uredajZaPodatke) {
+			int geografskaSirina, String usmjerenje, Set<Uredaj> uredajiZaPodatke) {
 		super();
 		this.id = naplatnaTockaId;
 		this.oznaka = oznaka;
@@ -40,7 +37,7 @@ public class NaplatnaTocka {
 		this.geografskaDuzina = geografskaDuzina;
 		this.geografskaSirina = geografskaSirina;
 		this.usmjerenje = usmjerenje;
-		this.uredajZaPodatke = uredajZaPodatke;
+		this.uredajiZaPodatke = uredajiZaPodatke;
 	} 
 	
 	public NaplatnaTocka() {
@@ -103,14 +100,12 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 	}
 
-	public Uredaj getUredajZaPodatke() {
-		return uredajZaPodatke;
+	public Set<Uredaj> getUredajiZaPodatke() {
+		return uredajiZaPodatke;
 	}
 
-	public void setUredajZaPodatke(Uredaj uredajZaPodatke) {
-		this.uredajZaPodatke = uredajZaPodatke;
+	public void setUredajiZaPodatke(Set<Uredaj> uredajiZaPodatke) {
+		this.uredajiZaPodatke = uredajiZaPodatke;
 	}
-	
-	
-	
+
 }
