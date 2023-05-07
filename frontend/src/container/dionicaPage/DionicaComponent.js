@@ -25,7 +25,7 @@ const DionicaComponent = () => {
 
     const dionicaDelete = (id) => {
         deleteDionica(id).then(res => {
-            setDionice(prevDionice => prevDionice.filter(dionica => dionica.id !== id));
+            setDionice(prevDionice => prevDionice.filter(dionica => dionica.dionicaId !== id));
         });
     };
 
@@ -68,7 +68,7 @@ const DionicaComponent = () => {
                                 <Button onClick={() => editEkorazred(dionica.dionicaId)} color="primary">
                                     Update
                                 </Button>
-                                <Button style={{marginLeft: "1em"}} onClick={() => dionicaDelete(dionica.id)} color="danger">
+                                <Button style={{marginLeft: "1em"}} onClick={() => dionicaDelete(dionica.dionicaId)} color="danger">
                                     Delete
                                 </Button>
                             </td>
