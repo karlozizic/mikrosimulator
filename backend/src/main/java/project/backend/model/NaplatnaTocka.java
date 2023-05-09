@@ -1,11 +1,10 @@
 package project.backend.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.util.Set;
 
 @Entity
 @Table(name="NAPLATNA_TOCKA")
@@ -25,13 +24,18 @@ public class NaplatnaTocka {
 	
 	private int geografskaSirina;
 	
-	private String usmjerenje; 
-	
+	private String usmjerenje;
+
 	@ManyToOne
-	private Uredaj uredajZaPodatke;
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn
+	private Dionica dionica;
+	
+//	@OneToMany
+//	private Set<Uredaj> uredajiZaPodatke;
 
 	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
-			int geografskaSirina, String usmjerenje, Uredaj uredajZaPodatke) {
+			int geografskaSirina, String usmjerenje, Dionica dionica) {
 		super();
 		this.id = naplatnaTockaId;
 		this.oznaka = oznaka;
@@ -40,9 +44,22 @@ public class NaplatnaTocka {
 		this.geografskaDuzina = geografskaDuzina;
 		this.geografskaSirina = geografskaSirina;
 		this.usmjerenje = usmjerenje;
-		this.uredajZaPodatke = uredajZaPodatke;
-	} 
-	
+		this.dionica = dionica;
+//		this.uredajiZaPodatke = uredajiZaPodatke;
+	}
+	public NaplatnaTocka(String oznaka, String naziv, int stacionaza, int geografskaDuzina,
+						 int geografskaSirina, String usmjerenje, Dionica dionica) {
+		super();
+		this.oznaka = oznaka;
+		this.naziv = naziv;
+		this.stacionaza = stacionaza;
+		this.geografskaDuzina = geografskaDuzina;
+		this.geografskaSirina = geografskaSirina;
+		this.usmjerenje = usmjerenje;
+		this.dionica = dionica;
+//		this.uredajiZaPodatke = uredajiZaPodatke;
+	}
+
 	public NaplatnaTocka() {
 		
 	}
@@ -103,14 +120,20 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 	}
 
-	public Uredaj getUredajZaPodatke() {
-		return uredajZaPodatke;
+	public Dionica getDionica() {
+		return dionica;
 	}
 
-	public void setUredajZaPodatke(Uredaj uredajZaPodatke) {
-		this.uredajZaPodatke = uredajZaPodatke;
+	public void setDionica(Dionica dionica) {
+		this.dionica = dionica;
 	}
-	
-	
-	
+
+	//	public Set<Uredaj> getUredajiZaPodatke() {
+//		return uredajiZaPodatke;
+//	}
+//
+//	public void setUredajiZaPodatke(Set<Uredaj> uredajiZaPodatke) {
+//		this.uredajiZaPodatke = uredajiZaPodatke;
+//	}
+
 }

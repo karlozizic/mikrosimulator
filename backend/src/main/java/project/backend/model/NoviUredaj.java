@@ -6,15 +6,19 @@ public class NoviUredaj {
     private int uredajtype;
     private String name;
 
-    public NoviUredaj(int uredajtype, String name) {
+    private Long naplatnaTockaId;
+
+    public NoviUredaj(int uredajtype, String name, Long naplatnaTockaId) {
         this.uredajtype = uredajtype;
         this.name = name;
+        this.naplatnaTockaId = naplatnaTockaId;
     }
 
-    public NoviUredaj(int uredajtype, String name, Long id) {
+    public NoviUredaj(int uredajtype, String name, Long id, Long naplatnaTockaId) {
         this.uredajtype = uredajtype;
         this.name = name;
         this.id = id;
+        this.naplatnaTockaId = naplatnaTockaId;
     }
 
     public NoviUredaj() {
@@ -43,6 +47,14 @@ public class NoviUredaj {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getNaplatnaTockaId() {
+        return naplatnaTockaId;
+    }
+
+    public void setNaplatnaTockaId(Long naplatnaTockaId) {
+        this.naplatnaTockaId = naplatnaTockaId;
     }
 }
 

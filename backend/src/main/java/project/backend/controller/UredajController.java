@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import project.backend.model.*;
+import project.backend.serviceImpl.NaplatnaTockaImpl;
 import project.backend.serviceImpl.UredajImpl;
 
 
@@ -18,9 +19,12 @@ import project.backend.serviceImpl.UredajImpl;
 public class UredajController{
 	
 	UredajImpl uredajService;
+
+	NaplatnaTockaImpl naplatnaTockaService;
 	
-	public UredajController(@Autowired UredajImpl uredajService) {
-		this.uredajService = uredajService; 
+	public UredajController(@Autowired UredajImpl uredajService, @Autowired NaplatnaTockaImpl naplatnaTockaService) {
+		this.uredajService = uredajService;
+		this.naplatnaTockaService = naplatnaTockaService;
 	}
 	
 	@GetMapping("/fetch")
@@ -38,7 +42,7 @@ public class UredajController{
 		} else {
 			name = ((Klasifikator) uredajFromDB).getName();
 		}
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId());
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId());
 
 		if(uredajFromDB == null) {
 			ResponseUredaj data = new ResponseUredaj(null, null, false, "Neuspjesno dohvacanje uredaja!");
@@ -48,6 +52,7 @@ public class UredajController{
 			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
 		}
 	}
+
 
 	@PutMapping("/update")
 	public ResponseEntity<ResponseUredaj> updateUredaj(@RequestBody NoviUredaj updatedUredaj){
@@ -73,7 +78,7 @@ public class UredajController{
 		}
 
 		Uredaj uredaj = uredajService.updateUredaja(uredajFromDB);
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, updatedUredaj.getName(), uredajFromDB.getUredajId());
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, updatedUredaj.getName(), uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId()	);
 
 		ResponseUredaj data = new ResponseUredaj(noviUredaj, null, true, "Uspjesno updateanje uredaja!");
 		return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
@@ -82,21 +87,22 @@ public class UredajController{
 	}
 
 	@PostMapping("/register")
-	public ResponseEntity<ResponseUredaj> newUredaj(@RequestBody NoviUredaj noviUredaj){
+	public ResponseEntity<ResponseUredaj> newUredaj(@RequestBody NoviUredaj noviUredaj) {
 
 		Uredaj uredajFromDB = null;
 		String name = "";
-
-		if(noviUredaj.getUredajtype() == 1) {
-			Kamera uredaj = new Kamera(noviUredaj.getName());
-			uredajFromDB = (Kamera) uredajService.stvoriUredaj(uredaj);
+		NaplatnaTocka naplatnaTocka = naplatnaTockaService.dohvatiNaplatnuTockuPoId(noviUredaj.getNaplatnaTockaId());
+		if (noviUredaj.getUredajtype() == 1) {
+			Kamera uredaj = new Kamera(noviUredaj.getName(), naplatnaTocka);
+			uredajFromDB =  uredajService.stvoriUredaj(uredaj);
 			name = ((Kamera) uredajFromDB).getName();
-		} else if (noviUredaj.getUredajtype() == 2) {
-			Primopredajnik uredaj = new Primopredajnik(noviUredaj.getName());
+		}
+		else if (noviUredaj.getUredajtype() == 2) {
+			Primopredajnik uredaj = new Primopredajnik(noviUredaj.getName(), naplatnaTocka);
 			uredajFromDB = (Primopredajnik) uredajService.stvoriUredaj(uredaj);
 			name = ((Primopredajnik) uredajFromDB).getName();
 		} else if (noviUredaj.getUredajtype() == 3) {
-			Klasifikator uredaj = new Klasifikator(noviUredaj.getName());
+			Klasifikator uredaj = new Klasifikator(noviUredaj.getName(), naplatnaTocka);
 			uredajFromDB = (Klasifikator) uredajService.stvoriUredaj(uredaj);
 			name = ((Klasifikator) uredajFromDB).getName();
 		}
@@ -106,11 +112,10 @@ public class UredajController{
 		}
 
 		int tipUredaja = uredajService.dohvatiTipUredaja(uredajFromDB.getUredajId());
-		noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId());
+		noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), naplatnaTocka.getNaplatnaTockaId());
 
 		ResponseUredaj data = new ResponseUredaj(noviUredaj, null, true, "Uspjesno stvaranje uredaja!");
 		return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
-
 	}
 
 	@DeleteMapping("/delete/{id}")
@@ -129,7 +134,7 @@ public class UredajController{
 		}
 		Uredaj uredaj = uredajService.obrisiUredaj(uredajId);
 
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId());
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
 
 		if(uredaj == null) {
 			ResponseUredaj data = new ResponseUredaj(null, null, false, "Neuspjesno brisanje uredaja!");
@@ -146,11 +151,40 @@ public class UredajController{
 	public ResponseEntity<ResponseUredaj> getAllUredaji(){
 
 		List<Uredaj> listaUredaja = uredajService.dohvatiSveUredaje();
+		List<NoviUredaj> listaNovihUredaja= new ArrayList<>();
+
+		if(listaUredaja.isEmpty()) {
+			ResponseUredaj data = new ResponseUredaj(null, listaNovihUredaja, false, null);
+			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
+		} else {
+			for (Uredaj uredaj : listaUredaja) {
+				int tipUredaja = uredajService.dohvatiTipUredaja(uredaj.getUredajId());
+				String name = "";
+				if(tipUredaja == 1) {
+					name = ((Kamera) uredaj).getName();
+				} else if(tipUredaja == 2) {
+					name = ((Primopredajnik) uredaj).getName();
+				} else {
+					name = ((Klasifikator) uredaj).getName();
+				}
+				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
+				listaNovihUredaja.add(noviUredaj);
+			}
+			ResponseUredaj data = new ResponseUredaj(null, listaNovihUredaja, true, "Dohvacanje uspjesno!");
+			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
+		}
+	}
+
+	@GetMapping("/allby")
+	public ResponseEntity<ResponseUredaj> dohvatiUredajeNaplatneTocke(@RequestParam(name = "id") String idNaplatneTocke){
+		Long id = Long.parseLong(idNaplatneTocke);
+		NaplatnaTocka naplatnaTocka = naplatnaTockaService.dohvatiNaplatnuTockuPoId(id);
+		List<Uredaj> listaUredaja = uredajService.dohvatiUredajeNaplatneTocke(naplatnaTocka);
 
 		if(listaUredaja.isEmpty()) {
 			ResponseUredaj data = new ResponseUredaj(null, null, false, null);
 			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
-		}else {
+		} else {
 			List<NoviUredaj> listaNovihUredaja= new ArrayList<NoviUredaj>();
 			for (Uredaj uredaj : listaUredaja) {
 				int tipUredaja = uredajService.dohvatiTipUredaja(uredaj.getUredajId());
@@ -162,7 +196,7 @@ public class UredajController{
 				} else {
 					name = ((Klasifikator) uredaj).getName();
 				}
-				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId());
+				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
 				listaNovihUredaja.add(noviUredaj);
 			}
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import project.backend.model.NaplatnaTocka;
 import project.backend.model.NoviUredaj;
 import project.backend.model.Uredaj;
 
@@ -23,5 +24,7 @@ public interface UredajServis {
 	Uredaj obrisiUredaj(Long uredajId);
 
 	List<Uredaj> dohvatiSveUredaje();
-	
+
+	List<Uredaj> dohvatiUredajeNaplatneTocke(NaplatnaTocka naplatnaTocka);
+
 }

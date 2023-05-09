@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
-import { dionicaRegister } from '../../utils/axios/backendCalls/dionicaEndpoints';
+import {dionicaRegister, getAllDionice} from '../../utils/axios/backendCalls/dionicaEndpoints';
 import "../allCss/create-update.css"
+import Select from "react-select";
+
 const CreateDionicaComponent = () => {
     const [smjer, setSmjer] = useState('');
     const [najvecaBrzina, setNajvecaBrzina] = useState('');
@@ -10,15 +12,35 @@ const CreateDionicaComponent = () => {
     const [oznaka, setOznaka] = useState('');
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
-    const [naplatnaTocka, setNaplatnaTocka] = useState('');
-    const [slijediDionica, setSlijediDionica] = useState('');
-    const [prethodiDionica, setPrethodiDionica] = useState('');
-
+    const [dionice, setDionice] = useState([]);
+    const [dionicaPrije, setDionicaPrije] = useState('');
+    const [dionicaPoslije, setDionicaPoslije] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getAllDionice().then((res) => {
+            console.log(res.listaDionica);
+            setDionice(res.listaDionica);
+        });
+    }, []);
+
+    const handleDionicaPrijeChange = (selectedOption) => {
+        console.log(selectedOption);
+        // const dionica =  {"dionicaId": selectedOption.value};
+        setDionicaPrije(selectedOption);
+    }
+
+    const handleDionicaPoslijeChange = (selectedOption) => {
+        console.log(selectedOption);
+        // const dionica =  {"dionicaId": selectedOption.value};
+        setDionicaPoslije(selectedOption);
+    }
 
     const saveDionica = (e) => {
         e.preventDefault();
-        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, naplatnaTocka, slijediDionica, prethodiDionica };
+        const dionicaPrijeId = dionicaPrije.value != null ? dionicaPrije.value : null;
+        const dionicaPoslijeId = dionicaPoslije.value != null ? dionicaPoslije.value : null;
+        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, dionicaPrijeId, dionicaPoslijeId };
         console.log('dionica = ' + JSON.stringify(dionica));
 
         dionicaRegister(dionica).then(() => {
@@ -47,15 +69,6 @@ const CreateDionicaComponent = () => {
             case 'zavrsnaStacionaza':
                 setZavrsnaStacionaza(value);
                 break;
-            case 'naplatnaTocka':
-                setNaplatnaTocka(value);
-                break;
-            case 'slijediDionica':
-                setSlijediDionica(value);
-                break;
-            case 'prethodiDionica':
-                setPrethodiDionica(value);
-                break;
             default:
                 break;
         }
@@ -76,23 +89,29 @@ const CreateDionicaComponent = () => {
                                 <Form>
                                     <FormGroup style={{ padding: '1em' }}>
                                         <label>Smjer:</label>
-                                        <input name="smjer" className="form-control" value={smjer} onChange={changeHandler}></input>
+                                        <input name="smjer" className="form-control" value={smjer === "" ? null : smjer} onChange={changeHandler}></input>
                                         <label>Najveca brzina:</label>
-                                        <input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler}></input>
+                                        <input name="najvecaBrzina" className="form-control" value={najvecaBrzina === "" ? null : najvecaBrzina} onChange={changeHandler}></input>
                                         <label>Broj traka:</label>
-                                        <input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler}></input>
+                                        <input name="brojTraka" className="form-control" value={brojTraka === "" ? null : brojTraka} onChange={changeHandler}></input>
                                         <label>Oznaka:</label>
-                                        <input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler}></input>
+                                        <input name="oznaka" className="form-control" value={oznaka === "" ? null : oznaka} onChange={changeHandler}></input>
                                         <label>Pocetna stacionaza:</label>
-                                        <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler}></input>
+                                        <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza ==="" ? null : pocetnaStacionaza} onChange={changeHandler}></input>
                                         <label>Zavrsna stacionaza:</label>
-                                        <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
-                                        <label>Naplatna Tocka:</label>
-                                        <input name="naplatnaTocka" className="form-control" value={naplatnaTocka === "" ? null : naplatnaTocka} onChange={changeHandler}></input>
-                                        <label>Sljedi dionica:</label>
-                                        <input name="slijediDionica" className="form-control" value={slijediDionica === "" ? null : slijediDionica} onChange={changeHandler}></input>
-                                        <label>Prethodi dionica:</label>
-                                        <input name="prethodiDionica" className="form-control" value={prethodiDionica === "" ? null : prethodiDionica} onChange={changeHandler}></input>
+                                        <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza === "" ? null : zavrsnaStacionaza} onChange={changeHandler}></input>
+                                        Dionica Prije:
+                                        <Select
+                                            name="dionicaPrije"
+                                            value={dionicaPrije}
+                                            onChange={handleDionicaPrijeChange}
+                                            options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}/>
+                                        Dionica poslije
+                                        <Select
+                                            name="dionicaPoslije"
+                                            value={dionicaPoslije}
+                                            onChange={handleDionicaPoslijeChange}
+                                            options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}/>
                                     </FormGroup>
                                     <Button color="success" onClick={saveDionica}>
                                         Save

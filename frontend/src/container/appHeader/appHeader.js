@@ -33,9 +33,6 @@ const AppHeader = () =>  {
                                 <DropdownItem href="/kategorije">
                                     Kategorija
                                 </DropdownItem>
-                                <DropdownItem href="/vozila">
-                                    Vozilo
-                                </DropdownItem>
                                 <DropdownItem href="/dionice">
                                     Dionica
                                 </DropdownItem>
@@ -44,6 +41,10 @@ const AppHeader = () =>  {
                                 </DropdownItem>
                                 <DropdownItem href="/uredaji">
                                     Uredaj
+                                </DropdownItem>
+                                <DropdownItem divider/>
+                                <DropdownItem href="/vozila">
+                                    Vozilo
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>

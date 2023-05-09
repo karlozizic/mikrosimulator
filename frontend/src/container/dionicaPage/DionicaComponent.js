@@ -25,7 +25,7 @@ const DionicaComponent = () => {
 
     const dionicaDelete = (id) => {
         deleteDionica(id).then(res => {
-            setDionice(prevDionice => prevDionice.filter(dionica => dionica.id !== id));
+            setDionice(prevDionice => prevDionice.filter(dionica => dionica.dionicaId !== id));
         });
     };
 
@@ -40,15 +40,14 @@ const DionicaComponent = () => {
                     <thead>
                     <tr>
                         <th>Dionica ID</th>
-                        <th>Dionica smjer</th>
-                        <th>Dionica najveca brzina</th>
-                        <th>Dionica broj traka</th>
-                        <th>Dionica oznaka</th>
-                        <th>Dionica pocetna stacionaza</th>
-                        <th>Dionica zavrsna stacionaza</th>
-                        <th>Dionica naplatna tocka</th>
-                        <th>Slijedi Dionica</th>
+                        <th>Smjer</th>
+                        <th>Najveca brzina</th>
+                        <th>Broj traka</th>
+                        <th>Oznaka</th>
+                        <th>Pocetna stacionaza</th>
+                        <th>Zavrsna stacionaza</th>
                         <th>Prethodi Dionica</th>
+                        <th>Slijedi Dionica</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,14 +60,13 @@ const DionicaComponent = () => {
                             <td>{dionica.oznaka}</td>
                             <td>{dionica.pocetnaStacionaza}</td>
                             <td>{dionica.zavrsnaStacionaza}</td>
-                            <td>{dionica.naplatnaTocka}</td>
-                            <td>{dionica.slijedi}</td>
-                            <td>{dionica.prethodi}</td>
+                            <td>{dionica.prethodi === null ? "" : dionica.prethodi.oznaka}</td>
+                            <td>{dionica.slijedi === null ? "" : dionica.slijedi.oznaka}</td>
                             <td>
                                 <Button onClick={() => editEkorazred(dionica.dionicaId)} color="primary">
                                     Update
                                 </Button>
-                                <Button style={{marginLeft: "1em"}} onClick={() => dionicaDelete(dionica.id)} color="danger">
+                                <Button style={{marginLeft: "1em"}} onClick={() => dionicaDelete(dionica.dionicaId)} color="danger">
                                     Delete
                                 </Button>
                             </td>

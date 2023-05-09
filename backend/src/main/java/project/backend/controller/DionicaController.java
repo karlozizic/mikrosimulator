@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import project.backend.model.Dionica;
+import project.backend.model.NovaDionica;
 import project.backend.model.ResponseDionica;
 import project.backend.serviceImpl.DionicaImpl;
 
@@ -42,9 +43,14 @@ public class DionicaController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseDionica> updateDionica(@RequestBody Dionica updatedDionica){
-		
-		Dionica dionicaFromDB = dionicaService.updateDionice(updatedDionica); 
+	public ResponseEntity<ResponseDionica> updateDionica(@RequestBody NovaDionica updatedDionica){
+
+		Dionica oldDionica = dionicaService.dohvatiDionicuPoId(updatedDionica.getDionicaId());
+		Dionica slijedi = oldDionica.getSlijedi();
+		Dionica prethodi = oldDionica.getPrethodi();
+
+		Dionica dionica = new Dionica(updatedDionica.getDionicaId(), updatedDionica.getSmjer(), updatedDionica.getNajvecaBrzina(), updatedDionica.getBrojTraka(), updatedDionica.getOznaka(), updatedDionica.getPocetnaStacionaza(), updatedDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionicaFromDB = dionicaService.updateDionice(dionica);
 		
 		if(dionicaFromDB == null) {
 			ResponseDionica data = new ResponseDionica(null, null, false, "Neuspjesno updateanje dionice!");
@@ -57,9 +63,20 @@ public class DionicaController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseDionica> newDionica(@RequestBody Dionica novaDionica){
-		
-		Dionica dionicaFromDB = dionicaService.stvoriDionicu(novaDionica);
+	public ResponseEntity<ResponseDionica> newDionica(@RequestBody NovaDionica novaDionica){
+
+		Dionica slijedi = null;
+		Dionica prethodi = null;
+
+		if (novaDionica.getSlijediId() != null) {
+			slijedi = dionicaService.dohvatiDionicuPoId(novaDionica.getSlijediId());
+		}
+		if (novaDionica.getPrethodiId() != null) {
+			prethodi = dionicaService.dohvatiDionicuPoId(novaDionica.getPrethodiId());
+		}
+
+		Dionica dionica = new Dionica(novaDionica.getSmjer(), novaDionica.getNajvecaBrzina(), novaDionica.getBrojTraka(), novaDionica.getOznaka(), novaDionica.getPocetnaStacionaza(), novaDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionicaFromDB = dionicaService.stvoriDionicu(dionica);
 		
 		if(dionicaFromDB == null) {
 			ResponseDionica data = new ResponseDionica(null, null, false, "Neuspjesno stvaranje dionice!");

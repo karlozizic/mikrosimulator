@@ -1,17 +1,33 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import { uredajRegister } from '../../utils/axios/backendCalls/uredajEndpoints';
 import "../allCss/create-update.css"
+import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
+import Select from "react-select";
 const CreateUredajComponent = () => {
     const [name, setName] = useState('');
     const [uredajtype, setUredajtype] = useState(1);
+    const [naplatnaTocka, setNaplatnaTocka] = useState('');
+    const [naplatneTocke, setNaplatneTocke] = useState([]);
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getAllNaplatneTocke().then((res) => {
+            setNaplatneTocke(res.listaNaplatnihTocki);
+        });
+    }, []);
+
+    const handleNaplatnaTockaChange = (selectedOption) => {
+        console.log(selectedOption);
+        setNaplatnaTocka(selectedOption);
+    }
+
     const saveUredaj = (e) => {
         e.preventDefault();
-        const uredaj = { name, uredajtype };
+        const naplatnaTockaId = naplatnaTocka.value != null ? naplatnaTocka.value : null;
+        const uredaj = { name, uredajtype, naplatnaTockaId };
         console.log('uredaj = ' + JSON.stringify(uredaj));
 
         uredajRegister(uredaj).then(() => {
@@ -50,6 +66,12 @@ const CreateUredajComponent = () => {
                                             <option value={2}>Primopredajnik</option>
                                             <option value={3}>Klasifikator</option>
                                         </select>
+                                        Naplatna tocka:
+                                        <Select
+                                            name="naplatnaTocka"
+                                            value={naplatnaTocka}
+                                            onChange={handleNaplatnaTockaChange}
+                                            options={naplatneTocke && naplatneTocke.length > 0 ? naplatneTocke.map((naplatneTocka) => ({ value: naplatneTocka.naplatnaTockaId, label: naplatneTocka.oznaka })) : []}/>
                                     </FormGroup>
                                     <Button color="success" onClick={saveUredaj}>
                                         Save

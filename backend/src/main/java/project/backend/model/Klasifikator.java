@@ -9,8 +9,8 @@ import jakarta.persistence.Entity;
 public class Klasifikator extends Uredaj{
 
 	private String name;
-	public Klasifikator(String name) {
-		super();
+	public Klasifikator(String name, NaplatnaTocka naplatnaTocka) {
+		super(naplatnaTocka);
 		this.name = name;
 	}
 

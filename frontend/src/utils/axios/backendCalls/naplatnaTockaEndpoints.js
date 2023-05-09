@@ -18,6 +18,7 @@ export const naplatnaTockaEdit = async (naplatnaTocka) => {
         geografskaDuzina: naplatnaTocka.geografskaDuzina,
         geografskaSirina: naplatnaTocka.geografskaSirina,
         usmjerenje: naplatnaTocka.usmjerenje,
+        dionicaId: naplatnaTocka.dionicaId
     });
     return response.data;
 };
@@ -30,6 +31,7 @@ export const naplatnaTockaRegister = async (naplatnaTocka) => {
         geografskaDuzina: naplatnaTocka.geografskaDuzina,
         geografskaSirina: naplatnaTocka.geografskaSirina,
         usmjerenje: naplatnaTocka.usmjerenje,
+        dionicaId: naplatnaTocka.dionicaId
     });
     return response.data;
 };

@@ -8,8 +8,8 @@ import jakarta.persistence.Entity;
 public class Kamera extends Uredaj{
 
 	private String name;
-	public Kamera(String name) {
-		super();
+	public Kamera(String name, NaplatnaTocka naplatnaTocka) {
+		super(naplatnaTocka);
 		this.name = name;
 	}
 
@@ -24,4 +24,6 @@ public class Kamera extends Uredaj{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 }

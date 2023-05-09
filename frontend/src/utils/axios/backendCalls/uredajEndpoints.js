@@ -21,6 +21,7 @@ export const uredajRegister = async (uredaj) => {
     const response = await axios.post("/spring/uredaj/register", {
         uredajtype: uredaj.uredajtype,
         name: uredaj.name,
+        naplatnaTockaId: uredaj.naplatnaTockaId
     });
     return response.data;
 };
