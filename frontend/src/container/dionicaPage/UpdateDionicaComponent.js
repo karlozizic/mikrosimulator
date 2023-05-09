@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import {dionicaEdit} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import "../allCss/create-update.css"
+import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
 const UpdateDionicaComponent = () => {
 
     const [smjer, setSmjer] = useState('');
@@ -13,11 +14,19 @@ const UpdateDionicaComponent = () => {
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
     const [naplatnaTocka, setNaplatnaTocka] = useState('');
-    const [slijediDionica, setSlijediDionica] = useState('');
-    const [prethodiDionica, setPrethodiDionica] = useState('');
+    const [dionicaPrije, setDionicaPrije] = useState('');
+    const [dionicaPoslije, setDionicaPoslije] = useState('');
+    const [dionice, setDionice] = useState([]);
 
     const navigate = useNavigate();
     const { id } = useParams();
+
+    useEffect(() => {
+        getAllDionice().then((res) => {
+            console.log(res.listaDionica);
+            setDionice(res.listaDionica);
+        });
+    }, []);
 
     useEffect(() => {
         getDionica(id).then((res) => {
@@ -28,13 +37,27 @@ const UpdateDionicaComponent = () => {
             setPocetnaStacionaza(res.dionica.pocetnaStacionaza);
             setZavrsnaStacionaza(res.dionica.zavrsnaStacionaza);
             setNaplatnaTocka(res.dionica.naplatnaTocka);
-            setSlijediDionica(res.dionica.slijediDionica);
-            setPrethodiDionica(res.dionica.prethodiDionica);
         });
     }, [id]);
 
+
+    const handleDionicaPrijeChange = (selectedOption) => {
+        console.log(selectedOption);
+        // const dionica =  {"dionicaId": selectedOption.value};
+        setDionicaPrije(selectedOption);
+    }
+
+    const handleDionicaPoslijeChange = (selectedOption) => {
+        console.log(selectedOption);
+        // const dionica =  {"dionicaId": selectedOption.value};
+        setDionicaPoslije(selectedOption);
+    }
+
+
     const updateFunction = (e) => {
         e.preventDefault();
+        const dionicaPrijeId = dionicaPrije.value != null ? dionicaPrije.value : null;
+        const dionicaPoslijeId = dionicaPoslije.value != null ? dionicaPoslije.value : null;
         const dionica = {
             dionicaId: id,
             smjer: smjer,
@@ -44,8 +67,8 @@ const UpdateDionicaComponent = () => {
             pocetnaStacionaza: pocetnaStacionaza,
             zavrsnaStacionaza: zavrsnaStacionaza,
             naplatnaTocka: naplatnaTocka,
-            slijediDionica: slijediDionica,
-            prethodiDionica: prethodiDionica,
+            dionicaPrijeId: dionicaPrijeId,
+            dionicaPoslijeId: dionicaPoslijeId
         }
         console.log('dionica = ' + JSON.stringify(dionica));
 
@@ -77,12 +100,6 @@ const UpdateDionicaComponent = () => {
                 break;
             case 'naplatnaTocka':
                 setNaplatnaTocka(value);
-                break;
-            case 'slijediDionica':
-                setSlijediDionica(value);
-                break;
-            case 'prethodiDionica':
-                setPrethodiDionica(value);
                 break;
             default:
                 break;
@@ -117,13 +134,7 @@ const UpdateDionicaComponent = () => {
                                         <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler}></input>
                                         <label>Zavrsna stacionaza:</label>
                                         <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
-                                        <label>Naplatna tocka:</label>
-                                        <input name="naplatnaTocka" className="form-control" value={naplatnaTocka} onChange={changeHandler}></input>
-                                        <label>Slijedi dionica:</label>
-                                        <input name="slijediDionica" className="form-control" value={slijediDionica} onChange={changeHandler}></input>
-                                        <label>Prethodi dionica:</label>
-                                        <input name="prethodiDionica" className="form-control" value={prethodiDionica} onChange={changeHandler}></input>
-                                    </FormGroup>
+                                        </FormGroup>
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>

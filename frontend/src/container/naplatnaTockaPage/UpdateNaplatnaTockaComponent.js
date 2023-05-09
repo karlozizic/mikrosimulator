@@ -5,7 +5,6 @@ import {getNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndp
 import {naplatnaTockaEdit} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import "../allCss/create-update.css"
 import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
-import Select from "react-select";
 const UpdateNaplatnaTocka = () => {
     const [oznaka, setOznaka] = useState('');
     const [naziv, setNaziv] = useState('');

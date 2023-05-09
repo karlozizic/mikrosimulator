@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import {naplatnaTockaRegister} from '../../utils/axios/backendCalls/naplatnaTockaEndpoints';
 import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
-import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import Select from "react-select";
 const CreateNaplatnaTockaComponent = () => {
     const [oznaka, setOznaka] = useState('');

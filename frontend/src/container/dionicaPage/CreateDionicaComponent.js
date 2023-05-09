@@ -12,8 +12,6 @@ const CreateDionicaComponent = () => {
     const [oznaka, setOznaka] = useState('');
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
-    const [slijediDionica, setSlijediDionica] = useState('');
-    const [prethodiDionica, setPrethodiDionica] = useState('');
     const [dionice, setDionice] = useState([]);
     const [dionicaPrije, setDionicaPrije] = useState('');
     const [dionicaPoslije, setDionicaPoslije] = useState('');
@@ -42,7 +40,7 @@ const CreateDionicaComponent = () => {
         e.preventDefault();
         const dionicaPrijeId = dionicaPrije.value != null ? dionicaPrije.value : null;
         const dionicaPoslijeId = dionicaPoslije.value != null ? dionicaPoslije.value : null;
-        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, dionicaPoslijeId, dionicaPrijeId };
+        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, dionicaPrijeId, dionicaPoslijeId };
         console.log('dionica = ' + JSON.stringify(dionica));
 
         dionicaRegister(dionica).then(() => {

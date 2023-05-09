@@ -35,7 +35,7 @@ public class Dionica {
 	public Dionica prethodi; 
 
 	public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza,
-			int zavrsnaStacionaza) {
+			int zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
 		super();
 		this.id = dionicaId;
 		this.smjer = smjer;
@@ -44,8 +44,21 @@ public class Dionica {
 		this.oznaka = oznaka;
 		this.pocetnaStacionaza = pocetnaStacionaza;
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.slijedi = slijedi;
+		this.prethodi = prethodi;
 	}
-	
+
+	public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza, int zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
+		this.smjer = smjer;
+		this.najvecaBrzina = najvecaBrzina;
+		this.brojTraka = brojTraka;
+		this.oznaka = oznaka;
+		this.pocetnaStacionaza = pocetnaStacionaza;
+		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.slijedi = slijedi;
+		this.prethodi = prethodi;
+	}
+
 	public Dionica() {
 		
 	}
@@ -106,7 +119,19 @@ public class Dionica {
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
 	}
 
-	
-	
-	
+	public Dionica getSlijedi() {
+		return slijedi;
+	}
+
+	public void setSlijedi(Dionica slijedi) {
+		this.slijedi = slijedi;
+	}
+
+	public Dionica getPrethodi() {
+		return prethodi;
+	}
+
+	public void setPrethodi(Dionica prethodi) {
+		this.prethodi = prethodi;
+	}
 }
