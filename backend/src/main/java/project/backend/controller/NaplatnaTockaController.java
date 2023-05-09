@@ -82,7 +82,6 @@ public class NaplatnaTockaController {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(naplatnaTocka, null, true, "Uspjesno brisanje naplatne tocke!");
 			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
 		}
-	
 	}
 	
 	
