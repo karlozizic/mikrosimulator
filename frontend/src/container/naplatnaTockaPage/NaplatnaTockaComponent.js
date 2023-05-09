@@ -47,6 +47,7 @@ const NaplatnaTockaComponent = () => {
                         <th>Geografska Duzina</th>
                         <th>Geografska Sirina</th>
                         <th>Usmjerenje</th>
+                        <th>Oznaka Dionice</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,6 +60,7 @@ const NaplatnaTockaComponent = () => {
                             <td>{naplatnaTocka.geografskaDuzina}</td>
                             <td>{naplatnaTocka.geografskaSirina}</td>
                             <td>{naplatnaTocka.usmjerenje}</td>
+                            <td>{naplatnaTocka.dionica.oznaka}</td>
                             <td>
                                 <Button onClick={() => editNaplatnaTocka(naplatnaTocka.naplatnaTockaId)} color="primary">
                                     Update

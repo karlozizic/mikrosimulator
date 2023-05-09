@@ -13,7 +13,7 @@ const CreateDionicaComponent = () => {
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
     const [slijediDionica, setSlijediDionica] = useState('');
-    const [prethodiDionica, setPrethodiDionica] = useState('')
+    const [prethodiDionica, setPrethodiDionica] = useState('');
     const [dionice, setDionice] = useState([]);
     const [dionicaPrije, setDionicaPrije] = useState('');
     const [dionicaPoslije, setDionicaPoslije] = useState('');
@@ -28,19 +28,21 @@ const CreateDionicaComponent = () => {
 
     const handleDionicaPrijeChange = (selectedOption) => {
         console.log(selectedOption);
-        const dionica =  {"dionicaId": selectedOption.value};
+        // const dionica =  {"dionicaId": selectedOption.value};
         setDionicaPrije(selectedOption);
     }
 
     const handleDionicaPoslijeChange = (selectedOption) => {
         console.log(selectedOption);
-        const dionica =  {"dionicaId": selectedOption.value};
+        // const dionica =  {"dionicaId": selectedOption.value};
         setDionicaPoslije(selectedOption);
     }
 
     const saveDionica = (e) => {
         e.preventDefault();
-        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, slijediDionica, prethodiDionica };
+        const dionicaPrijeId = dionicaPrije.value != null ? dionicaPrije.value : null;
+        const dionicaPoslijeId = dionicaPoslije.value != null ? dionicaPoslije.value : null;
+        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, dionicaPoslijeId, dionicaPrijeId };
         console.log('dionica = ' + JSON.stringify(dionica));
 
         dionicaRegister(dionica).then(() => {
@@ -68,12 +70,6 @@ const CreateDionicaComponent = () => {
                 break;
             case 'zavrsnaStacionaza':
                 setZavrsnaStacionaza(value);
-                break;
-            case 'slijediDionica':
-                setSlijediDionica(value);
-                break;
-            case 'prethodiDionica':
-                setPrethodiDionica(value);
                 break;
             default:
                 break;

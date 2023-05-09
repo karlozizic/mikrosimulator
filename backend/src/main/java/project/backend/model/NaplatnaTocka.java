@@ -1,6 +1,8 @@
 package project.backend.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.Set;
 
@@ -25,6 +27,7 @@ public class NaplatnaTocka {
 	private String usmjerenje;
 
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 	private Dionica dionica;
 	

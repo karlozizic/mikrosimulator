@@ -16,6 +16,7 @@ const UredajComponent = () => {
         });
     }, []);
 
+
     const addUredaj = () => {
         navigate('/add-uredaj');
     };

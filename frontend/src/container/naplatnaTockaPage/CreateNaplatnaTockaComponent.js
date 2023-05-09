@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import {naplatnaTockaRegister} from '../../utils/axios/backendCalls/naplatnaTockaEndpoints';
-
+import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
+import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
+import Select from "react-select";
 const CreateNaplatnaTockaComponent = () => {
     const [oznaka, setOznaka] = useState('');
     const [naziv, setNaziv] = useState('');
@@ -10,12 +12,25 @@ const CreateNaplatnaTockaComponent = () => {
     const [geografskaDuzina, setGeografskaDuzina] = useState('');
     const [geografskaSirina, setGeografskaSirina] = useState('');
     const [usmjerenje, setUsmjerenje] = useState('');
+    const [dionica, setDionica] = useState('');
+    const [dionice, setDionice] = useState([]);
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        getAllDionice().then((res) => {
+            setDionice(res.listaDionica);
+        });
+    }, []);
+
+    const handleDionicaChange = (selectedOption) => {
+        setDionica(selectedOption);
+    }
+
     const saveNaplatnaTocka = (e) => {
         e.preventDefault();
-        const naplatnaTocka = { oznaka, naziv, stacionaza, geografskaDuzina, geografskaSirina, usmjerenje };
+        const dionicaId = dionica.value == null ?  '' : dionica.value;
+        const naplatnaTocka = { oznaka, naziv, stacionaza, geografskaDuzina, geografskaSirina, usmjerenje, dionicaId };
         console.log('naplatna tocka = ' + JSON.stringify(naplatnaTocka));
 
         naplatnaTockaRegister(naplatnaTocka).then(() => {
@@ -75,6 +90,12 @@ const CreateNaplatnaTockaComponent = () => {
                                         <input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>
                                         <label>Usmjerenje:</label>
                                         <input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler}></input>
+                                        Dionica:
+                                        <Select
+                                            name="dionica"
+                                            value={dionica}
+                                            onChange={handleDionicaChange}
+                                            options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}/>
                                     </FormGroup>
                                     <Button color="success" onClick={saveNaplatnaTocka}>
                                         Save

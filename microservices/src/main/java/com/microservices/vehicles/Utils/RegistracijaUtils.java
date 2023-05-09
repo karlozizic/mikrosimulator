@@ -18,6 +18,6 @@ public class RegistracijaUtils {
             registracija += (char)(r.nextInt(26) + 'a');
         }
 
-        return registracija;
+        return registracija.toUpperCase();
     }
 }

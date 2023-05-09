@@ -2,6 +2,8 @@ package project.backend.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 //Za UredajZaPrikupljanjePodataka, Kameru, Primopredajnik, Klasifikator sam koristio strategiju Single Table - dakle svi Entiteti ce se nalaziti u jednoj tablici unutar baze
 //vidi jos je li to dobro? - medutim strategije Table Per Class, MappedSupperClass nisam uspio implementirati
@@ -19,6 +21,7 @@ public class Uredaj {
 	public Long id;
 
 	@ManyToOne
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
 //	@JoinColumn(name="naplatna_tocka_id")
 	private NaplatnaTocka naplatnaTocka;

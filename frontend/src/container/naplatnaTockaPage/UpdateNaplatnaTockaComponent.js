@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import {getNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import {naplatnaTockaEdit} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import "../allCss/create-update.css"
+import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
+import Select from "react-select";
 const UpdateNaplatnaTocka = () => {
     const [oznaka, setOznaka] = useState('');
     const [naziv, setNaziv] = useState('');
@@ -11,6 +13,8 @@ const UpdateNaplatnaTocka = () => {
     const [geografskaDuzina, setGeografskaDuzina] = useState('');
     const [geografskaSirina, setGeografskaSirina] = useState('');
     const [usmjerenje, setUsmjerenje] = useState('');
+    const [dionica, setDionica] = useState('');
+    const [dionice, setDionice] = useState([]);
 
     const navigate = useNavigate();
     const { id } = useParams();
@@ -25,6 +29,17 @@ const UpdateNaplatnaTocka = () => {
             setUsmjerenje(res.naplatnaTocka.usmjerenje);
         });
     }, [id]);
+
+    useEffect(() => {
+        getAllDionice().then((res) => {
+            setDionice(res.listaDionica);
+        });
+    }, []);
+
+    const handleDionicaChange = (selectedOption) => {
+        setDionica(selectedOption);
+    }
+
 
     const updateFunction = (e) => {
         e.preventDefault();
@@ -97,7 +112,7 @@ const UpdateNaplatnaTocka = () => {
                                         <input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>
                                         <label>Usmjerenje:</label>
                                         <input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler}></input>
-                                    </FormGroup>
+                                        </FormGroup>
                                     <Button color="success" onClick={updateFunction}>
                                         Save
                                     </Button>

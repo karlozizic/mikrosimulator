@@ -46,13 +46,13 @@ public class NaplatnaTockaController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NovaNaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
+	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
 
-		Dionica dionica = dionicaService.dohvatiDionicuPoId(updatedNaplatnaTocka.getDionicaId());
-		NaplatnaTocka naplatnaTocka = new NaplatnaTocka(updatedNaplatnaTocka.getOznaka(), updatedNaplatnaTocka.getNaziv(), updatedNaplatnaTocka.getStacionaza(), updatedNaplatnaTocka.getGeografskaDuzina(), updatedNaplatnaTocka.getGeografskaSirina(), updatedNaplatnaTocka.getUsmjerenje(), dionica);
 		Long longId = Long.parseLong(id);
-		naplatnaTocka.setNaplatnaTockaId(longId);
-		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(naplatnaTocka);
+		updatedNaplatnaTocka.setNaplatnaTockaId(longId);
+		NaplatnaTocka naplatnaTocka = naplatnaTockaService.dohvatiNaplatnuTockuPoId(longId);
+		updatedNaplatnaTocka.setDionica(naplatnaTocka.getDionica());
+		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(updatedNaplatnaTocka);
 		
 		if(naplatnaTockaFromDB == null) {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, null, false, "Neuspjesno updateanje naplatne tocke!");
