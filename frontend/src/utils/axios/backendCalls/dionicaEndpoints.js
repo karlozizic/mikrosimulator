@@ -18,9 +18,8 @@ export const dionicaEdit = async (dionica) => {
         oznaka: dionica.oznaka,
         pocetnaStacionaza: dionica.pocetnaStacionaza,
         zavrsnaStacionaza: dionica.zavrsnaStacionaza,
-        naplatnaTocka: dionica.naplatnaTocka,
         slijedi: dionica.slijedi,
-        prethodi:dionica.prethodi,
+        prethodi: dionica.prethodi,
     });
     return response.data;
 };

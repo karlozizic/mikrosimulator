@@ -46,9 +46,8 @@ const DionicaComponent = () => {
                         <th>Oznaka</th>
                         <th>Pocetna stacionaza</th>
                         <th>Zavrsna stacionaza</th>
-                        <th>Naplatna tocka</th>
-                        {/*<th>Slijedi Dionica</th>*/}
-                        {/*<th>Prethodi Dionica</th>*/}
+                        <th>Slijedi Dionica</th>
+                        <th>Prethodi Dionica</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,9 +60,8 @@ const DionicaComponent = () => {
                             <td>{dionica.oznaka}</td>
                             <td>{dionica.pocetnaStacionaza}</td>
                             <td>{dionica.zavrsnaStacionaza}</td>
-                            <td>{dionica.naplatnaTocka.naziv}</td>
-                            {/*<td>{dionica.slijedi}</td>*/}
-                            {/*<td>{dionica.prethodi}</td>*/}
+                            <td>{dionica.slijedi === null ? "" : dionica.slijedi.oznaka}</td>
+                            <td>{dionica.prethodi === null ? "" : dionica.prethodi.oznaka}</td>
                             <td>
                                 <Button onClick={() => editEkorazred(dionica.dionicaId)} color="primary">
                                     Update
