@@ -43,8 +43,20 @@ public class NaplatnaTocka {
 		this.usmjerenje = usmjerenje;
 		this.dionica = dionica;
 //		this.uredajiZaPodatke = uredajiZaPodatke;
-	} 
-	
+	}
+	public NaplatnaTocka(String oznaka, String naziv, int stacionaza, int geografskaDuzina,
+						 int geografskaSirina, String usmjerenje, Dionica dionica) {
+		super();
+		this.oznaka = oznaka;
+		this.naziv = naziv;
+		this.stacionaza = stacionaza;
+		this.geografskaDuzina = geografskaDuzina;
+		this.geografskaSirina = geografskaSirina;
+		this.usmjerenje = usmjerenje;
+		this.dionica = dionica;
+//		this.uredajiZaPodatke = uredajiZaPodatke;
+	}
+
 	public NaplatnaTocka() {
 		
 	}

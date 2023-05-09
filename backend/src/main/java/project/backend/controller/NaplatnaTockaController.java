@@ -10,8 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import project.backend.model.Dionica;
 import project.backend.model.NaplatnaTocka;
+import project.backend.model.NovaNaplatnaTocka;
 import project.backend.model.ResponseNaplatnaTocka;
+import project.backend.serviceImpl.DionicaImpl;
 import project.backend.serviceImpl.NaplatnaTockaImpl;
 
 @Controller
@@ -19,9 +22,11 @@ import project.backend.serviceImpl.NaplatnaTockaImpl;
 public class NaplatnaTockaController {
 
 	NaplatnaTockaImpl naplatnaTockaService;
+	DionicaImpl dionicaService;
 	
-	public NaplatnaTockaController(@Autowired NaplatnaTockaImpl naplatnaTockaService) {
-		this.naplatnaTockaService = naplatnaTockaService; 
+	public NaplatnaTockaController(@Autowired NaplatnaTockaImpl naplatnaTockaService, @Autowired DionicaImpl dionicaService) {
+		this.naplatnaTockaService = naplatnaTockaService;
+		this.dionicaService = dionicaService;
 	}
 	
 	@GetMapping("/fetch")
@@ -41,11 +46,13 @@ public class NaplatnaTockaController {
 	}
 	
 	@PutMapping("/update")
-	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
+	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NovaNaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
 
+		Dionica dionica = dionicaService.dohvatiDionicuPoId(updatedNaplatnaTocka.getDionicaId());
+		NaplatnaTocka naplatnaTocka = new NaplatnaTocka(updatedNaplatnaTocka.getOznaka(), updatedNaplatnaTocka.getNaziv(), updatedNaplatnaTocka.getStacionaza(), updatedNaplatnaTocka.getGeografskaDuzina(), updatedNaplatnaTocka.getGeografskaSirina(), updatedNaplatnaTocka.getUsmjerenje(), dionica);
 		Long longId = Long.parseLong(id);
-		updatedNaplatnaTocka.setNaplatnaTockaId(longId);
-		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(updatedNaplatnaTocka); 
+		naplatnaTocka.setNaplatnaTockaId(longId);
+		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.updateNaplatneTocke(naplatnaTocka);
 		
 		if(naplatnaTockaFromDB == null) {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, null, false, "Neuspjesno updateanje naplatne tocke!");
@@ -58,9 +65,11 @@ public class NaplatnaTockaController {
 	}
 	
 	@PostMapping("/register")
-	public ResponseEntity<ResponseNaplatnaTocka> newNaplatnaTocka(@RequestBody NaplatnaTocka novaNaplatnaTocka){
-		
-		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.stvoriNaplatnuTocku(novaNaplatnaTocka);
+	public ResponseEntity<ResponseNaplatnaTocka> newNaplatnaTocka(@RequestBody NovaNaplatnaTocka novaNaplatnaTocka){
+
+		Dionica dionica = dionicaService.dohvatiDionicuPoId(novaNaplatnaTocka.getDionicaId());
+		NaplatnaTocka naplatnaTocka = new NaplatnaTocka(novaNaplatnaTocka.getOznaka(), novaNaplatnaTocka.getNaziv(), novaNaplatnaTocka.getStacionaza(), novaNaplatnaTocka.getGeografskaDuzina(), novaNaplatnaTocka.getGeografskaSirina(), novaNaplatnaTocka.getUsmjerenje(), dionica);
+		NaplatnaTocka naplatnaTockaFromDB = naplatnaTockaService.stvoriNaplatnuTocku(naplatnaTocka);
 		
 		if(naplatnaTockaFromDB == null) {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, null, false, "Neuspjesno stvaranje naplatne tocke!");
