@@ -151,12 +151,12 @@ public class UredajController{
 	public ResponseEntity<ResponseUredaj> getAllUredaji(){
 
 		List<Uredaj> listaUredaja = uredajService.dohvatiSveUredaje();
+		List<NoviUredaj> listaNovihUredaja= new ArrayList<>();
 
 		if(listaUredaja.isEmpty()) {
-			ResponseUredaj data = new ResponseUredaj(null, null, false, null);
+			ResponseUredaj data = new ResponseUredaj(null, listaNovihUredaja, false, null);
 			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
 		} else {
-			List<NoviUredaj> listaNovihUredaja= new ArrayList<NoviUredaj>();
 			for (Uredaj uredaj : listaUredaja) {
 				int tipUredaja = uredajService.dohvatiTipUredaja(uredaj.getUredajId());
 				String name = "";
@@ -170,7 +170,6 @@ public class UredajController{
 				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
 				listaNovihUredaja.add(noviUredaj);
 			}
-
 			ResponseUredaj data = new ResponseUredaj(null, listaNovihUredaja, true, "Dohvacanje uspjesno!");
 			return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
 		}
