@@ -1,3 +1,4 @@
 # Mikrosimulator sustava beskontaktne naplate cestarine
 
-Zadatak u sklopu završnog rada
+Backend and microservices - Spring Boot
+Frontend - React.js
