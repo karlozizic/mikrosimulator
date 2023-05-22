@@ -67,7 +67,7 @@ public class VehiclesController {
         try {
             Long id = vehicleRepository.lastId() == null ? Long.valueOf(1) : vehicleRepository.lastId() + 1;
 
-            ArrayList<String> naciniNaplate = new ArrayList<String>(Arrays.asList("ENC", "Na naplatnom mjestu"));
+            ArrayList<String> naciniNaplate = new ArrayList<String>(Arrays.asList("Bežično", "Registracijska oznaka"));
 
             ArrayList<String> boje = new ArrayList<String>(Arrays.asList("Crvena", "Plava", "Zelena", "Žuta", "Narančasta", "Ljubičasta", "Smeđa", "Crna", "Bijela"));
 
@@ -93,7 +93,7 @@ public class VehiclesController {
                 }
                 int idENC = 0;
                 // mora uzeti najvecu vrijednost i dodat + 1 - problem kada imamo veliki skup podataka
-                if (nacinNaplate == "ENC") {
+                if (nacinNaplate == "Bežično") {
                     idENC = (Integer) new Random().nextInt(1000000);
                 } else {
                     idENC = 0;
