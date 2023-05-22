@@ -16,11 +16,13 @@ public class NovaDionica
 
     private String zavrsnaStacionaza;
 
+    private String oznakaAutoceste;
+
     public Long slijediId;
 
     public Long prethodiId;
 
-    public NovaDionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, Long slijediId, Long prethodiId) {
+    public NovaDionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Long slijediId, Long prethodiId) {
         this.dionicaId = dionicaId;
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
@@ -28,17 +30,19 @@ public class NovaDionica
         this.oznaka = oznaka;
         this.pocetnaStacionaza = pocetnaStacionaza;
         this.zavrsnaStacionaza = zavrsnaStacionaza;
+        this.oznakaAutoceste = oznakaAutoceste;
         this.slijediId = slijediId;
         this.prethodiId = prethodiId;
     }
 
-    public NovaDionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, Long slijediId, Long prethodiId) {
+    public NovaDionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Long slijediId, Long prethodiId) {
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
         this.brojTraka = brojTraka;
         this.oznaka = oznaka;
         this.pocetnaStacionaza = pocetnaStacionaza;
         this.zavrsnaStacionaza = zavrsnaStacionaza;
+        this.oznakaAutoceste = oznakaAutoceste;
         this.slijediId = slijediId;
         this.prethodiId = prethodiId;
     }
@@ -115,5 +119,13 @@ public class NovaDionica
 
     public void setPrethodiId(Long prethodiId) {
         this.prethodiId = prethodiId;
+    }
+
+    public String getOznakaAutoceste() {
+        return oznakaAutoceste;
+    }
+
+    public void setOznakaAutoceste(String oznakaAutoceste) {
+        this.oznakaAutoceste = oznakaAutoceste;
     }
 }

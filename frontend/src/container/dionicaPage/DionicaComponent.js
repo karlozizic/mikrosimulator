@@ -46,6 +46,7 @@ const DionicaComponent = () => {
                         <th>Oznaka</th>
                         <th>Pocetna stacionaza</th>
                         <th>Zavrsna stacionaza</th>
+                        <th>Oznaka autoceste</th>
                         <th>Prethodi Dionica</th>
                         <th>Slijedi Dionica</th>
                     </tr>
@@ -60,6 +61,7 @@ const DionicaComponent = () => {
                             <td>{dionica.oznaka}</td>
                             <td>{dionica.pocetnaStacionaza}</td>
                             <td>{dionica.zavrsnaStacionaza}</td>
+                            <td>{dionica.oznakaAutoceste}</td>
                             <td>{dionica.prethodi === null ? "" : dionica.prethodi.oznaka}</td>
                             <td>{dionica.slijedi === null ? "" : dionica.slijedi.oznaka}</td>
                             <td>

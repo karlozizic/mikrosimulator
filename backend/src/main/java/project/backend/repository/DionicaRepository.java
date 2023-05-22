@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface DionicaRepository extends JpaRepository<Dionica, Long>{
 
-    @Query("select d from Dionica d where d.oznaka=?1")
+    @Query("select d from Dionica d where d.oznakaAutoceste=?1")
     List<Dionica> findByOznaka(String oznaka);
 
 }

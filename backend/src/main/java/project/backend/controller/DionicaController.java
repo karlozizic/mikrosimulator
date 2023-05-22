@@ -64,7 +64,7 @@ public class DionicaController {
 		Dionica slijedi = oldDionica.getSlijedi();
 		Dionica prethodi = oldDionica.getPrethodi();
 
-		Dionica dionica = new Dionica(updatedDionica.getDionicaId(), updatedDionica.getSmjer(), updatedDionica.getNajvecaBrzina(), updatedDionica.getBrojTraka(), updatedDionica.getOznaka(), updatedDionica.getPocetnaStacionaza(), updatedDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionica = new Dionica(updatedDionica.getDionicaId(), updatedDionica.getSmjer(), updatedDionica.getNajvecaBrzina(), updatedDionica.getBrojTraka(), updatedDionica.getOznaka(), updatedDionica.getPocetnaStacionaza(), updatedDionica.getZavrsnaStacionaza(), updatedDionica.getOznakaAutoceste(), slijedi, prethodi);
 		Dionica dionicaFromDB = dionicaService.updateDionice(dionica);
 		
 		if(dionicaFromDB == null) {
@@ -90,7 +90,7 @@ public class DionicaController {
 			prethodi = dionicaService.dohvatiDionicuPoId(novaDionica.getPrethodiId());
 		}
 
-		Dionica dionica = new Dionica(novaDionica.getSmjer(), novaDionica.getNajvecaBrzina(), novaDionica.getBrojTraka(), novaDionica.getOznaka(), novaDionica.getPocetnaStacionaza(), novaDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionica = new Dionica(novaDionica.getSmjer(), novaDionica.getNajvecaBrzina(), novaDionica.getBrojTraka(), novaDionica.getOznaka(), novaDionica.getPocetnaStacionaza(), novaDionica.getZavrsnaStacionaza(), novaDionica.getOznakaAutoceste(), slijedi, prethodi);
 		Dionica dionicaFromDB = dionicaService.stvoriDionicu(dionica);
 		
 		if(dionicaFromDB == null) {

@@ -23,10 +23,12 @@ public class Dionica {
 	private int brojTraka;
 	
 	private String oznaka;
-	
+
 	private String pocetnaStacionaza;
 	
 	private String zavrsnaStacionaza;
+
+	private String oznakaAutoceste;
 	
 	@OneToOne(optional=true)
 	public Dionica slijedi;
@@ -35,7 +37,7 @@ public class Dionica {
 	public Dionica prethodi; 
 
 	public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza,
-				   String zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
+				   String zavrsnaStacionaza,String oznakaAutoceste, Dionica slijedi, Dionica prethodi) {
 		super();
 		this.id = dionicaId;
 		this.smjer = smjer;
@@ -44,17 +46,19 @@ public class Dionica {
 		this.oznaka = oznaka;
 		this.pocetnaStacionaza = pocetnaStacionaza;
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.oznakaAutoceste = oznakaAutoceste;
 		this.slijedi = slijedi;
 		this.prethodi = prethodi;
 	}
 
-	public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
+	public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Dionica slijedi, Dionica prethodi) {
 		this.smjer = smjer;
 		this.najvecaBrzina = najvecaBrzina;
 		this.brojTraka = brojTraka;
 		this.oznaka = oznaka;
 		this.pocetnaStacionaza = pocetnaStacionaza;
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.oznakaAutoceste = oznakaAutoceste;
 		this.slijedi = slijedi;
 		this.prethodi = prethodi;
 	}
@@ -117,6 +121,14 @@ public class Dionica {
 
 	public void setZavrsnaStacionaza(String zavrsnaStacionaza) {
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+	}
+
+	public String getOznakaAutoceste() {
+		return oznakaAutoceste;
+	}
+
+	public void setOznakaAutoceste(String oznakaAutoceste) {
+		this.oznakaAutoceste = oznakaAutoceste;
 	}
 
 	public Dionica getSlijedi() {

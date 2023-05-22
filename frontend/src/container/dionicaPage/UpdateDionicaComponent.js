@@ -13,6 +13,7 @@ const UpdateDionicaComponent = () => {
     const [oznaka, setOznaka] = useState('');
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
+    const [oznakaAutoceste, setOznakaAutoceste] = useState('');
     const [naplatnaTocka, setNaplatnaTocka] = useState('');
     const [dionicaPrije, setDionicaPrije] = useState('');
     const [dionicaPoslije, setDionicaPoslije] = useState('');
@@ -36,6 +37,7 @@ const UpdateDionicaComponent = () => {
             setOznaka(res.dionica.oznaka);
             setPocetnaStacionaza(res.dionica.pocetnaStacionaza);
             setZavrsnaStacionaza(res.dionica.zavrsnaStacionaza);
+            setOznakaAutoceste(res.dionica.oznakaAutoceste);
             setNaplatnaTocka(res.dionica.naplatnaTocka);
         });
     }, [id]);
@@ -66,6 +68,7 @@ const UpdateDionicaComponent = () => {
             oznaka: oznaka,
             pocetnaStacionaza: pocetnaStacionaza,
             zavrsnaStacionaza: zavrsnaStacionaza,
+            oznakaAutoceste: oznakaAutoceste,
             naplatnaTocka: naplatnaTocka,
             dionicaPrijeId: dionicaPrijeId,
             dionicaPoslijeId: dionicaPoslijeId
@@ -101,6 +104,9 @@ const UpdateDionicaComponent = () => {
             case 'naplatnaTocka':
                 setNaplatnaTocka(value);
                 break;
+            case 'oznakaAutoceste':
+                setOznakaAutoceste(value);
+                break;
             default:
                 break;
         }
@@ -134,6 +140,8 @@ const UpdateDionicaComponent = () => {
                                         <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler}></input>
                                         <label>Zavrsna stacionaza:</label>
                                         <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
+                                        <label>Oznaka autoceste:</label>
+                                        <input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste} onChange={changeHandler}></input>
                                         </FormGroup>
                                     <Button color="success" onClick={updateFunction}>
                                         Save

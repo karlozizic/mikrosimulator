@@ -18,6 +18,7 @@ export const dionicaEdit = async (dionica) => {
         oznaka: dionica.oznaka,
         pocetnaStacionaza: dionica.pocetnaStacionaza,
         zavrsnaStacionaza: dionica.zavrsnaStacionaza,
+        oznakaAutoceste: dionica.oznakaAutoceste,
         slijedi: dionica.dionicaPoslijeId,
         prethodi: dionica.dionicaPrijeId,
     });
@@ -33,6 +34,7 @@ export const dionicaRegister = async (dionica) => {
         pocetnaStacionaza: dionica.pocetnaStacionaza,
         zavrsnaStacionaza: dionica.zavrsnaStacionaza,
         naplatnaTocka: dionica.naplatnaTocka,
+        oznakaAutoceste: dionica.oznakaAutoceste,
         slijediId: dionica.dionicaPoslijeId,
         prethodiId: dionica.dionicaPrijeId,
     });
