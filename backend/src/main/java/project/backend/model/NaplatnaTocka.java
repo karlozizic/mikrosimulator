@@ -18,7 +18,7 @@ public class NaplatnaTocka {
 	
 	private String naziv;
 	
-	private int stacionaza;
+	private String stacionaza;
 	
 	private int geografskaDuzina;
 	
@@ -34,7 +34,7 @@ public class NaplatnaTocka {
 //	@OneToMany
 //	private Set<Uredaj> uredajiZaPodatke;
 
-	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
+	public NaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, String stacionaza, int geografskaDuzina,
 			int geografskaSirina, String usmjerenje, Dionica dionica) {
 		super();
 		this.id = naplatnaTockaId;
@@ -47,7 +47,7 @@ public class NaplatnaTocka {
 		this.dionica = dionica;
 //		this.uredajiZaPodatke = uredajiZaPodatke;
 	}
-	public NaplatnaTocka(String oznaka, String naziv, int stacionaza, int geografskaDuzina,
+	public NaplatnaTocka(String oznaka, String naziv, String stacionaza, int geografskaDuzina,
 						 int geografskaSirina, String usmjerenje, Dionica dionica) {
 		super();
 		this.oznaka = oznaka;
@@ -88,11 +88,11 @@ public class NaplatnaTocka {
 		this.naziv = naziv;
 	}
 
-	public int getStacionaza() {
+	public String getStacionaza() {
 		return stacionaza;
 	}
 
-	public void setStacionaza(int stacionaza) {
+	public void setStacionaza(String stacionaza) {
 		this.stacionaza = stacionaza;
 	}
 

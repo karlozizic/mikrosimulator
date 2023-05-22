@@ -12,15 +12,15 @@ public class NovaDionica
 
     private String oznaka;
 
-    private int pocetnaStacionaza;
+    private String pocetnaStacionaza;
 
-    private int zavrsnaStacionaza;
+    private String zavrsnaStacionaza;
 
     public Long slijediId;
 
     public Long prethodiId;
 
-    public NovaDionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza, int zavrsnaStacionaza, Long slijediId, Long prethodiId) {
+    public NovaDionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, Long slijediId, Long prethodiId) {
         this.dionicaId = dionicaId;
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
@@ -32,7 +32,7 @@ public class NovaDionica
         this.prethodiId = prethodiId;
     }
 
-    public NovaDionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza, int zavrsnaStacionaza, Long slijediId, Long prethodiId) {
+    public NovaDionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, Long slijediId, Long prethodiId) {
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
         this.brojTraka = brojTraka;
@@ -85,19 +85,19 @@ public class NovaDionica
         this.oznaka = oznaka;
     }
 
-    public int getPocetnaStacionaza() {
+    public String getPocetnaStacionaza() {
         return pocetnaStacionaza;
     }
 
-    public void setPocetnaStacionaza(int pocetnaStacionaza) {
+    public void setPocetnaStacionaza(String pocetnaStacionaza) {
         this.pocetnaStacionaza = pocetnaStacionaza;
     }
 
-    public int getZavrsnaStacionaza() {
+    public String getZavrsnaStacionaza() {
         return zavrsnaStacionaza;
     }
 
-    public void setZavrsnaStacionaza(int zavrsnaStacionaza) {
+    public void setZavrsnaStacionaza(String zavrsnaStacionaza) {
         this.zavrsnaStacionaza = zavrsnaStacionaza;
     }
 

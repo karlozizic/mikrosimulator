@@ -25,6 +25,11 @@ public class DionicaImpl implements DionicaServis{
 	}
 
 	@Override
+	public List<Dionica> dohvatiDionicePoOznaci(String oznaka) {
+		return dionicaRepository.findByOznaka(oznaka);
+	}
+
+	@Override
 	public Dionica updateDionice(Dionica updatedDionica) {
 		Optional<Dionica> dionicaOptional = dionicaRepository.findById(updatedDionica.getDionicaId());
 		if(dionicaOptional.isPresent()) {
@@ -56,5 +61,6 @@ public class DionicaImpl implements DionicaServis{
 		}
 		return null;
 	}
+
 	
 }

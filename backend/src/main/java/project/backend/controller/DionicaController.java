@@ -41,6 +41,21 @@ public class DionicaController {
 		
 
 	}
+	@GetMapping("/fetchByOznaka")
+	public ResponseEntity<ResponseDionica> getDionicaByOznaka(@RequestParam(name = "oznaka") String oznaka){
+
+		List<Dionica> listaDionica = dionicaService.dohvatiDionicePoOznaci(oznaka);
+
+		if(listaDionica == null) {
+			ResponseDionica data = new ResponseDionica(null, null, false, "Neuspjesno dohvacanje dionica po oznaci!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}else {
+			ResponseDionica data = new ResponseDionica(null, listaDionica, true, "Uspjesno dohvacanje dionica po oznaci!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}
+
+
+	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<ResponseDionica> updateDionica(@RequestBody NovaDionica updatedDionica){

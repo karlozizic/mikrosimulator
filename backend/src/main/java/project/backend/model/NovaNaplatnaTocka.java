@@ -8,7 +8,7 @@ public class NovaNaplatnaTocka {
 
     private String naziv;
 
-    private int stacionaza;
+    private String stacionaza;
 
     private int geografskaDuzina;
 
@@ -18,7 +18,7 @@ public class NovaNaplatnaTocka {
 
     private Long dionicaId;
 
-    public NovaNaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, int stacionaza, int geografskaDuzina,
+    public NovaNaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, String stacionaza, int geografskaDuzina,
                          int geografskaSirina, String usmjerenje, Long dionicaId) {
         super();
         this.id = naplatnaTockaId;
@@ -59,11 +59,11 @@ public class NovaNaplatnaTocka {
         this.naziv = naziv;
     }
 
-    public int getStacionaza() {
+    public String getStacionaza() {
         return stacionaza;
     }
 
-    public void setStacionaza(int stacionaza) {
+    public void setStacionaza(String stacionaza) {
         this.stacionaza = stacionaza;
     }
 
