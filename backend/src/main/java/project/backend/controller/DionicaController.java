@@ -2,6 +2,7 @@ package project.backend.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import project.backend.model.Dionica;
-import project.backend.model.NovaDionica;
-import project.backend.model.ResponseDionica;
+import project.backend.model.*;
 import project.backend.serviceImpl.DionicaImpl;
 
 @Controller
@@ -130,5 +129,23 @@ public class DionicaController {
 			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
 		}
 	}
-	
+
+	@GetMapping("/fetchOznake")
+	public ResponseEntity<ResponseOznaka> getAllOznake(){
+		List<Dionica> listaDionica = dionicaService.dohvatiSveDionice();
+		List<String> listaOznaka = new ArrayList<>();
+
+		for (Dionica dionica : listaDionica) {
+			if(!listaOznaka.contains(dionica.getOznakaAutoceste())){
+				listaOznaka.add(dionica.getOznakaAutoceste());
+			}
+		}
+		if(listaOznaka.isEmpty()) {
+			ResponseOznaka data = new ResponseOznaka(listaOznaka, false);
+			return new ResponseEntity<ResponseOznaka>(data, HttpStatus.OK);
+		}else {
+			ResponseOznaka data = new ResponseOznaka(listaOznaka, true);
+			return new ResponseEntity<ResponseOznaka>(data, HttpStatus.OK);
+		}
+	}
 }
