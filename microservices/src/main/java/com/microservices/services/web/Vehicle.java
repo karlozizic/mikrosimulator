@@ -18,11 +18,19 @@ public class Vehicle {
     protected String kategorija;
     protected String drzavaRegistracije;
 
+    private String pocetnaDionicaOznaka;
+
+    private Long pocetnaDionicaId;
+    private String zavrsnaDionicaOznaka;
+
+    private Long zavrsnaDionicaId;
+
     protected Vehicle() {
     }
 
     protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
-                      String ekoRazred, String kategorija, String drzavaRegistracije) {
+                      String ekoRazred, String kategorija, String drzavaRegistracije,
+                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -34,6 +42,10 @@ public class Vehicle {
         this.ekoRazred = ekoRazred;
         this.kategorija = kategorija;
         this.drzavaRegistracije = drzavaRegistracije;
+        this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
+        this.pocetnaDionicaId = pocetnaDionicaId;
+        this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
+        this.zavrsnaDionicaId = zavrsnaDionicaId;
     }
 
     public Long getId() {
@@ -116,6 +128,38 @@ public class Vehicle {
         this.drzavaRegistracije = drzavaRegistracije;
     }
 
+    public String getPocetnaDionicaOznaka() {
+        return pocetnaDionicaOznaka;
+    }
+
+    public void setPocetnaDionicaOznaka(String pocetnaDionicaOznaka) {
+        this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
+    }
+
+    public Long getPocetnaDionicaId() {
+        return pocetnaDionicaId;
+    }
+
+    public void setPocetnaDionicaId(Long pocetnaDionicaId) {
+        this.pocetnaDionicaId = pocetnaDionicaId;
+    }
+
+    public String getZavrsnaDionicaOznaka() {
+        return zavrsnaDionicaOznaka;
+    }
+
+    public void setZavrsnaDionicaOznaka(String zavrsnaDionicaOznaka) {
+        this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
+    }
+
+    public Long getZavrsnaDionicaId() {
+        return zavrsnaDionicaId;
+    }
+
+    public void setZavrsnaDionicaId(Long zavrsnaDionicaId) {
+        this.zavrsnaDionicaId = zavrsnaDionicaId;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -123,12 +167,16 @@ public class Vehicle {
                 ", nacinNaplate='" + nacinNaplate + '\'' +
                 ", boja='" + boja + '\'' +
                 ", brojOsovina=" + brojOsovina +
-                ", VIN=" + VIN +
+                ", VIN='" + VIN + '\'' +
                 ", idENC=" + idENC +
                 ", registracijskaOznaka='" + registracijskaOznaka + '\'' +
                 ", ekoRazred='" + ekoRazred + '\'' +
                 ", kategorija='" + kategorija + '\'' +
                 ", drzavaRegistracije='" + drzavaRegistracije + '\'' +
+                ", pocetnaDionicaOznaka='" + pocetnaDionicaOznaka + '\'' +
+                ", pocetnaDionicaId=" + pocetnaDionicaId +
+                ", zavrsnaDionicaOznaka='" + zavrsnaDionicaOznaka + '\'' +
+                ", zavrsnaDionicaId=" + zavrsnaDionicaId +
                 '}';
     }
 }

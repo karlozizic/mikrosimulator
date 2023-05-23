@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -32,9 +30,16 @@ public class Vehicle implements Serializable {
 
     private String drzavaRegistracije;
 
+    private String pocetnaDionicaOznaka;
+
+    private Long pocetnaDionicaId;
+    private String zavrsnaDionicaOznaka;
+
+    private Long zavrsnaDionicaId;
+
     public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC,
                    String registracijskaOznaka, String ekoRazred, String kategorija,
-                   String drzavaRegistracije) {
+                   String drzavaRegistracije, String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -46,6 +51,10 @@ public class Vehicle implements Serializable {
         this.ekoRazred = ekoRazred;
         this.kategorija = kategorija;
         this.drzavaRegistracije = drzavaRegistracije;
+        this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
+        this.pocetnaDionicaId = pocetnaDionicaId;
+        this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
+        this.zavrsnaDionicaId = zavrsnaDionicaId;
     }
 
     public Vehicle() {
@@ -130,6 +139,38 @@ public class Vehicle implements Serializable {
 
     public void setDrzavaRegistracije(String drzavaRegistracije) {
         this.drzavaRegistracije = drzavaRegistracije;
+    }
+
+    public String getPocetnaDionicaOznaka() {
+        return pocetnaDionicaOznaka;
+    }
+
+    public void setPocetnaDionicaOznaka(String pocetnaDionicaOznaka) {
+        this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
+    }
+
+    public Long getPocetnaDionicaId() {
+        return pocetnaDionicaId;
+    }
+
+    public void setPocetnaDionicaId(Long pocetnaDionicaId) {
+        this.pocetnaDionicaId = pocetnaDionicaId;
+    }
+
+    public String getZavrsnaDionicaOznaka() {
+        return zavrsnaDionicaOznaka;
+    }
+
+    public void setZavrsnaDionicaOznaka(String zavrsnaDionicaOznaka) {
+        this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
+    }
+
+    public Long getZavrsnaDionicaId() {
+        return zavrsnaDionicaId;
+    }
+
+    public void setZavrsnaDionicaId(Long zavrsnaDionicaId) {
+        this.zavrsnaDionicaId = zavrsnaDionicaId;
     }
 
     @Override

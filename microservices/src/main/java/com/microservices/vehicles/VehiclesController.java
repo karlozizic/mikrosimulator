@@ -5,6 +5,7 @@ import com.microservices.vehicles.Utils.BrojOsovinaUtils;
 import com.microservices.vehicles.Utils.JsonReader;
 import com.microservices.vehicles.Utils.Parser;
 import com.microservices.vehicles.Utils.RegistracijaUtils;
+import com.microservices.vehicles.models.Dionica;
 import com.microservices.vehicles.models.Drzava;
 import com.microservices.vehicles.models.Ekorazred;
 import com.microservices.vehicles.models.Kategorija;
@@ -18,10 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Logger;
 
 @RestController
@@ -83,6 +81,10 @@ public class VehiclesController {
             JSONArray drzave = (JSONArray) drzaveJSON.get("listaDrzavaRegistracije"); //JSONArray
             ArrayList<Drzava> drzaveArray = Parser.parseDrzave(drzave);
 
+            JSONObject oznakeAutocestaJSON = (JSONObject) JsonReader.getJson("http://localhost:8080/spring/dionica/fetchOznake");
+            JSONArray oznake = (JSONArray) oznakeAutocestaJSON.get("oznake"); //JSONArray
+            ArrayList<String> oznakeAutocesta = Parser.parseOznake(oznake);
+
             for (int i = 0; i < num; i++) {
                 String nacinNaplate = naciniNaplate.get(new Random().nextInt(naciniNaplate.size()));
                 String boja = boje.get(new Random().nextInt(boje.size()));
@@ -101,11 +103,20 @@ public class VehiclesController {
                 Ekorazred randomEkoRazred =  ekorazrediArray.get(new Random().nextInt(ekorazrediArray.size()));
                 Kategorija randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));
+
+                String oznaka = oznakeAutocesta.get(new Random().nextInt(oznakeAutocesta.size()));
+                JSONObject dionice = (JSONObject) JsonReader.getJson("http://localhost:8080/spring/dionica/fetchByOznaka?oznaka=" + oznaka);
+                JSONArray dioniceArray = (JSONArray) dionice.get("listaDionica");
+                List<Dionica> dioniceList = Parser.parseDionice(dioniceArray);
+                dioniceList.sort(Comparator.comparing(Dionica::getPocetnaStacionaza)); //sortirane dionice po pocetnoj stacionazi
+                Dionica pocetnaDionica = dioniceList.get(new Random().nextInt(dioniceList.size() - 1)); //ne moze biti zadnja dionica
+                Dionica zavrsnaDionica = dioniceList.get(new Random().nextInt(dioniceList.indexOf(pocetnaDionica) + 1, dioniceList.size()));
+
                 //broj osovina - ovisno o kategoriji (vidi po kategorijama)
                 int brojOsovina = BrojOsovinaUtils.generateBrojOsovina(randomKategorija);
                 //registracijska oznaka - ovisno o drzavi registracije (grad?)
                 String registracijskaOznaka = RegistracijaUtils.generateRegistracija(randomDrzavaRegistracije);
-                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv());
+                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId());
                 id += 1;
                 vehicleRepository.save(generatedVozilo);
             }
