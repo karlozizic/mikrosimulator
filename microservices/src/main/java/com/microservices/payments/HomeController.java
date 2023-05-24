@@ -1,4 +1,4 @@
-package com.microservices.services.payment;
+package com.microservices.payments;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
