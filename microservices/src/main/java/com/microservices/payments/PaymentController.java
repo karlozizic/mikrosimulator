@@ -1,5 +1,6 @@
 package com.microservices.payments;
 
+import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.Utils.DionicaUtils;
 import com.microservices.payments.Utils.Parser;
 import com.microservices.payments.models.Dionica;
@@ -11,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,6 +43,20 @@ public class PaymentController {
         List<Payment> payments = paymentRepository.findAll();
         logger.info("payment-service payments() found: " + payments.size() + " payments");
         return payments;
+    }
+
+    @RequestMapping(path = "/payments/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Payment byId(@PathVariable("id") String id) {
+        logger.info("payments-service byId() invoked: " + id);
+        Long paymentId = Long.valueOf(id);
+        Payment payment = paymentRepository.findById(paymentId);
+        logger.info("payments-service byId() found: " + payment);
+
+        if (payment == null)
+            throw new VehicleNotFoundException(paymentId);
+        else {
+            return payment;
+        }
     }
 
     @RequestMapping(path = "/generate", produces = MediaType.APPLICATION_JSON_VALUE)

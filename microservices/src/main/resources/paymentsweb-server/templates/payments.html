@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Payments by Id</h1>
+
+	<div th:if="not ${payments}">
+		<div class="alert alert-warning m-2">
+			No payments found containing '<span th:text="${search}">text</span>'.
+		</div>
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:if="${payments}">
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Vrijeme ocitanja</th>
+					<th>Uredaj</th>
+					<th>Naplatna tocka</th>
+					<th>Kategorija</th>
+					<th>ID ENC</th>
+					<th>Registracijska oznaka</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="payment : ${payments}">
+					<td><a href="payment.html"
+						th:href="@{|/payments/${payment.id}|}"
+						th:text="|${payment.id}|"></a></td>
+					<td th:text="${payment.vrijemeOcitanja}">Vrijeme ocitanja</td>
+					<td th:text="${payment.uredaj}">Uredaj</td>
+					<td th:text="${payment.naplatnaTocka}">Naplatna Tocka</td>
+					<td th:text="${payment.kategorija}">Kategorija</td>
+					<td th:text="${payment.idENC}">ID ENC</td>
+					<td th:text="${payment.registracijskaOznaka}">Registracijska Oznaka</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div style="text-align: right">
+		Options: <a th:href="@{/}">Home</a>
+<!--		| <a th:href="@{/payments/search}">Payment-->
+<!--			Search</a>-->
+	</div>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>
