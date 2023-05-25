@@ -30,6 +30,7 @@ public class Vehicle implements Serializable {
 
     private String drzavaRegistracije;
 
+    private String oznakaAutoceste;
     private String pocetnaDionicaOznaka;
 
     private Long pocetnaDionicaId;
@@ -37,9 +38,12 @@ public class Vehicle implements Serializable {
 
     private Long zavrsnaDionicaId;
 
+    private float prosjecnaBrzina;
+
     public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC,
                    String registracijskaOznaka, String ekoRazred, String kategorija,
-                   String drzavaRegistracije, String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId) {
+                   String drzavaRegistracije, String oznakaAutoceste, String pocetnaDionicaOznaka,
+                   Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId, float prosjecnaBrzina) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -51,10 +55,12 @@ public class Vehicle implements Serializable {
         this.ekoRazred = ekoRazred;
         this.kategorija = kategorija;
         this.drzavaRegistracije = drzavaRegistracije;
+        this.oznakaAutoceste = oznakaAutoceste;
         this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
         this.pocetnaDionicaId = pocetnaDionicaId;
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
+        this.prosjecnaBrzina = prosjecnaBrzina;
     }
 
     public Vehicle() {
@@ -141,6 +147,14 @@ public class Vehicle implements Serializable {
         this.drzavaRegistracije = drzavaRegistracije;
     }
 
+    public String getOznakaAutoceste() {
+        return oznakaAutoceste;
+    }
+
+    public void setOznakaAutoceste(String oznakaAutoceste) {
+        this.oznakaAutoceste = oznakaAutoceste;
+    }
+
     public String getPocetnaDionicaOznaka() {
         return pocetnaDionicaOznaka;
     }
@@ -171,6 +185,14 @@ public class Vehicle implements Serializable {
 
     public void setZavrsnaDionicaId(Long zavrsnaDionicaId) {
         this.zavrsnaDionicaId = zavrsnaDionicaId;
+    }
+
+    public float getProsjecnaBrzina() {
+        return prosjecnaBrzina;
+    }
+
+    public void setProsjecnaBrzina(float prosjecnaBrzina) {
+        this.prosjecnaBrzina = prosjecnaBrzina;
     }
 
     @Override

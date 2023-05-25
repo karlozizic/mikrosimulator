@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import project.backend.model.Dionica;
 import project.backend.model.NaplatnaTocka;
 
 @Service
@@ -21,6 +22,8 @@ public interface NaplatnaTockaServis {
 	
 	NaplatnaTocka obrisiNaplatnuTocku(Long naplatnaTockaId); 
 	
-	List<NaplatnaTocka> dohvatiSveNaplatneTocke(); 
+	List<NaplatnaTocka> dohvatiSveNaplatneTocke();
+
+	List<NaplatnaTocka> dohvatiSveNaplatneTockePoDionici(Dionica dionica);
 	
 }

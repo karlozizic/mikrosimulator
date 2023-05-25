@@ -1,4 +1,4 @@
-package com.microservices.payments;
+package com.microservices.payments.models;
 
 
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -17,19 +17,24 @@ public class Vehicle {
     protected String kategorija;
     protected String drzavaRegistracije;
 
-    private String pocetnaDionicaOznaka;
+    protected String oznakaAutoceste;
 
-    private Long pocetnaDionicaId;
-    private String zavrsnaDionicaOznaka;
+    protected String pocetnaDionicaOznaka;
 
-    private Long zavrsnaDionicaId;
+    protected Long pocetnaDionicaId;
+    protected String zavrsnaDionicaOznaka;
+
+    protected Long zavrsnaDionicaId;
+
+    protected float prosjecnaBrzina;
 
     protected Vehicle() {
     }
 
     protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
-                      String ekoRazred, String kategorija, String drzavaRegistracije,
-                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId) {
+                      String ekoRazred, String kategorija, String drzavaRegistracije, String oznakaAutoceste,
+                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId,
+                      float prosjecnaBrzina) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -41,10 +46,12 @@ public class Vehicle {
         this.ekoRazred = ekoRazred;
         this.kategorija = kategorija;
         this.drzavaRegistracije = drzavaRegistracije;
+        this.oznakaAutoceste = oznakaAutoceste;
         this.pocetnaDionicaOznaka = pocetnaDionicaOznaka;
         this.pocetnaDionicaId = pocetnaDionicaId;
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
+        this.prosjecnaBrzina = prosjecnaBrzina;
     }
 
     public Long getId() {
@@ -127,6 +134,14 @@ public class Vehicle {
         this.drzavaRegistracije = drzavaRegistracije;
     }
 
+    public String getOznakaAutoceste() {
+        return oznakaAutoceste;
+    }
+
+    public void setOznakaAutoceste(String oznakaAutoceste) {
+        this.oznakaAutoceste = oznakaAutoceste;
+    }
+
     public String getPocetnaDionicaOznaka() {
         return pocetnaDionicaOznaka;
     }
@@ -159,6 +174,14 @@ public class Vehicle {
         this.zavrsnaDionicaId = zavrsnaDionicaId;
     }
 
+    public float getProsjecnaBrzina() {
+        return prosjecnaBrzina;
+    }
+
+    public void setProsjecnaBrzina(float prosjecnaBrzina) {
+        this.prosjecnaBrzina = prosjecnaBrzina;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -172,6 +195,7 @@ public class Vehicle {
                 ", ekoRazred='" + ekoRazred + '\'' +
                 ", kategorija='" + kategorija + '\'' +
                 ", drzavaRegistracije='" + drzavaRegistracije + '\'' +
+                ", oznakaAutoceste='" + oznakaAutoceste + '\'' +
                 ", pocetnaDionicaOznaka='" + pocetnaDionicaOznaka + '\'' +
                 ", pocetnaDionicaId=" + pocetnaDionicaId +
                 ", zavrsnaDionicaOznaka='" + zavrsnaDionicaOznaka + '\'' +

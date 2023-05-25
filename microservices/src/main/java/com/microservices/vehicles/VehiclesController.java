@@ -116,7 +116,8 @@ public class VehiclesController {
                 int brojOsovina = BrojOsovinaUtils.generateBrojOsovina(randomKategorija);
                 //registracijska oznaka - ovisno o drzavi registracije (grad?)
                 String registracijskaOznaka = RegistracijaUtils.generateRegistracija(randomDrzavaRegistracije);
-                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId());
+                float brzina = new Random().nextFloat(90, 130);
+                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), oznaka, pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId(), brzina);
                 id += 1;
                 vehicleRepository.save(generatedVozilo);
             }

@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-//@Import(PaymentsConfiguration.class)
+@Import(PaymentsConfiguration.class)
 public class PaymentServer {
 
 

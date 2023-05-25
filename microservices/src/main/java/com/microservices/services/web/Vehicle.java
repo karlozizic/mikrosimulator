@@ -25,12 +25,14 @@ public class Vehicle {
 
     private Long zavrsnaDionicaId;
 
+    private float prosjecnaBrzina;
+
     protected Vehicle() {
     }
 
     protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
                       String ekoRazred, String kategorija, String drzavaRegistracije,
-                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId) {
+                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId, float prosjecnaBrzina) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -46,6 +48,7 @@ public class Vehicle {
         this.pocetnaDionicaId = pocetnaDionicaId;
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
+        this.prosjecnaBrzina = prosjecnaBrzina;
     }
 
     public Long getId() {
@@ -158,6 +161,14 @@ public class Vehicle {
 
     public void setZavrsnaDionicaId(Long zavrsnaDionicaId) {
         this.zavrsnaDionicaId = zavrsnaDionicaId;
+    }
+
+    public float getProsjecnaBrzina() {
+        return prosjecnaBrzina;
+    }
+
+    public void setProsjecnaBrzina(float prosjecnaBrzina) {
+        this.prosjecnaBrzina = prosjecnaBrzina;
     }
 
     @Override

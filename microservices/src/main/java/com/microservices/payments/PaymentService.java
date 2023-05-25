@@ -1,5 +1,6 @@
 package com.microservices.payments;
 
+import com.microservices.payments.models.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
