@@ -1,49 +1,40 @@
-package com.microservices.vehicles;
+package com.microservices.payments.models;
 
-import java.io.Serializable;
-import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
-@Entity
-@Table(name="VEHICLE")
-public class Vehicle implements Serializable {
-    @Id
-    private Long id;
+@JsonRootName("Vehicle")
+public class Vehicle {
 
-    private String nacinNaplate;
+    protected Long id;
+    protected String nacinNaplate;
+    protected String boja;
+    protected int brojOsovina;
+    protected String VIN;
+    protected int idENC;
+    protected String registracijskaOznaka;
+    protected String ekoRazred;
+    protected String kategorija;
+    protected String drzavaRegistracije;
 
-    private String boja;
+    protected String oznakaAutoceste;
 
-    private int brojOsovina;
+    protected String pocetnaDionicaOznaka;
 
-    private String VIN;
+    protected Long pocetnaDionicaId;
+    protected String zavrsnaDionicaOznaka;
 
-    private int idENC;
+    protected Long zavrsnaDionicaId;
 
-    private String registracijskaOznaka;
+    protected float prosjecnaBrzina;
 
-    private String ekoRazred;
-    private String kategorija;
+    protected Vehicle() {
+    }
 
-    private String drzavaRegistracije;
-
-    private String oznakaAutoceste;
-    private String pocetnaDionicaOznaka;
-
-    private Long pocetnaDionicaId;
-    private String zavrsnaDionicaOznaka;
-
-    private Long zavrsnaDionicaId;
-
-    private float prosjecnaBrzina;
-
-    public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC,
-                   String registracijskaOznaka, String ekoRazred, String kategorija,
-                   String drzavaRegistracije, String oznakaAutoceste, String pocetnaDionicaOznaka,
-                   Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId, float prosjecnaBrzina) {
+    protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
+                      String ekoRazred, String kategorija, String drzavaRegistracije, String oznakaAutoceste,
+                      String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId,
+                      float prosjecnaBrzina) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -61,10 +52,6 @@ public class Vehicle implements Serializable {
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
         this.prosjecnaBrzina = prosjecnaBrzina;
-    }
-
-    public Vehicle() {
-
     }
 
     public Long getId() {
@@ -196,31 +183,23 @@ public class Vehicle implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(VIN, boja, brojOsovina, drzavaRegistracije, ekoRazred, idENC, kategorija, nacinNaplate,
-                registracijskaOznaka, id);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vehicle vehicle = (Vehicle) o;
-        return brojOsovina == vehicle.brojOsovina && idENC == vehicle.idENC && Objects.equals(id, vehicle.id) && Objects.equals(nacinNaplate, vehicle.nacinNaplate) && Objects.equals(boja, vehicle.boja) && Objects.equals(VIN, vehicle.VIN) && Objects.equals(registracijskaOznaka, vehicle.registracijskaOznaka) && Objects.equals(ekoRazred, vehicle.ekoRazred) && Objects.equals(kategorija, vehicle.kategorija) && Objects.equals(drzavaRegistracije, vehicle.drzavaRegistracije);
-    }
-
-    @Override
     public String toString() {
         return "Vehicle{" +
-                "nacinNaplate='" + nacinNaplate + '\'' +
+                "id=" + id +
+                ", nacinNaplate='" + nacinNaplate + '\'' +
                 ", boja='" + boja + '\'' +
                 ", brojOsovina=" + brojOsovina +
-                ", VIN=" + VIN +
+                ", VIN='" + VIN + '\'' +
                 ", idENC=" + idENC +
                 ", registracijskaOznaka='" + registracijskaOznaka + '\'' +
                 ", ekoRazred='" + ekoRazred + '\'' +
                 ", kategorija='" + kategorija + '\'' +
                 ", drzavaRegistracije='" + drzavaRegistracije + '\'' +
+                ", oznakaAutoceste='" + oznakaAutoceste + '\'' +
+                ", pocetnaDionicaOznaka='" + pocetnaDionicaOznaka + '\'' +
+                ", pocetnaDionicaId=" + pocetnaDionicaId +
+                ", zavrsnaDionicaOznaka='" + zavrsnaDionicaOznaka + '\'' +
+                ", zavrsnaDionicaId=" + zavrsnaDionicaId +
                 '}';
     }
 }

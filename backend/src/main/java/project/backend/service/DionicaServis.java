@@ -12,6 +12,8 @@ import project.backend.model.Dionica;
 public interface DionicaServis {
 	
 	Dionica dohvatiDionicuPoId(Long id);
+
+	List<Dionica> dohvatiDionicePoOznaci(String oznaka);
 	
 	Dionica updateDionice(Dionica updatedDionica);
 	
@@ -19,6 +21,8 @@ public interface DionicaServis {
 	
 	Dionica obrisiDionicu(Long dionicaId); 
 	
-	List<Dionica> dohvatiSveDionice(); 
+	List<Dionica> dohvatiSveDionice();
+
+
 	
 }

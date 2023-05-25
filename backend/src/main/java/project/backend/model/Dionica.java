@@ -23,10 +23,12 @@ public class Dionica {
 	private int brojTraka;
 	
 	private String oznaka;
+
+	private String pocetnaStacionaza;
 	
-	private int pocetnaStacionaza;
-	
-	private int zavrsnaStacionaza;
+	private String zavrsnaStacionaza;
+
+	private String oznakaAutoceste;
 	
 	@OneToOne(optional=true)
 	public Dionica slijedi;
@@ -34,8 +36,8 @@ public class Dionica {
 	@OneToOne(optional=true)
 	public Dionica prethodi; 
 
-	public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza,
-			int zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
+	public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza,
+				   String zavrsnaStacionaza,String oznakaAutoceste, Dionica slijedi, Dionica prethodi) {
 		super();
 		this.id = dionicaId;
 		this.smjer = smjer;
@@ -44,17 +46,19 @@ public class Dionica {
 		this.oznaka = oznaka;
 		this.pocetnaStacionaza = pocetnaStacionaza;
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.oznakaAutoceste = oznakaAutoceste;
 		this.slijedi = slijedi;
 		this.prethodi = prethodi;
 	}
 
-	public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, int pocetnaStacionaza, int zavrsnaStacionaza, Dionica slijedi, Dionica prethodi) {
+	public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Dionica slijedi, Dionica prethodi) {
 		this.smjer = smjer;
 		this.najvecaBrzina = najvecaBrzina;
 		this.brojTraka = brojTraka;
 		this.oznaka = oznaka;
 		this.pocetnaStacionaza = pocetnaStacionaza;
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+		this.oznakaAutoceste = oznakaAutoceste;
 		this.slijedi = slijedi;
 		this.prethodi = prethodi;
 	}
@@ -103,20 +107,28 @@ public class Dionica {
 		this.oznaka = oznaka;
 	}
 
-	public int getPocetnaStacionaza() {
+	public String getPocetnaStacionaza() {
 		return pocetnaStacionaza;
 	}
 
-	public void setPocetnaStacionaza(int pocetnaStacionaza) {
+	public void setPocetnaStacionaza(String pocetnaStacionaza) {
 		this.pocetnaStacionaza = pocetnaStacionaza;
 	}
 
-	public int getZavrsnaStacionaza() {
+	public String getZavrsnaStacionaza() {
 		return zavrsnaStacionaza;
 	}
 
-	public void setZavrsnaStacionaza(int zavrsnaStacionaza) {
+	public void setZavrsnaStacionaza(String zavrsnaStacionaza) {
 		this.zavrsnaStacionaza = zavrsnaStacionaza;
+	}
+
+	public String getOznakaAutoceste() {
+		return oznakaAutoceste;
+	}
+
+	public void setOznakaAutoceste(String oznakaAutoceste) {
+		this.oznakaAutoceste = oznakaAutoceste;
 	}
 
 	public Dionica getSlijedi() {

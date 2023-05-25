@@ -44,6 +44,7 @@ public class NaplatnaTockaController {
 		}
 
 	}
+
 	
 	@PutMapping("/update")
 	public ResponseEntity<ResponseNaplatnaTocka> updateNaplatnaTocka(@RequestBody NaplatnaTocka updatedNaplatnaTocka, @RequestParam(name="id") String id){
@@ -106,6 +107,23 @@ public class NaplatnaTockaController {
 			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, listaNaplatnihTocaka, true, "Dohvacanje uspjesno!");
 			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
 		}
+	}
+
+	@GetMapping("/fetchByDionica")
+	public ResponseEntity<ResponseNaplatnaTocka> getByDionica(@RequestParam(name = "dionicaId") String id){
+
+		Long longId = Long.parseLong(id);
+		Dionica dionica = dionicaService.dohvatiDionicuPoId(longId);
+		List<NaplatnaTocka> listaNaplatnihTocaka = naplatnaTockaService.dohvatiSveNaplatneTockePoDionici(dionica);
+
+		if(listaNaplatnihTocaka.isEmpty()) {
+			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, listaNaplatnihTocaka, false, null);
+			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
+		}else {
+			ResponseNaplatnaTocka data = new ResponseNaplatnaTocka(null, listaNaplatnihTocaka, true, "Dohvacanje uspjesno!");
+			return new ResponseEntity<ResponseNaplatnaTocka>(data, HttpStatus.OK);
+		}
+
 	}
 	
 }

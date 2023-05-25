@@ -13,6 +13,7 @@ const CreateDionicaComponent = () => {
     const [pocetnaStacionaza, setPocetnaStacionaza] = useState('');
     const [zavrsnaStacionaza, setZavrsnaStacionaza] = useState('');
     const [dionice, setDionice] = useState([]);
+    const [oznakaAutoceste, setOznakaAutoceste] = useState('');
     const [dionicaPrije, setDionicaPrije] = useState('');
     const [dionicaPoslije, setDionicaPoslije] = useState('');
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ const CreateDionicaComponent = () => {
         e.preventDefault();
         const dionicaPrijeId = dionicaPrije.value != null ? dionicaPrije.value : null;
         const dionicaPoslijeId = dionicaPoslije.value != null ? dionicaPoslije.value : null;
-        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, dionicaPrijeId, dionicaPoslijeId };
+        const dionica = { smjer, najvecaBrzina, brojTraka, oznaka, pocetnaStacionaza, zavrsnaStacionaza, oznakaAutoceste,dionicaPrijeId, dionicaPoslijeId };
         console.log('dionica = ' + JSON.stringify(dionica));
 
         dionicaRegister(dionica).then(() => {
@@ -68,6 +69,9 @@ const CreateDionicaComponent = () => {
                 break;
             case 'zavrsnaStacionaza':
                 setZavrsnaStacionaza(value);
+                break;
+            case 'oznakaAutoceste':
+                setOznakaAutoceste(value);
                 break;
             default:
                 break;
@@ -100,6 +104,8 @@ const CreateDionicaComponent = () => {
                                         <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza ==="" ? null : pocetnaStacionaza} onChange={changeHandler}></input>
                                         <label>Zavrsna stacionaza:</label>
                                         <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza === "" ? null : zavrsnaStacionaza} onChange={changeHandler}></input>
+                                        <label>Oznaka autoceste:</label>
+                                        <input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste === "" ? null : oznakaAutoceste} onChange={changeHandler}></input>
                                         Dionica Prije:
                                         <Select
                                             name="dionicaPrije"

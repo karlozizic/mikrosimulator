@@ -1,8 +1,9 @@
-package project.backend.model;
+package com.microservices.payments.models;
 
-public class NovaDionica
-{
-    private Long dionicaId;
+
+public class Dionica {
+
+    private Long id;
 
     private String smjer;
 
@@ -12,18 +13,19 @@ public class NovaDionica
 
     private String oznaka;
 
-    private String pocetnaStacionaza;
+    private Double pocetnaStacionaza;
 
-    private String zavrsnaStacionaza;
+    private Double zavrsnaStacionaza;
 
-    private String oznakaAutoceste;
-
+    public String oznakaAutoceste;
     public Long slijediId;
 
     public Long prethodiId;
 
-    public NovaDionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Long slijediId, Long prethodiId) {
-        this.dionicaId = dionicaId;
+    public Dionica(Long dionicaId, String smjer, int najvecaBrzina, int brojTraka, String oznaka, Double pocetnaStacionaza,
+                   Double zavrsnaStacionaza, String oznakaAutoceste, Long slijediId, Long prethodiId) {
+        super();
+        this.id = dionicaId;
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
         this.brojTraka = brojTraka;
@@ -35,26 +37,22 @@ public class NovaDionica
         this.prethodiId = prethodiId;
     }
 
-    public NovaDionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, String pocetnaStacionaza, String zavrsnaStacionaza, String oznakaAutoceste, Long slijediId, Long prethodiId) {
+    public Dionica(String smjer, int najvecaBrzina, int brojTraka, String oznaka, Double pocetnaStacionaza, Double zavrsnaStacionaza, Long slijediId, Long prethodiId) {
         this.smjer = smjer;
         this.najvecaBrzina = najvecaBrzina;
         this.brojTraka = brojTraka;
         this.oznaka = oznaka;
         this.pocetnaStacionaza = pocetnaStacionaza;
         this.zavrsnaStacionaza = zavrsnaStacionaza;
-        this.oznakaAutoceste = oznakaAutoceste;
         this.slijediId = slijediId;
         this.prethodiId = prethodiId;
     }
-
-    public NovaDionica() {}
-
     public Long getDionicaId() {
-        return dionicaId;
+        return id;
     }
 
-    public void setDionicaIdId(Long id) {
-        this.dionicaId = id;
+    public void setDionicaId(Long dionicaId) {
+        this.id = dionicaId;
     }
 
     public String getSmjer() {
@@ -89,19 +87,19 @@ public class NovaDionica
         this.oznaka = oznaka;
     }
 
-    public String getPocetnaStacionaza() {
+    public Double getPocetnaStacionaza() {
         return pocetnaStacionaza;
     }
 
-    public void setPocetnaStacionaza(String pocetnaStacionaza) {
+    public void setPocetnaStacionaza(Double pocetnaStacionaza) {
         this.pocetnaStacionaza = pocetnaStacionaza;
     }
 
-    public String getZavrsnaStacionaza() {
+    public Double getZavrsnaStacionaza() {
         return zavrsnaStacionaza;
     }
 
-    public void setZavrsnaStacionaza(String zavrsnaStacionaza) {
+    public void setZavrsnaStacionaza(Double zavrsnaStacionaza) {
         this.zavrsnaStacionaza = zavrsnaStacionaza;
     }
 
@@ -119,13 +117,5 @@ public class NovaDionica
 
     public void setPrethodiId(Long prethodiId) {
         this.prethodiId = prethodiId;
-    }
-
-    public String getOznakaAutoceste() {
-        return oznakaAutoceste;
-    }
-
-    public void setOznakaAutoceste(String oznakaAutoceste) {
-        this.oznakaAutoceste = oznakaAutoceste;
     }
 }

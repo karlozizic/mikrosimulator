@@ -1,27 +1,34 @@
-package project.backend.model;
+package com.microservices.payments.models;
 
-public class NovaNaplatnaTocka {
+import com.fasterxml.jackson.annotation.JsonRootName;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-    private Long id;
+@JsonRootName("NaplatnaTocka")
+public class NaplatnaTocka {
 
-    private String oznaka;
+    protected Long id;
 
-    private String naziv;
+    protected String oznaka;
 
-    private String stacionaza;
+    protected String naziv;
 
-    private int geografskaDuzina;
+    protected Double stacionaza;
 
-    private int geografskaSirina;
+    protected int geografskaDuzina;
 
-    private String usmjerenje;
+    protected int geografskaSirina;
 
-    private Long dionicaId;
+    protected String usmjerenje;
 
-    public NovaNaplatnaTocka(Long naplatnaTockaId, String oznaka, String naziv, String stacionaza, int geografskaDuzina,
-                         int geografskaSirina, String usmjerenje, Long dionicaId) {
-        super();
-        this.id = naplatnaTockaId;
+    protected Long dionicaId;
+
+    protected String oznakaDionice;
+
+    public NaplatnaTocka(Long id, String oznaka, String naziv, Double stacionaza, int geografskaDuzina, int geografskaSirina, String usmjerenje, Long dionicaId, String oznakaDionice) {
+        this.id = id;
         this.oznaka = oznaka;
         this.naziv = naziv;
         this.stacionaza = stacionaza;
@@ -29,10 +36,7 @@ public class NovaNaplatnaTocka {
         this.geografskaSirina = geografskaSirina;
         this.usmjerenje = usmjerenje;
         this.dionicaId = dionicaId;
-    }
-
-    public NovaNaplatnaTocka() {
-
+        this.oznakaDionice = oznakaDionice;
     }
 
     public Long getId() {
@@ -59,11 +63,11 @@ public class NovaNaplatnaTocka {
         this.naziv = naziv;
     }
 
-    public String getStacionaza() {
+    public Double getStacionaza() {
         return stacionaza;
     }
 
-    public void setStacionaza(String stacionaza) {
+    public void setStacionaza(Double stacionaza) {
         this.stacionaza = stacionaza;
     }
 
@@ -97,5 +101,13 @@ public class NovaNaplatnaTocka {
 
     public void setDionicaId(Long dionicaId) {
         this.dionicaId = dionicaId;
+    }
+
+    public String getOznakaDionice() {
+        return oznakaDionice;
+    }
+
+    public void setOznakaDionice(String oznakaDionice) {
+        this.oznakaDionice = oznakaDionice;
     }
 }

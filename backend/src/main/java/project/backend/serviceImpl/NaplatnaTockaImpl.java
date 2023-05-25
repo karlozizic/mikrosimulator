@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import project.backend.model.Dionica;
 import project.backend.model.NaplatnaTocka;
 import project.backend.repository.NaplatnaTockaRepository;
 import project.backend.service.NaplatnaTockaServis;
@@ -54,6 +55,15 @@ public class NaplatnaTockaImpl implements NaplatnaTockaServis{
 		List<NaplatnaTocka> listaNaplatnihTocaka = naplatnaTockaRepository.findAll();
 		if(listaNaplatnihTocaka != null) {
 			return listaNaplatnihTocaka; 
+		}
+		return null;
+	}
+
+	@Override
+	public List<NaplatnaTocka> dohvatiSveNaplatneTockePoDionici(Dionica dionica) {
+		List<NaplatnaTocka> listaNaplatnihTocaka = naplatnaTockaRepository.dohvatSveNaplatneTockePoDionici(dionica);
+		if(listaNaplatnihTocaka != null) {
+			return listaNaplatnihTocaka;
 		}
 		return null;
 	}

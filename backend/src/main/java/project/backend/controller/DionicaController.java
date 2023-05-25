@@ -2,6 +2,7 @@ package project.backend.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import project.backend.model.Dionica;
-import project.backend.model.NovaDionica;
-import project.backend.model.ResponseDionica;
+import project.backend.model.*;
 import project.backend.serviceImpl.DionicaImpl;
 
 @Controller
@@ -41,6 +40,21 @@ public class DionicaController {
 		
 
 	}
+	@GetMapping("/fetchByOznaka")
+	public ResponseEntity<ResponseDionica> getDionicaByOznaka(@RequestParam(name = "oznaka") String oznaka){
+
+		List<Dionica> listaDionica = dionicaService.dohvatiDionicePoOznaci(oznaka);
+
+		if(listaDionica == null) {
+			ResponseDionica data = new ResponseDionica(null, null, false, "Neuspjesno dohvacanje dionica po oznaci!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}else {
+			ResponseDionica data = new ResponseDionica(null, listaDionica, true, "Uspjesno dohvacanje dionica po oznaci!");
+			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
+		}
+
+
+	}
 	
 	@PutMapping("/update")
 	public ResponseEntity<ResponseDionica> updateDionica(@RequestBody NovaDionica updatedDionica){
@@ -49,7 +63,7 @@ public class DionicaController {
 		Dionica slijedi = oldDionica.getSlijedi();
 		Dionica prethodi = oldDionica.getPrethodi();
 
-		Dionica dionica = new Dionica(updatedDionica.getDionicaId(), updatedDionica.getSmjer(), updatedDionica.getNajvecaBrzina(), updatedDionica.getBrojTraka(), updatedDionica.getOznaka(), updatedDionica.getPocetnaStacionaza(), updatedDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionica = new Dionica(updatedDionica.getDionicaId(), updatedDionica.getSmjer(), updatedDionica.getNajvecaBrzina(), updatedDionica.getBrojTraka(), updatedDionica.getOznaka(), updatedDionica.getPocetnaStacionaza(), updatedDionica.getZavrsnaStacionaza(), updatedDionica.getOznakaAutoceste(), slijedi, prethodi);
 		Dionica dionicaFromDB = dionicaService.updateDionice(dionica);
 		
 		if(dionicaFromDB == null) {
@@ -75,7 +89,7 @@ public class DionicaController {
 			prethodi = dionicaService.dohvatiDionicuPoId(novaDionica.getPrethodiId());
 		}
 
-		Dionica dionica = new Dionica(novaDionica.getSmjer(), novaDionica.getNajvecaBrzina(), novaDionica.getBrojTraka(), novaDionica.getOznaka(), novaDionica.getPocetnaStacionaza(), novaDionica.getZavrsnaStacionaza(), slijedi, prethodi);
+		Dionica dionica = new Dionica(novaDionica.getSmjer(), novaDionica.getNajvecaBrzina(), novaDionica.getBrojTraka(), novaDionica.getOznaka(), novaDionica.getPocetnaStacionaza(), novaDionica.getZavrsnaStacionaza(), novaDionica.getOznakaAutoceste(), slijedi, prethodi);
 		Dionica dionicaFromDB = dionicaService.stvoriDionicu(dionica);
 		
 		if(dionicaFromDB == null) {
@@ -115,5 +129,23 @@ public class DionicaController {
 			return new ResponseEntity<ResponseDionica>(data, HttpStatus.OK);
 		}
 	}
-	
+
+	@GetMapping("/fetchOznake")
+	public ResponseEntity<ResponseOznaka> getAllOznake(){
+		List<Dionica> listaDionica = dionicaService.dohvatiSveDionice();
+		List<String> listaOznaka = new ArrayList<>();
+
+		for (Dionica dionica : listaDionica) {
+			if(!listaOznaka.contains(dionica.getOznakaAutoceste())){
+				listaOznaka.add(dionica.getOznakaAutoceste());
+			}
+		}
+		if(listaOznaka.isEmpty()) {
+			ResponseOznaka data = new ResponseOznaka(listaOznaka, false);
+			return new ResponseEntity<ResponseOznaka>(data, HttpStatus.OK);
+		}else {
+			ResponseOznaka data = new ResponseOznaka(listaOznaka, true);
+			return new ResponseEntity<ResponseOznaka>(data, HttpStatus.OK);
+		}
+	}
 }
