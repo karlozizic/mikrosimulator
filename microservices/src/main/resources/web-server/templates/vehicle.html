@@ -1,92 +1,96 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="header :: copy"></head>
 
 <body>
-	<h1>Vehicle Details</h1>
-
-	<div th:if="not ${vehicle}">
-		<div class="m-3 alert alert-warning">
-			Unable to find vehicle '<span th:text="${id}">id</span>'
+<h1>Vehicle Details</h1>
+<div th:if="${vehicle}" class="container">
+	<div class="row">
+		<div class="col-3">
+			<dl>
+				<dt>ID</dt>
+				<dd th:text="${vehicle.id}">id</dd>
+			</dl>
+			<dl>
+				<dt>Nacin Naplate</dt>
+				<dd th:text="${vehicle.nacinNaplate}">nacinNaplate</dd>
+			</dl>
+			<dl>
+				<dt>Boja</dt>
+				<dd th:text="${vehicle.boja}">boja</dd>
+			</dl>
+			<dl>
+				<dt>Broj osovina</dt>
+				<dd th:text="${vehicle.brojOsovina}">brojOsovina</dd>
+			</dl>
 		</div>
-		<div style="height: 2cm">&nbsp;</div>
+		<div class="col-3">
+			<dl>
+				<dt>VIN</dt>
+				<dd th:text="${vehicle.VIN}">VIN</dd>
+			</dl>
+			<dl>
+				<dt>ID ENC</dt>
+				<dd th:text="${vehicle.idENC}">idENC</dd>
+			</dl>
+			<dl>
+				<dt>Registracijska oznaka</dt>
+				<dd th:text="${vehicle.registracijskaOznaka}">registracijskaOznaka</dd>
+			</dl>
+			<dl>
+				<dt>Ekorazred</dt>
+				<dd th:text="${vehicle.ekoRazred}">ekoRazred</dd>
+			</dl>
+		</div>
+		<div class="col-3">
+			<dl>
+				<dt>Kategorija</dt>
+				<dd th:text="${vehicle.kategorija}">kategorija</dd>
+			</dl>
+			<dl>
+				<dt>Drzava registracije</dt>
+				<dd th:text="${vehicle.drzavaRegistracije}">drzavaRegistracije</dd>
+			</dl>
+			<dl>
+				<dt>Oznaka pocetne dionice</dt>
+				<dd th:text="${vehicle.pocetnaDionicaOznaka}">pocetnaDionicaOznaka</dd>
+			</dl>
+			<dl>
+				<dt>ID pocetne dionice</dt>
+				<dd th:text="${vehicle.pocetnaDionicaId}">pocetnaDionicaId</dd>
+			</dl>
+		</div>
+		<div class="col-3">
+			<dl>
+				<dt>Oznaka zavrsne dionice</dt>
+				<dd th:text="${vehicle.zavrsnaDionicaOznaka}">zavrsnaDionicaOznaka</dd>
+			</dl>
+			<dl>
+				<dt>ID zavrsne dionice</dt>
+				<dd th:text="${vehicle.zavrsnaDionicaId}">zavrsnaDionicaId</dd>
+			</dl>
+			<dl>
+				<dt>Prosjecna brzina</dt>
+				<dd th:text="${vehicle.prosjecnaBrzina}">prosjecna brzina</dd>
+			</dl>
+		</div>
 	</div>
+</div>
 
-	<div th:if="${vehicle}" class="container">
-		<dl class="row">
-			<dt class="col-1">Id</dt>
-			<dd th:text="${vehicle.id}">id</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-1">Nacin Naplate</dt>
-			<dd th:text="${vehicle.nacinNaplate}">nacinNaplate</dd>
-	    </dl>
-	    <dl class="row">
-			<dt class="col-1">Boja</dt>
-			<dd th:text="${vehicle.boja}">boja</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-1">Broj osovina</dt>
-			<dd th:text="${vehicle.brojOsovina}">brojOsovina</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-1">VIN</dt>
-			<dd th:text="${vehicle.VIN}">VIN</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-1">idENC</dt>
-			<dd th:text="${vehicle.idENC}">idENC</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Registracijska oznaka</dt>
-			<dd th:text="${vehicle.registracijskaOznaka}">registracijskaOznaka</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">ekoRazred</dt>
-			<dd th:text="${vehicle.ekoRazred}">ekoRazred</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">kategorija</dt>
-			<dd th:text="${vehicle.kategorija}">kategorija</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">drzavaRegistracije</dt>
-			<dd th:text="${vehicle.drzavaRegistracije}">drzavaRegistracije</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Oznaka pocetne dionice</dt>
-			<dd th:text="${vehicle.pocetnaDionicaOznaka}">pocetnaDionicaOznaka</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Id pocetne dionice</dt>
-			<dd th:text="${vehicle.pocetnaDionicaId}">pocetnaDionicaId</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Oznaka zavrsne dionice</dt>
-			<dd th:text="${vehicle.zavrsnaDionicaOznaka}">zavrsnaDionicaOznaka</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Id zavrsne dionice</dt>
-			<dd th:text="${vehicle.zavrsnaDionicaId}">zavrsnaDionicaId</dd>
-		</dl>
-		<dl class="row">
-			<dt class="col-2">Prosjecna brzina</dt>
-			<dd th:text="${vehicle.prosjecnaBrzina}">prosjecna brzina</dd>
-		</dl>
-	</div>
 
-	<div class="row" style="height: 2cm">&nbsp;</div>
 
-	<div class="row" style="text-align: right">
+<div class="row" style="height: 2cm">&nbsp;</div>
+
+<div class="row" style="text-align: right">
 	    <span class="col-12">
 		Options: &nbsp; <a th:href="@{/}">Home</a>
-<!--			| <a-->
-<!--			th:href="@{/vehicles/search}">Vehicle Search</a>-->
+			<!--			| <a-->
+			<!--			th:href="@{/vehicles/search}">Vehicle Search</a>-->
 		</span>
-	</div>
+</div>
 
-	<div th:replace="footer :: copy"></div>
+<div th:replace="footer :: copy"></div>
 </body>
 </html>
