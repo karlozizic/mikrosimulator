@@ -117,16 +117,19 @@ public class PaymentController {
                             for (Uredaj u : uredajList) {
                                 Long id = paymentRepository.lastId() == null ? Long.valueOf(1) : paymentRepository.lastId() + 1;
                                 Timestamp t = new Timestamp(vrijemeOcitanja.getTime() + 2 * 60 * 60 * 1000); //dodajemo 2 sata zbog vremenske zone
-                                if (u.getUredajType() == 1) { // Kamera - registracija
-                                    paymentRepository.save(new Payment(id, t, "Kamera: " + u.getName(), n.getNaziv(), null, 0, v.getRegistracijskaOznaka()));
-                                } else if (u.getUredajType() == 2) { // Primopredajnik - ID ENC (ako postoji)
-                                    if (v.getIdENC() != 0) {
-                                        paymentRepository.save(new Payment(id, t, "Primopredajnik: " + u.getName(), n.getNaziv(), null, v.getIdENC(), null));
+                                int kvar = u.getKvar();
+                                if (kvar == 0) {
+                                    if (u.getUredajType() == 1) { // Kamera - registracija
+                                        paymentRepository.save(new Payment(id, t, "Kamera: " + u.getName(), n.getNaziv(), null, 0, v.getRegistracijskaOznaka()));
+                                    } else if (u.getUredajType() == 2) { // Primopredajnik - ID ENC (ako postoji)
+                                        if (v.getIdENC() != 0) {
+                                            paymentRepository.save(new Payment(id, t, "Primopredajnik: " + u.getName(), n.getNaziv(), null, v.getIdENC(), null));
+                                        }
+                                    } else { // Klasifikator - kategorija
+                                        paymentRepository.save(new Payment(id, t, "Klasifikator: " + u.getName(), n.getNaziv(), v.getKategorija(), 0, null));
                                     }
-                                } else { // Klasifikator - kategorija
-                                    paymentRepository.save(new Payment(id, t, "Klasifikator: " + u.getName(), n.getNaziv(), v.getKategorija(), 0, null));
+                                    System.out.println("Payment saved");
                                 }
-                                System.out.println("Payment saved");
                             }
                         }
                     }
