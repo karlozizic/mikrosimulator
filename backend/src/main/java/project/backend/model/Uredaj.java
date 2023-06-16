@@ -20,6 +20,10 @@ public class Uredaj {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long id;
 
+	private boolean kvar;
+
+	private float razinaPouzdanosti;
+
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn
@@ -29,14 +33,18 @@ public class Uredaj {
 	@Column(name="uredaj_type", insertable = false, updatable = false)
 	protected int uredajType;
 
-	public Uredaj(Long uredajId, NaplatnaTocka naplatnaTocka) {
+	public Uredaj(Long uredajId, NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
 		super();
 		this.id = uredajId;
 		this.naplatnaTocka = naplatnaTocka;
+		this.kvar = kvar;
+		this.razinaPouzdanosti = razinaPouzdanosti;
 	}
-	public Uredaj(NaplatnaTocka naplatnaTocka) {
+	public Uredaj(NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
 		super();
 		this.naplatnaTocka = naplatnaTocka;
+		this.kvar = kvar;
+		this.razinaPouzdanosti = razinaPouzdanosti;
 	}
 
 	public Uredaj(){}
@@ -67,5 +75,21 @@ public class Uredaj {
 
 	public void setNaplatnaTocka(NaplatnaTocka naplatnaTocka) {
 		this.naplatnaTocka = naplatnaTocka;
+	}
+
+	public boolean isKvar() {
+		return kvar;
+	}
+
+	public void setKvar(boolean kvar) {
+		this.kvar = kvar;
+	}
+
+	public float getRazinaPouzdanosti() {
+		return razinaPouzdanosti;
+	}
+
+	public void setRazinaPouzdanosti(float razinaPouzdanosti) {
+		this.razinaPouzdanosti = razinaPouzdanosti;
 	}
 }

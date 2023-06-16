@@ -8,17 +8,25 @@ public class NoviUredaj {
 
     private Long naplatnaTockaId;
 
-    public NoviUredaj(int uredajtype, String name, Long naplatnaTockaId) {
+    private boolean kvar;
+
+    private float razinaPouzdanosti;
+
+    public NoviUredaj(int uredajtype, String name, Long naplatnaTockaId, boolean kvar, float razinaPouzdanosti) {
         this.uredajtype = uredajtype;
         this.name = name;
         this.naplatnaTockaId = naplatnaTockaId;
+        this.kvar = kvar;
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 
-    public NoviUredaj(int uredajtype, String name, Long id, Long naplatnaTockaId) {
+    public NoviUredaj(int uredajtype, String name, Long id, Long naplatnaTockaId, boolean kvar, float razinaPouzdanosti) {
         this.uredajtype = uredajtype;
         this.name = name;
         this.id = id;
         this.naplatnaTockaId = naplatnaTockaId;
+        this.kvar = kvar;
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 
     public NoviUredaj() {
@@ -55,6 +63,22 @@ public class NoviUredaj {
 
     public void setNaplatnaTockaId(Long naplatnaTockaId) {
         this.naplatnaTockaId = naplatnaTockaId;
+    }
+
+    public boolean isKvar() {
+        return kvar;
+    }
+
+    public void setKvar(boolean kvar) {
+        this.kvar = kvar;
+    }
+
+    public float getRazinaPouzdanosti() {
+        return razinaPouzdanosti;
+    }
+
+    public void setRazinaPouzdanosti(float razinaPouzdanosti) {
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 }
 
