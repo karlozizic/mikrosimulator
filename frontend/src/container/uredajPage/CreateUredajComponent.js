@@ -8,7 +8,7 @@ import Select from "react-select";
 const CreateUredajComponent = () => {
     const [name, setName] = useState('');
     const [kvar, setKvar] = useState(0);
-    const [razinaPouzdanosti, setRazinaPouzdanosti] = useState('');
+    const [razinaPouzdanosti, setRazinaPouzdanosti] = useState('1.0');
     const [uredajtype, setUredajtype] = useState(1);
     const [naplatnaTocka, setNaplatnaTocka] = useState('');
     const [naplatneTocke, setNaplatneTocke] = useState([]);
@@ -83,7 +83,7 @@ const CreateUredajComponent = () => {
                                             <option value={1}>Da</option>
                                         </select>
                                         <label>Razina Pouzdanosti:</label>
-                                        <input name="razinaPouzdanosti" className="form-control" value={razinaPouzdanosti} onChange={changeHandler}/>
+                                        <input name="razinaPouzdanosti" className="form-control" value={razinaPouzdanosti} onChange={changeHandler} />
                                     </FormGroup>
                                     <Button color="success" onClick={saveUredaj}>
                                         Save
