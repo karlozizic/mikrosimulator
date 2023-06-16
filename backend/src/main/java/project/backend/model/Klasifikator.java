@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 public class Klasifikator extends Uredaj{
 
 	private String name;
-	public Klasifikator(String name, NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
+	public Klasifikator(String name, NaplatnaTocka naplatnaTocka, boolean kvar, String razinaPouzdanosti) {
 		super(naplatnaTocka, kvar, razinaPouzdanosti);
 		this.name = name;
 	}

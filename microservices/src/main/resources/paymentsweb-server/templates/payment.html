@@ -17,33 +17,32 @@
 	<div th:if="${payment}" class="container">
 		<dl class="row">
 			<dt class="col-1">Id</dt>
-			<dd th:text="${payment.id}">id</dd>
+			<dd class="col-2" th:text="${payment.id}">id</dd>
 		</dl>
 		<dl class="row">
 			<dt class="col-2">Vrijeme ocitanja</dt>
-			<dd th:text="${payment.vrijemeOcitanja}">Vrijeme ocitanja</dd>
-	    </dl>
+			<dd class="col-2" th:text="${payment.vrijemeOcitanja}">Vrijeme ocitanja</dd>
+		</dl>
 		<dl class="row">
 			<dt class="col-1">Uredaj</dt>
-			<dd th:text="${payment.uredaj}">Uredaj</dd>
+			<dd class="col-2" th:text="${payment.uredaj}">Uredaj</dd>
 		</dl>
 		<dl class="row">
 			<dt class="col-2">Naplatna Tocka</dt>
-			<dd th:text="${payment.naplatnaTocka}">Naplatna Tocka</dd>
+			<dd class="col-2" th:text="${payment.naplatnaTocka}">Naplatna Tocka</dd>
 		</dl>
 		<dl class="row">
 			<dt class="col-2">Kategorija</dt>
-			<dd th:text="${payment.kategorija}">Kategorija</dd>
+			<dd class="col-2" th:text="${payment.kategorija}">Kategorija</dd>
 		</dl>
 		<dl class="row">
-			<dt class="col-1">ID ENC</dt>
-			<dd th:text="${payment.idENC}">ID ENC</dd>
+			<dt class="col-2">ID ENC</dt>
+			<dd class="col-2" th:text="${payment.idENC}">ID ENC</dd>
 		</dl>
 		<dl class="row">
 			<dt class="col-2">Registracijska oznaka</dt>
-			<dd th:text="${payment.registracijskaOznaka}">Registracijska oznaka</dd>
+			<dd class="col-2" th:text="${payment.registracijskaOznaka}">Registracijska oznaka</dd>
 		</dl>
-
 	</div>
 
 	<div class="row" style="height: 2cm">&nbsp;</div>

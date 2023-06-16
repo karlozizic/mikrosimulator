@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 public class Primopredajnik extends Uredaj{
 
 	private String name;
-	public Primopredajnik(String name, NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
+	public Primopredajnik(String name, NaplatnaTocka naplatnaTocka, boolean kvar, String razinaPouzdanosti) {
 		super(naplatnaTocka, kvar, razinaPouzdanosti);
 		this.name = name;
 	}

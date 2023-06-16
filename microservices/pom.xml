@@ -22,7 +22,6 @@
 	<!--	-->
 
 	<dependencies>
-
 		<dependency>
 			<!-- Setup Spring Boot -->
 			<groupId>org.springframework.boot</groupId>

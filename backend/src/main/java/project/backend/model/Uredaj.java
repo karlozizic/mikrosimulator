@@ -22,7 +22,7 @@ public class Uredaj {
 
 	private boolean kvar;
 
-	private float razinaPouzdanosti;
+	private String razinaPouzdanosti;
 
 	@ManyToOne
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -33,14 +33,14 @@ public class Uredaj {
 	@Column(name="uredaj_type", insertable = false, updatable = false)
 	protected int uredajType;
 
-	public Uredaj(Long uredajId, NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
+	public Uredaj(Long uredajId, NaplatnaTocka naplatnaTocka, boolean kvar, String razinaPouzdanosti) {
 		super();
 		this.id = uredajId;
 		this.naplatnaTocka = naplatnaTocka;
 		this.kvar = kvar;
 		this.razinaPouzdanosti = razinaPouzdanosti;
 	}
-	public Uredaj(NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
+	public Uredaj(NaplatnaTocka naplatnaTocka, boolean kvar, String razinaPouzdanosti) {
 		super();
 		this.naplatnaTocka = naplatnaTocka;
 		this.kvar = kvar;
@@ -85,11 +85,11 @@ public class Uredaj {
 		this.kvar = kvar;
 	}
 
-	public float getRazinaPouzdanosti() {
+	public String getRazinaPouzdanosti() {
 		return razinaPouzdanosti;
 	}
 
-	public void setRazinaPouzdanosti(float razinaPouzdanosti) {
+	public void setRazinaPouzdanosti(String razinaPouzdanosti) {
 		this.razinaPouzdanosti = razinaPouzdanosti;
 	}
 }

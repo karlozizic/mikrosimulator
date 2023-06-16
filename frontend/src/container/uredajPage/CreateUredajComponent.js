@@ -7,6 +7,8 @@ import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaE
 import Select from "react-select";
 const CreateUredajComponent = () => {
     const [name, setName] = useState('');
+    const [kvar, setKvar] = useState(0);
+    const [razinaPouzdanosti, setRazinaPouzdanosti] = useState('');
     const [uredajtype, setUredajtype] = useState(1);
     const [naplatnaTocka, setNaplatnaTocka] = useState('');
     const [naplatneTocke, setNaplatneTocke] = useState([]);
@@ -27,9 +29,8 @@ const CreateUredajComponent = () => {
     const saveUredaj = (e) => {
         e.preventDefault();
         const naplatnaTockaId = naplatnaTocka.value != null ? naplatnaTocka.value : null;
-        const uredaj = { name, uredajtype, naplatnaTockaId };
+        const uredaj = { name, uredajtype, naplatnaTockaId, kvar, razinaPouzdanosti};
         console.log('uredaj = ' + JSON.stringify(uredaj));
-
         uredajRegister(uredaj).then(() => {
             navigate('/uredaji');
         });
@@ -41,6 +42,10 @@ const CreateUredajComponent = () => {
             setName(value);
         } else if (name === 'uredajtype') {
             setUredajtype(Number(value));
+        } else if (name === 'kvar') {
+            setKvar(Number(value));
+        } else if(name === 'razinaPouzdanosti') {
+            setRazinaPouzdanosti(value);
         }
     };
 
@@ -61,7 +66,7 @@ const CreateUredajComponent = () => {
                                         <label>Name:</label>
                                         <input name="name" className="form-control" value={name} onChange={changeHandler} />
                                         <label>UredajType:</label>
-                                        <select name="uredajtype" className="form-control" value={uredajtype} onChange={changeHandler}>
+                                        <select name="uredajtype" className="form-control" value={uredajtype}  onChange={changeHandler}>
                                             <option value={1}>Kamera</option>
                                             <option value={2}>Primopredajnik</option>
                                             <option value={3}>Klasifikator</option>
@@ -72,6 +77,13 @@ const CreateUredajComponent = () => {
                                             value={naplatnaTocka}
                                             onChange={handleNaplatnaTockaChange}
                                             options={naplatneTocke && naplatneTocke.length > 0 ? naplatneTocke.map((naplatneTocka) => ({ value: naplatneTocka.naplatnaTockaId, label: naplatneTocka.oznaka })) : []}/>
+                                        <label>Kvar:</label>
+                                        <select name="kvar" className="form-control" value={kvar} onChange={changeHandler}>
+                                            <option value={0}>Ne</option>
+                                            <option value={1}>Da</option>
+                                        </select>
+                                        <label>Razina Pouzdanosti:</label>
+                                        <input name="razinaPouzdanosti" className="form-control" value={razinaPouzdanosti} onChange={changeHandler}/>
                                     </FormGroup>
                                     <Button color="success" onClick={saveUredaj}>
                                         Save

@@ -44,8 +44,8 @@ const NaplatnaTockaComponent = () => {
                         <th>Oznaka</th>
                         <th>Naziv</th>
                         <th>Stacionaza</th>
-                        <th>Geografska Duzina</th>
-                        <th>Geografska Sirina</th>
+                        {/*<th>Geografska Duzina</th>*/}
+                        {/*<th>Geografska Sirina</th>*/}
                         <th>Usmjerenje</th>
                         <th>Oznaka Dionice</th>
                     </tr>
@@ -57,8 +57,8 @@ const NaplatnaTockaComponent = () => {
                             <td>{naplatnaTocka.oznaka}</td>
                             <td>{naplatnaTocka.naziv}</td>
                             <td>{naplatnaTocka.stacionaza}</td>
-                            <td>{naplatnaTocka.geografskaDuzina}</td>
-                            <td>{naplatnaTocka.geografskaSirina}</td>
+                            {/*<td>{naplatnaTocka.geografskaDuzina}</td>*/}
+                            {/*<td>{naplatnaTocka.geografskaSirina}</td>*/}
                             <td>{naplatnaTocka.usmjerenje}</td>
                             <td>{naplatnaTocka.dionica.oznaka}</td>
                             <td>

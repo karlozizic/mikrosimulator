@@ -1,5 +1,16 @@
 import React, {useState} from 'react'
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavItem, NavLink
+} from 'reactstrap';
 
 const AppHeader = () =>  {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +24,6 @@ const AppHeader = () =>  {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
-                        {/*<NavItem>*/}
-                        {/*    <NavLink href="/components/">Components</NavLink>*/}
-                        {/*</NavItem>*/}
                         {/*<NavItem>*/}
                         {/*    <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>*/}
                         {/*</NavItem>*/}
@@ -48,6 +56,9 @@ const AppHeader = () =>  {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
+                        <NavItem>
+                            <NavLink href="/simulator">Mikrosimulator</NavLink>
+                        </NavItem>
                     </Nav>
                 </Collapse>
             </Navbar>

@@ -45,6 +45,8 @@ const UredajComponent = () => {
                         <th>Naziv</th>
                         <th>Type</th>
                         <th>Naplatna Tocka Id</th>
+                        <th>Kvar</th>
+                        <th>Razina pouzdanosti</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,6 +56,8 @@ const UredajComponent = () => {
                             <td>{uredaj.name}</td>
                             <td>{uredaj.uredajtype === 1 ? 'Kamera' : uredaj.uredajtype === 2 ? 'Primopredajnik' : 'Klasifikator'}</td>
                             <td>{uredaj.naplatnaTockaId}</td>
+                            <td>{uredaj.kvar === 1 ? 'Da' : 'Ne'}</td>
+                            <td>{uredaj.razinaPouzdanosti}</td>
                             <td>
                                 <Button onClick={() => editUredaj(uredaj.id)} color="primary">
                                     Update

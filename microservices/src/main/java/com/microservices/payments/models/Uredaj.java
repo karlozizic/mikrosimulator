@@ -13,7 +13,6 @@ public class Uredaj {
 
     protected Long naplatnaTockaId;
 
-
     public Uredaj(Long id, int uredajType, String name, Long naplatnaTockaId) {
         this.id = id;
         this.uredajType = uredajType;

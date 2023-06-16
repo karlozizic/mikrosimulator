@@ -83,10 +83,10 @@ const CreateNaplatnaTockaComponent = () => {
                                         <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
                                         <label>Stacionaza:</label>
                                         <input name="stacionaza" className="form-control" value={stacionaza} onChange={changeHandler}></input>
-                                        <label>Geografska duzina:</label>
-                                        <input name="geografskaDuzina" className="form-control" value={geografskaDuzina} onChange={changeHandler}></input>
-                                        <label>Geografska sirina:</label>
-                                        <input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>
+                                        {/*<label>Geografska duzina:</label>*/}
+                                        {/*<input name="geografskaDuzina" className="form-control" value={geografskaDuzina} onChange={changeHandler}></input>*/}
+                                        {/*<label>Geografska sirina:</label>*/}
+                                        {/*<input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>*/}
                                         <label>Usmjerenje:</label>
                                         <input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler}></input>
                                         Dionica:

@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 public class Kamera extends Uredaj{
 
 	private String name;
-	public Kamera(String name, NaplatnaTocka naplatnaTocka, boolean kvar, float razinaPouzdanosti) {
+	public Kamera(String name, NaplatnaTocka naplatnaTocka, boolean kvar, String razinaPouzdanosti) {
 		super(naplatnaTocka, kvar, razinaPouzdanosti);
 		this.name = name;
 	}
