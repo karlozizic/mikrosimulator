@@ -2,19 +2,18 @@ import React from 'react'
 import {useEffect, useState} from 'react';
 import {Button, Card, CardBody, Col, Container, Form, FormGroup, Row, Table, Input, Label} from 'reactstrap';
 import Select from "react-select";
-import axios from "axios";
+import axios from "../../utils/axios/apiClient";
 //import css file
 
 const Mikrosimulator = () => {
     const [brojVozila, setBrojVozila] = useState('');
 
-    const generateOcitanje = () => {
-        //samo GET request
-        axios.get('http://localhost:4444/generate')
+    const generateVozila = async () => {
+        const response = await axios.get('/vehicles/generate/' + brojVozila)
     };
 
-    const generateVozila = () => {
-        axios.get('http://localhost:2222/vehicles/generate/' + brojVozila)
+    const generateOcitanje = async () => {
+        const response = await axios.get('/generate')
     };
 
     const changeHandler = (event) => {
@@ -44,7 +43,9 @@ const Mikrosimulator = () => {
                                 <Label>Do</Label>
                                 <Input></Input>
                                 <Button onClick={generateVozila}>Generiraj Vozila</Button>
-                                <Button>Pregled Vozila</Button>
+                                <a href="http://localhost:3333/vehicles/all">
+                                    <Button>Pregled Vozila</Button>
+                                </a>
                                 <div>
                                     <Button onClick={generateOcitanje}>Generiraj Očitanja</Button>
                                 </div>
