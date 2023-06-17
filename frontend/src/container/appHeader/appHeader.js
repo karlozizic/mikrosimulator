@@ -50,10 +50,10 @@ const AppHeader = () =>  {
                                 <DropdownItem href="/uredaji">
                                     Uredaj
                                 </DropdownItem>
-                                <DropdownItem divider/>
-                                <DropdownItem href="/vozila">
-                                    Vozilo
-                                </DropdownItem>
+                                {/*<DropdownItem divider/>*/}
+                                {/*<DropdownItem href="/vozila">*/}
+                                {/*    Vozilo*/}
+                                {/*</DropdownItem>*/}
                             </DropdownMenu>
                         </UncontrolledDropdown>
                         <NavItem>

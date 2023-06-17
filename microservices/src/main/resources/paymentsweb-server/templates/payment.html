@@ -6,7 +6,7 @@
 
 <body>
 	<h1>Payment Details</h1>
-
+	<hr/>
 	<div th:if="not ${payment}">
 		<div class="m-3 alert alert-warning">
 			Unable to find payment '<span th:text="${id}">id</span>'
@@ -16,7 +16,7 @@
 
 	<div th:if="${payment}" class="container">
 		<dl class="row">
-			<dt class="col-1">Id</dt>
+			<dt class="col-1">ID</dt>
 			<dd class="col-2" th:text="${payment.id}">id</dd>
 		</dl>
 		<dl class="row">

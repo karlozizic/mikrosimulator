@@ -33,6 +33,8 @@ import NaplatnaTockaComponent from "./container/naplatnaTockaPage/NaplatnaTockaC
 import CreateNaplatnaTockaComponent from "./container/naplatnaTockaPage/CreateNaplatnaTockaComponent";
 import UpdateNaplatnaTockaComponent from "./container/naplatnaTockaPage/UpdateNaplatnaTockaComponent";
 
+import Mikrosimulator from "./container/mikrosimulatorPage/Mikrosimulator";
+
 function App() {
     return(
         <div className="App">
@@ -67,6 +69,8 @@ function App() {
                 <Route path={"/dionice"} element={<DionicaComponent/>}/>
                 <Route path={"/add-dionica"} element={<CreateDionicaComponent/>}/>
                 <Route path={"/update-dionica/:id"} element={<UpdateDionicaComponent/>}/>
+
+                <Route path={"/simulator"} element={<Mikrosimulator/>}/>
 
             </Routes>
         </div>
