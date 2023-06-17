@@ -34,26 +34,49 @@ const Mikrosimulator = () => {
                     <Card>
                         <Col>
                             <h3>Mikrosimulator</h3>
-                            <CardBody>
-                                <Label>Broj vozila</Label>
-                                <Input name={"brojVozila"} onChange={changeHandler}></Input>
-                                <Label>Vremenski interval</Label>
-                                <Label>Od</Label>
-                                <Input></Input>
-                                <Label>Do</Label>
-                                <Input></Input>
-                                <Button onClick={generateVozila}>Generiraj Vozila</Button>
-                                <a href="http://localhost:3333/vehicles/all">
-                                    <Button>Pregled Vozila</Button>
-                                </a>
-                                <div>
-                                    <Button onClick={generateOcitanje}>Generiraj Očitanja</Button>
-                                </div>
-                                <a href="http://localhost:5555/payments/all">
-                                    <Button>Pregled Očitanja</Button>
-                                </a>
-                            </CardBody>
                         </Col>
+                            <CardBody>
+                                <Row>
+                                    <Col>
+                                        <Label>Broj vozila</Label>
+                                        <Input name={"brojVozila"} onChange={changeHandler}>
+                                        </Input>
+                                    </Col>
+                                    <Col>
+                                        <Label>Intenzitet</Label>
+                                        <Input name={"intenzitet"} onChange={changeHandler}>
+                                        </Input>
+                                    </Col>
+                                </Row>
+                                {/*<Label>Vremenski interval</Label>*/}
+                                <Row>
+                                    <Col>
+                                        <Label>Vrijeme pocetka simulacije</Label>
+                                        <Input></Input>
+                                    </Col>
+                                    <Col>
+                                        <Label>Vrijeme kraja simulacije</Label>
+                                        <Input></Input>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                    <Button onClick={generateVozila}>Generiraj Vozila</Button>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        <a href="http://localhost:3333/vehicles/all">
+                                            <Button>Pregled Vozila</Button>
+                                        </a>
+                                        <Button onClick={generateOcitanje}>Generiraj Očitanja</Button>
+                                        <a href="http://localhost:5555/payments/all">
+                                            <Button>Pregled Očitanja</Button>
+                                        </a>
+                                    </Col>
+                                </Row>
+                            </CardBody>
+
                     </Card>
                 </Row>
             </Container>
