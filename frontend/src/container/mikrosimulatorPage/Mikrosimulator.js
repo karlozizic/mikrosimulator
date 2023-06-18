@@ -1,6 +1,19 @@
 import React from 'react'
 import {useEffect, useState} from 'react';
-import {Button, Card, CardBody, Col, Container, Form, FormGroup, Row, Table, Input, Label} from 'reactstrap';
+import {
+    Button,
+    Card,
+    CardBody,
+    Col,
+    Container,
+    Form,
+    FormGroup,
+    Row,
+    Table,
+    Input,
+    Label,
+    ButtonGroup, ButtonToolbar
+} from 'reactstrap';
 import Select from "react-select";
 import axios from "../../utils/axios/apiClient";
 //import css file
@@ -47,59 +60,52 @@ const Mikrosimulator = () => {
     }
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Card>
-                        <Col>
-                            <h3>Mikrosimulator</h3>
-                        </Col>
-                            <CardBody>
-                                <Row>
-                                    <Col>
-                                        <Label>Broj vozila</Label>
-                                        <Input name={"brojVozila"} onChange={changeHandler}>
-                                        </Input>
-                                    </Col>
-                                    <Col>
-                                        <Label>Intenzitet</Label>
-                                        <Input name={"intenzitet"} onChange={changeHandler}>
-                                        </Input>
-                                    </Col>
-                                </Row>
-                                {/*<Label>Vremenski interval</Label>*/}
-                                <Row>
-                                    <Col>
-                                        <Label>Vrijeme pocetka simulacije</Label>
-                                        <Input type={"datetime-local"} name={"pocetnoVrijeme"} onChange={changeHandler}></Input>
-                                    </Col>
-                                    <Col>
-                                        <Label>Vrijeme kraja simulacije</Label>
-                                        <Input type={"datetime-local"} name={"zavrsnoVrijeme"} onChange={changeHandler}></Input>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                    <Button onClick={generateVozila}>Generiraj Vozila</Button>
-                                    </Col>
-                                </Row>
-                                <Row>
-                                    <Col>
-                                        <a href="http://localhost:3333/vehicles/all">
-                                            <Button>Pregled Vozila</Button>
-                                        </a>
-                                        <Button onClick={generateOcitanje}>Generiraj Očitanja</Button>
-                                        <a href="http://localhost:5555/payments/all">
-                                            <Button>Pregled Očitanja</Button>
-                                        </a>
-                                    </Col>
-                                </Row>
-                            </CardBody>
-
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+        <Container className="d-flex justify-content-center align-items-center">
+            <Row>
+                <Card>
+                    <Col>
+                        <h3>Mikrosimulator</h3>
+                    </Col>
+                        <CardBody>
+                            <Row sm={10} className="d-flex justify-content-center align-items-center">
+                                <Col>
+                                    <Label>Broj vozila</Label>
+                                    <Input name={"brojVozila"} onChange={changeHandler}>
+                                    </Input>
+                                </Col>
+                                <Col>
+                                    <Label>Intenzitet</Label>
+                                    <Input name={"intenzitet"} onChange={changeHandler}>
+                                    </Input>
+                                </Col>
+                            </Row>
+                            {/*<Label>Vremenski interval</Label>*/}
+                            <Row sm={10} className="d-flex justify-content-center align-items-center">
+                                <Col>
+                                    <Label>Vrijeme pocetka simulacije</Label>
+                                    <Input type={"datetime-local"} name={"pocetnoVrijeme"} onChange={changeHandler}></Input>
+                                </Col>
+                                <Col>
+                                    <Label>Vrijeme kraja simulacije</Label>
+                                    <Input type={"datetime-local"} name={"zavrsnoVrijeme"} onChange={changeHandler}></Input>
+                                </Col>
+                            </Row>
+                            <Row className={"m-4"}>
+                                <Col>
+                                    <Button  color={"primary"} onClick={generateVozila}>Generiraj Vozila</Button>
+                                    <a href="http://localhost:3333/vehicles/all">
+                                        <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled Vozila</Button>
+                                    </a>
+                                    <Button style={{marginLeft: "1.25em"}} color={"primary"} onClick={generateOcitanje}>Generiraj Očitanja</Button>
+                                    <a href="http://localhost:5555/payments/all">
+                                        <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled Očitanja</Button>
+                                    </a>
+                                </Col>
+                            </Row>
+                        </CardBody>
+                </Card>
+            </Row>
+        </Container>
     );
 };
 export default Mikrosimulator;
