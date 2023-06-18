@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
 import { uredajRegister } from '../../utils/axios/backendCalls/uredajEndpoints';
-import "../allCss/create-update.css"
 import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import Select from "react-select";
 const CreateUredajComponent = () => {

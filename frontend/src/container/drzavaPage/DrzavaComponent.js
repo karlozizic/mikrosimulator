@@ -1,10 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Button, Row, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import {getAllDrzave} from "../../utils/axios/backendCalls/drzavaEndpoints";
 import {deleteDrzava} from "../../utils/axios/backendCalls/drzavaEndpoints";
 import { useNavigate } from "react-router-dom";
-import "../allCss/create-update.css"
 
 const DrzavaComponent = () => {
 
@@ -32,25 +31,27 @@ const DrzavaComponent = () => {
     };
 
     return (
-        <div style={{ margin: '0 4em' }}>
-            <h2 className="text-center" style={{padding:"1em"}}>Drzava List</h2>
+        <Container style={{ display: 'flex', flexDirection: 'column', maxWidth: '1000px', alignItems: 'left'}}>
+            <Row style={{ fontSize: '24px', textAlign: 'left'}}>
+                <p style={{fontWeight: 'bold'}}>Drzava List</p>
+            </Row>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addDrzava}>Add Drzava</Button>
             </div>
-            <Row className="my-4">
-                <Table striped bordered responsive hover>
+            <div>
+                <Table striped bordered responsive hover className="my-4" size={"sm"}>
                     <thead>
                     <tr>
-                        <th>Drzava ID</th>
-                        <th>Drzava Naziv</th>
+                        <th className="col-4">Drzava ID</th>
+                        <th className="col-4">Drzava Naziv</th>
                     </tr>
                     </thead>
                     <tbody>
                     {drzave.map((drzava) => (
                         <tr key={drzava.id}>
-                            <td>{drzava.id}</td>
-                            <td>{drzava.naziv}</td>
-                            <td>
+                            <td className="col-4">{drzava.id}</td>
+                            <td className="col-4">{drzava.naziv}</td>
+                            <td className="col-4">
                                 <Button onClick={() => editDrzava(drzava.id)} color="primary">
                                     Update
                                 </Button>
@@ -62,8 +63,8 @@ const DrzavaComponent = () => {
                     ))}
                     </tbody>
                 </Table>
-            </Row>
-        </div>
+            </div>
+        </Container>
     );
 };
 

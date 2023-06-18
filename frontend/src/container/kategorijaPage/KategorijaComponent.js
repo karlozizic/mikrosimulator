@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Button, Row, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import {getAllKategorije} from "../../utils/axios/backendCalls/kategorijaEndpoints";
 import {deleteKategorija} from "../../utils/axios/backendCalls/kategorijaEndpoints";
 import { useNavigate } from "react-router-dom";
@@ -31,25 +31,27 @@ const KategorijaComponent = () => {
     };
 
     return (
-        <div style={{ margin: '0 4em' }}>
-            <h2 className="text-center" style={{padding:"1em"}}>Kategorija List</h2>
+        <Container style={{ display: 'flex', flexDirection: 'column', maxWidth: '1000px', alignItems: 'left'}}>
+            <Row style={{ fontSize: '24px', textAlign: 'left'}}>
+                <p style={{fontWeight: 'bold'}}>Kategorija List</p>
+            </Row>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addKategorija}>Add Kategorija</Button>
             </div>
-            <Row className="my-4">
-                <Table striped bordered responsive hover>
+            <div>
+                <Table striped bordered responsive hover className="my-4" size={"sm"}>
                     <thead>
                     <tr>
-                        <th>Kategorija ID</th>
-                        <th>Kategorija Naziv</th>
+                        <th className="col-4">Kategorija ID</th>
+                        <th className="col-4">Kategorija Naziv</th>
                     </tr>
                     </thead>
                     <tbody>
                     {kategorije.map((kategorija) => (
                         <tr key={kategorija.id}>
-                            <td>{kategorija.id}</td>
-                            <td>{kategorija.naziv}</td>
-                            <td>
+                            <td className="col-4">{kategorija.id}</td>
+                            <td className="col-4">{kategorija.naziv}</td>
+                            <td className="col-4">
                                 <Button onClick={() => editKategorija(kategorija.id)} color="primary">
                                     Update
                                 </Button>
@@ -61,8 +63,8 @@ const KategorijaComponent = () => {
                     ))}
                     </tbody>
                 </Table>
-            </Row>
-        </div>
+            </div>
+        </Container>
     );
 };
 

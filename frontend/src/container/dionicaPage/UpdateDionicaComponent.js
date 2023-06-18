@@ -3,7 +3,6 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import {dionicaEdit} from "../../utils/axios/backendCalls/dionicaEndpoints";
-import "../allCss/create-update.css"
 import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
 const UpdateDionicaComponent = () => {
 

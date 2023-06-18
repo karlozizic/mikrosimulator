@@ -3,7 +3,6 @@ import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 're
 import { useNavigate, useParams } from 'react-router-dom';
 import {getNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import {naplatnaTockaEdit} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
-import "../allCss/create-update.css"
 import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
 const UpdateNaplatnaTocka = () => {
     const [oznaka, setOznaka] = useState('');
