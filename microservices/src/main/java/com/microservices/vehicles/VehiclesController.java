@@ -58,7 +58,7 @@ public class VehiclesController {
     }
 
     @PostMapping(path = "/vehicles/generate/{number}")//, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void generateVehicles(@PathVariable("number") String number, @RequestBody Vrijeme vrijeme) {
+    public void generateVehicles(@PathVariable("number") String number, @RequestBody Vrijeme vrijeme) {// @RequestParam(name="intenzitet") String intenzitet) {
 
         int num = Integer.parseInt(number);
 
@@ -85,8 +85,15 @@ public class VehiclesController {
             JSONArray oznake = (JSONArray) oznakeAutocestaJSON.get("oznake"); //JSONArray
             ArrayList<String> oznakeAutocesta = Parser.parseOznake(oznake);
 
-            Timestamp pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
-            Timestamp zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+            Timestamp pocetnoVrijeme;
+            Timestamp zavrsnoVrijeme;
+            if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
+                pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
+                zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+            } else {
+                pocetnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000);
+                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1);
+            }
 
             for (int i = 0; i < num; i++) {
                 String nacinNaplate = naciniNaplate.get(new Random().nextInt(naciniNaplate.size()));
