@@ -58,7 +58,7 @@ public class VehiclesController {
     }
 
     @PostMapping(path = "/vehicles/generate/{number}")//, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void generateVehicles(@PathVariable("number") String number, @RequestBody Vrijeme vrijeme) {// @RequestParam(name="intenzitet") String intenzitet) {
+    public void generateVehicles(@PathVariable("number") String number, @RequestBody Vrijeme vrijeme, @RequestParam(name="intenzitet") String intenzitetParam) {
 
         int num = Integer.parseInt(number);
 
@@ -87,12 +87,21 @@ public class VehiclesController {
 
             Timestamp pocetnoVrijeme;
             Timestamp zavrsnoVrijeme;
+            int intenzitet;
+            Map kategorijeMap = new HashMap<Kategorija, Integer>();
             if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
                 pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
                 zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+                int brojSati = (int) ((zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime()) / (1000 * 60 * 60));
+                intenzitet = Integer.parseInt(intenzitetParam);
+                for(Kategorija k : kategorijeArray) {
+                    kategorijeMap.put(k, intenzitet * brojSati);
+                }
+
             } else {
                 pocetnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000);
-                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1);
+                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1); // + 1 da ne bi bilo isto vrijeme
+                intenzitet = -1;
             }
 
             for (int i = 0; i < num; i++) {
@@ -111,7 +120,19 @@ public class VehiclesController {
                     idENC = 0;
                 }
                 Ekorazred randomEkoRazred =  ekorazrediArray.get(new Random().nextInt(ekorazrediArray.size()));
-                Kategorija randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                Kategorija randomKategorija = null;
+                if (intenzitet == -1) {
+                    randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                } else {
+                    boolean finished = false;
+                    while (!finished) {
+                        randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                        if ((Integer) kategorijeMap.get(randomKategorija) > 0) {
+                            kategorijeMap.put(randomKategorija, (Integer) kategorijeMap.get(randomKategorija) - 1);
+                            finished = true;
+                        } 
+                    }
+                }
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));
 
                 String oznaka = oznakeAutocesta.get(new Random().nextInt(oznakeAutocesta.size()));
