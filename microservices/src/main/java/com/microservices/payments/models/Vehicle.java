@@ -3,6 +3,8 @@ package com.microservices.payments.models;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+import java.sql.Timestamp;
+
 @JsonRootName("Vehicle")
 public class Vehicle {
 
@@ -28,13 +30,15 @@ public class Vehicle {
 
     protected float prosjecnaBrzina;
 
+    private Timestamp vrijeme;
+
     protected Vehicle() {
     }
 
     protected Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC, String registracijskaOznaka,
                       String ekoRazred, String kategorija, String drzavaRegistracije, String oznakaAutoceste,
                       String pocetnaDionicaOznaka, Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId,
-                      float prosjecnaBrzina) {
+                      float prosjecnaBrzina, Timestamp vrijeme) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -52,6 +56,7 @@ public class Vehicle {
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
         this.prosjecnaBrzina = prosjecnaBrzina;
+        this.vrijeme = vrijeme;
     }
 
     public Long getId() {
@@ -180,6 +185,14 @@ public class Vehicle {
 
     public void setProsjecnaBrzina(float prosjecnaBrzina) {
         this.prosjecnaBrzina = prosjecnaBrzina;
+    }
+
+    public Timestamp getVrijeme() {
+        return vrijeme;
+    }
+
+    public void setVrijeme(Timestamp vrijeme) {
+        this.vrijeme = vrijeme;
     }
 
     @Override

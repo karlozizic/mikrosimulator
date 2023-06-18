@@ -103,7 +103,7 @@ public class PaymentController {
 
             for (Vehicle v: vehicles) {
                 List<Dionica> dionicaList = DionicaUtils.getDionice(dioniceMap.get(v.getOznakaAutoceste()), v);
-                Date pocetnoVrijeme = new Date();
+                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime() - (long) (2 * 60 * 60 * 1000)); //zbog vremenske zone
                 for (Dionica d: dionicaList) {
                     List<NaplatnaTocka> naplatnaTockaList = naplatneTockeMap.get(d);
                     for (NaplatnaTocka n: naplatnaTockaList) {
@@ -113,12 +113,10 @@ public class PaymentController {
                             //izracunaj vrijeme ocitanja prema stacionazama i prosjecnoj brzini vozila
                             Double put = d.getZavrsnaStacionaza() - d.getPocetnaStacionaza();
                             Double vrijeme = put / v.getProsjecnaBrzina();
-                            pocetnoVrijeme = new java.sql.Date(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
-                            java.sql.Date vrijemeOcitanja = (java.sql.Date) pocetnoVrijeme;
+                            Timestamp vrijemeOcitanja = new Timestamp(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
 
                             for (Uredaj u : uredajList) {
                                 Long id = paymentRepository.lastId() == null ? Long.valueOf(1) : paymentRepository.lastId() + 1;
-                                Timestamp t = new Timestamp(vrijemeOcitanja.getTime() + 2 * 60 * 60 * 1000); //dodajemo 2 sata zbog vremenske zone
                                 int kvar = u.getKvar();
                                 double razinaPouzdanosti;
                                 if (u.getRazinaPouzdanosti() != "") {
@@ -135,7 +133,7 @@ public class PaymentController {
                                         } else {
                                             registracija = v.getRegistracijskaOznaka();
                                         }
-                                        paymentRepository.save(new Payment(id, t, "Kamera: " + u.getName(), n.getNaziv(), null, 0, registracija));
+                                        paymentRepository.save(new Payment(id, vrijemeOcitanja, "Kamera: " + u.getName(), n.getNaziv(), null, 0, registracija));
 
                                     } else if (u.getUredajType() == 2) { // Primopredajnik - ID ENC (ako postoji)
                                         if (v.getIdENC() != 0) {
@@ -145,7 +143,7 @@ public class PaymentController {
                                             } else {
                                                 idENC = v.getIdENC();
                                             }
-                                            paymentRepository.save(new Payment(id, t, "Primopredajnik: " + u.getName(), n.getNaziv(), null, idENC, null));
+                                            paymentRepository.save(new Payment(id, vrijemeOcitanja, "Primopredajnik: " + u.getName(), n.getNaziv(), null, idENC, null));
                                         }
 
                                     } else { // Klasifikator - kategorija
@@ -155,7 +153,7 @@ public class PaymentController {
                                         } else {
                                             kategorija = v.getKategorija();
                                         }
-                                        paymentRepository.save(new Payment(id, t, "Klasifikator: " + u.getName(), n.getNaziv(), kategorija, 0, null));
+                                        paymentRepository.save(new Payment(id, vrijemeOcitanja, "Klasifikator: " + u.getName(), n.getNaziv(), kategorija, 0, null));
                                     }
                                     System.out.println("Payment saved");
                                 }

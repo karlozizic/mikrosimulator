@@ -5,4 +5,4 @@ CREATE TABLE VEHICLE (ID bigint identity primary key, VIN varchar(255), BOJA var
                       EKO_RAZRED VARCHAR(255), KATEGORIJA VARCHAR(255), OZNAKA_AUTOCESTE VARCHAR(10),
                       POCETNA_DIONICA_OZNAKA VARCHAR(255), POCETNA_DIONICA_ID integer,
                       ZAVRSNA_DIONICA_OZNAKA VARCHAR(255), ZAVRSNA_DIONICA_ID integer,
-                      PROSJECNA_BRZINA float);
+                      PROSJECNA_BRZINA float, VRIJEME timestamp with time zone,);
