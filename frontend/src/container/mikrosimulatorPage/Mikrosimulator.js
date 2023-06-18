@@ -7,9 +7,19 @@ import axios from "../../utils/axios/apiClient";
 
 const Mikrosimulator = () => {
     const [brojVozila, setBrojVozila] = useState('');
+    const [intenzitet, setIntenzitet] = useState('');
+    const [pocetnoVrijeme, setPocetnoVrijeme] = useState('');
+    const [zavrsnoVrijeme, setZavrsnoVrijeme] = useState('');
 
     const generateVozila = async () => {
-        const response = await axios.get('/vehicles/generate/' + brojVozila)
+        let request = '/vehicles/generate/' + brojVozila + '?intenzitet='
+        request+= intenzitet !== '' ? intenzitet : '-1';
+        console.log(pocetnoVrijeme);
+        console.log(zavrsnoVrijeme);
+        const response = await axios.post(request, {
+            pocetnoVrijeme: pocetnoVrijeme,
+            zavrsnoVrijeme: zavrsnoVrijeme
+            });
     };
 
     const generateOcitanje = async () => {
@@ -21,6 +31,15 @@ const Mikrosimulator = () => {
         switch (name) {
             case 'brojVozila':
                 setBrojVozila(value);
+                break;
+            case 'intenzitet':
+                setIntenzitet(value);
+                break;
+            case 'pocetnoVrijeme':
+                setPocetnoVrijeme(value);
+                break;
+            case 'zavrsnoVrijeme':
+                setZavrsnoVrijeme(value);
                 break;
             default:
                 break;
@@ -52,11 +71,11 @@ const Mikrosimulator = () => {
                                 <Row>
                                     <Col>
                                         <Label>Vrijeme pocetka simulacije</Label>
-                                        <Input></Input>
+                                        <Input type={"datetime-local"} name={"pocetnoVrijeme"} onChange={changeHandler}></Input>
                                     </Col>
                                     <Col>
                                         <Label>Vrijeme kraja simulacije</Label>
-                                        <Input></Input>
+                                        <Input type={"datetime-local"} name={"zavrsnoVrijeme"} onChange={changeHandler}></Input>
                                     </Col>
                                 </Row>
                                 <Row>
