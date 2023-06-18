@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
+import {Button, Container, Row, Card, Col, CardBody, Form, FormGroup, CardTitle, Label, Input} from 'reactstrap';
 import { uredajRegister } from '../../utils/axios/backendCalls/uredajEndpoints';
 import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import Select from "react-select";
@@ -53,50 +53,46 @@ const CreateUredajComponent = () => {
     };
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Card>
-                        <Col>
-                            <h3>Add Uredaj</h3>
-                            <CardBody>
-                                <Form>
-                                    <FormGroup style={{ padding: '1em' }}>
-                                        <label>Name:</label>
-                                        <input name="name" className="form-control" value={name} onChange={changeHandler} />
-                                        <label>UredajType:</label>
-                                        <select name="uredajtype" className="form-control" value={uredajtype}  onChange={changeHandler}>
-                                            <option value={1}>Kamera</option>
-                                            <option value={2}>Primopredajnik</option>
-                                            <option value={3}>Klasifikator</option>
-                                        </select>
-                                        Naplatna tocka:
-                                        <Select
-                                            name="naplatnaTocka"
-                                            value={naplatnaTocka}
-                                            onChange={handleNaplatnaTockaChange}
-                                            options={naplatneTocke && naplatneTocke.length > 0 ? naplatneTocke.map((naplatneTocka) => ({ value: naplatneTocka.naplatnaTockaId, label: naplatneTocka.oznaka })) : []}/>
-                                        <label>Kvar:</label>
-                                        <select name="kvar" className="form-control" value={kvar} onChange={changeHandler}>
-                                            <option value={0}>Ne</option>
-                                            <option value={1}>Da</option>
-                                        </select>
-                                        <label>Razina Pouzdanosti:</label>
-                                        <input name="razinaPouzdanosti" className="form-control" value={razinaPouzdanosti} onChange={changeHandler} />
-                                    </FormGroup>
-                                    <Button color="success" onClick={saveUredaj}>
-                                        Save
-                                    </Button>
-                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
-                                        Cancel
-                                    </Button>
-                                </Form>
-                            </CardBody>
-                        </Col>
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+        <Container className="d-flex justify-content-center align-items-center">
+            <Card style={{width: '500px'}}>
+                <CardBody>
+                    <CardTitle>
+                        <h3 className="text-center">Dodaj uredaj</h3>
+                    </CardTitle>
+                    <Form>
+                        <FormGroup style={{ padding: '1em' }}>
+                            <Label>Name:</Label>
+                            <Input name="name" className="form-control" value={name} onChange={changeHandler} />
+                            <Label>UredajType:</Label>
+                            <select name="uredajtype" className="form-control" value={uredajtype}  onChange={changeHandler}>
+                                <option value={1}>Kamera</option>
+                                <option value={2}>Primopredajnik</option>
+                                <option value={3}>Klasifikator</option>
+                            </select>
+                            Naplatna tocka:
+                            <Select
+                                name="naplatnaTocka"
+                                value={naplatnaTocka}
+                                onChange={handleNaplatnaTockaChange}
+                                options={naplatneTocke && naplatneTocke.length > 0 ? naplatneTocke.map((naplatneTocka) => ({ value: naplatneTocka.naplatnaTockaId, label: naplatneTocka.oznaka })) : []}/>
+                            <Label>Kvar:</Label>
+                            <select name="kvar" className="form-control" value={kvar} onChange={changeHandler}>
+                                <option value={0}>Ne</option>
+                                <option value={1}>Da</option>
+                            </select>
+                            <Label>Razina Pouzdanosti:</Label>
+                            <Input name="razinaPouzdanosti" className="form-control" value={razinaPouzdanosti} onChange={changeHandler} />
+                        </FormGroup>
+                        <Button color="success" onClick={saveUredaj}>
+                            Save
+                        </Button>
+                        <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
+                            Cancel
+                        </Button>
+                    </Form>
+                </CardBody>
+            </Card>
+        </Container>
     );
 };
 

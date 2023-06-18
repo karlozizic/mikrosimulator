@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
+import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import {getDionica} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import {dionicaEdit} from "../../utils/axios/backendCalls/dionicaEndpoints";
@@ -118,43 +118,37 @@ const UpdateDionicaComponent = () => {
 
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Card>
-                        <Col>
-                            <h3>Update Dionica</h3>
-                            <CardBody>
-                                <Form>
-                                    <FormGroup style={{ padding: '1em' }}>
-                                        <label>Smjer:</label>
-                                        <input name="smjer" className="form-control" value={smjer} onChange={changeHandler}></input>
-                                        <label>Najveca brzina:</label>
-                                        <input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler}></input>
-                                        <label>Broj traka:</label>
-                                        <input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler}></input>
-                                        <label>Oznaka:</label>
-                                        <input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler}></input>
-                                        <label>Pocetna stacionaza:</label>
-                                        <input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler}></input>
-                                        <label>Zavrsna stacionaza:</label>
-                                        <input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler}></input>
-                                        <label>Oznaka autoceste:</label>
-                                        <input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste} onChange={changeHandler}></input>
-                                        </FormGroup>
-                                    <Button color="success" onClick={updateFunction}>
-                                        Save
-                                    </Button>
-                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
-                                        Cancel
-                                    </Button>
-                                </Form>
-                            </CardBody>
-                        </Col>
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+        <Container className="d-flex justify-content-center align-items-center">
+            <Card style={{width: '500px'}}>
+                <CardBody>
+                    <CardTitle className="text-center"><h3>Add Dionica</h3></CardTitle>
+                    <Form>
+                        <FormGroup style={{ padding: '1em' }}>
+                            <Label>Smjer:</Label>
+                            <Input name="smjer" className="form-control" value={smjer} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Najveca brzina:</Label>
+                            <Input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Broj traka:</Label>
+                            <Input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Oznaka:</Label>
+                            <Input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Pocetna stacionaza:</Label>
+                            <Input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Zavrsna stacionaza:</Label>
+                            <Input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            <Label>Oznaka autoceste:</Label>
+                            <Input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            </FormGroup>
+                        <Button color="success" onClick={updateFunction}>
+                            Save
+                        </Button>
+                        <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
+                            Cancel
+                        </Button>
+                    </Form>
+                </CardBody>
+            </Card>
+        </Container>
     );
 };
 

@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Container, Row, Card, Col, CardBody, Form, FormGroup } from 'reactstrap';
+import {Button, Container, Row, Card, Col, CardBody, Form, FormGroup, CardTitle, Label, Input} from 'reactstrap';
 import {naplatnaTockaRegister} from '../../utils/axios/backendCalls/naplatnaTockaEndpoints';
 import {getAllDionice} from "../../utils/axios/backendCalls/dionicaEndpoints";
 import Select from "react-select";
@@ -68,47 +68,40 @@ const CreateNaplatnaTockaComponent = () => {
     };
 
     return (
-        <div>
-            <Container>
-                <Row>
-                    <Card>
-                        <Col>
-                            <h3>Add Naplatna Tocka</h3>
-                            <CardBody>
-                                <Form>
-                                    <FormGroup style={{ padding: '1em' }}>
-                                        <label>Oznaka:</label>
-                                        <input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler}></input>
-                                        <label>Naziv:</label>
-                                        <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
-                                        <label>Stacionaza:</label>
-                                        <input name="stacionaza" className="form-control" value={stacionaza} onChange={changeHandler}></input>
-                                        {/*<label>Geografska duzina:</label>*/}
-                                        {/*<input name="geografskaDuzina" className="form-control" value={geografskaDuzina} onChange={changeHandler}></input>*/}
-                                        {/*<label>Geografska sirina:</label>*/}
-                                        {/*<input name="geografskaSirina" className="form-control" value={geografskaSirina} onChange={changeHandler}></input>*/}
-                                        <label>Usmjerenje:</label>
-                                        <input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler}></input>
-                                        Dionica:
-                                        <Select
-                                            name="dionica"
-                                            value={dionica}
-                                            onChange={handleDionicaChange}
-                                            options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}/>
-                                    </FormGroup>
-                                    <Button color="success" onClick={saveNaplatnaTocka}>
-                                        Save
-                                    </Button>
-                                    <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
-                                        Cancel
-                                    </Button>
-                                </Form>
-                            </CardBody>
-                        </Col>
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+        <Container className="d-flex justify-content-center align-items-center">
+            <Card style={{width: '500px'}}>
+                        <CardBody>
+                            <CardTitle>
+                                <h3>Add Naplatna tocka</h3>
+                            </CardTitle>
+                            <Form>
+                                <FormGroup style={{ padding: '1em' }}>
+                                    <Label>Oznaka:</Label>
+                                    <Input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                    <Label>Naziv:</Label>
+                                    <Input name="naziv" className="form-control" value={naziv} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                    <Label>Stacionaza:</Label>
+                                    <Input name="stacionaza" className="form-control" value={stacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                    <Label>Usmjerenje:</Label>
+                                    <Input name="usmjerenje" className="form-control" value={usmjerenje} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                    Dionica:
+                                    <Select
+                                        name="dionica"
+                                        value={dionica}
+                                        onChange={handleDionicaChange}
+                                        options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}
+                                    />
+                                </FormGroup>
+                                <Button color="success" onClick={saveNaplatnaTocka}>
+                                    Save
+                                </Button>
+                                <Button style={{marginLeft: "1em"}} color="danger" onClick={cancel}>
+                                    Cancel
+                                </Button>
+                            </Form>
+                        </CardBody>
+                </Card>
+        </Container>
     );
 };
 

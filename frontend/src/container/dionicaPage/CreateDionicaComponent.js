@@ -89,25 +89,26 @@ const CreateDionicaComponent = () => {
                     <Form>
                         <FormGroup style={{ padding: '1em' }}>
                             <Label>Smjer:</Label>
-                            <Input name="smjer" className="form-control" value={smjer === "" ? null : smjer} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="smjer" className="form-control" value={smjer === "" ? null : smjer} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Najveca brzina:</Label>
-                            <Input name="najvecaBrzina" className="form-control" value={najvecaBrzina === "" ? null : najvecaBrzina} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="najvecaBrzina" className="form-control" value={najvecaBrzina === "" ? null : najvecaBrzina} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Broj traka:</Label>
-                            <Input name="brojTraka" className="form-control" value={brojTraka === "" ? null : brojTraka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="brojTraka" className="form-control" value={brojTraka === "" ? null : brojTraka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Oznaka:</Label>
-                            <Input name="oznaka" className="form-control" value={oznaka === "" ? null : oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="oznaka" className="form-control" value={oznaka === "" ? null : oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Pocetna stacionaza:</Label>
-                            <Input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza ==="" ? null : pocetnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza ==="" ? null : pocetnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Zavrsna stacionaza:</Label>
-                            <Input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza === "" ? null : zavrsnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza === "" ? null : zavrsnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             <Label>Oznaka autoceste:</Label>
-                            <Input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste === "" ? null : oznakaAutoceste} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}></Input>
+                            <Input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste === "" ? null : oznakaAutoceste} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
                             Dionica Prije:
                             <Select
                                 name="dionicaPrije"
                                 value={dionicaPrije}
                                 onChange={handleDionicaPrijeChange}
-                                options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}/>
+                                options={dionice && dionice.length > 0 ? dionice.map((dionica) => ({ value: dionica.dionicaId, label: dionica.oznaka })) : []}
+                            />
                             Dionica poslije
                             <Select
                                 name="dionicaPoslije"
