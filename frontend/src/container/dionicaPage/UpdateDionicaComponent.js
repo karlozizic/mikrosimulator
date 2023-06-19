@@ -119,26 +119,48 @@ const UpdateDionicaComponent = () => {
 
     return (
         <Container className="d-flex justify-content-center align-items-center">
-            <Card style={{width: '500px'}}>
+            <Card style={{width: '800px'}}>
                 <CardBody>
-                    <CardTitle className="text-center"><h3>Add Dionica</h3></CardTitle>
+                    <CardTitle className="text-center"><h3>Update Dionica</h3></CardTitle>
                     <Form>
                         <FormGroup style={{ padding: '1em' }}>
-                            <Label>Smjer:</Label>
-                            <Input name="smjer" className="form-control" value={smjer} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Najveca brzina:</Label>
-                            <Input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Broj traka:</Label>
-                            <Input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Oznaka:</Label>
-                            <Input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Pocetna stacionaza:</Label>
-                            <Input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Zavrsna stacionaza:</Label>
-                            <Input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            <Label>Oznaka autoceste:</Label>
-                            <Input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
-                            </FormGroup>
+                            <Row>
+                                <Col md={6}>
+                                    <Label>Smjer:</Label>
+                                    <Input name="smjer" className="form-control" value={smjer} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                                <Col md={6}>
+                                    <Label>Najveca brzina:</Label>
+                                    <Input name="najvecaBrzina" className="form-control" value={najvecaBrzina} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={6}>
+                                    <Label>Broj traka:</Label>
+                                    <Input name="brojTraka" className="form-control" value={brojTraka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                                <Col md={6}>
+                                    <Label>Oznaka:</Label>
+                                    <Input name="oznaka" className="form-control" value={oznaka} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={6}>
+                                    <Label>Pocetna stacionaza:</Label>
+                                    <Input name="pocetnaStacionaza" className="form-control" value={pocetnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                                <Col md={6}>
+                                    <Label>Zavrsna stacionaza:</Label>
+                                    <Input name="zavrsnaStacionaza" className="form-control" value={zavrsnaStacionaza} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col md={6}>
+                                    <Label>Oznaka autoceste:</Label>
+                                <Input name="oznakaAutoceste" className="form-control" value={oznakaAutoceste} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                                </Col>
+                            </Row>
+                        </FormGroup>
                         <Button color="success" onClick={updateFunction}>
                             Save
                         </Button>
