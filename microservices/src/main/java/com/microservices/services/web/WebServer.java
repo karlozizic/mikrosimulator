@@ -10,24 +10,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
-@SpringBootApplication(exclude = { HibernateJpaAutoConfiguration.class, //
+@SpringBootApplication(exclude = { HibernateJpaAutoConfiguration.class,
         DataSourceAutoConfiguration.class })
 @EnableDiscoveryClient
-@ComponentScan(useDefaultFilters = false) // Disable component scanner
+@ComponentScan(useDefaultFilters = false)
 public class WebServer {
-
     public static final String VEHICLES_SERVICE_URL = "http://VEHICLES-SERVICE";
 
     public static void main(String[] args) {
-
         if (System.getProperty("registration.server.hostname") == null)
             System.setProperty("registration.server.hostname", "localhost");
 
         System.setProperty("spring.config.name", "web-server");
         SpringApplication.run(WebServer.class, args);
-
     }
-
     @LoadBalanced
     @Bean
     RestTemplate restTemplate() {
@@ -48,6 +44,6 @@ public class WebServer {
     public HomeController homeController() {
         return new HomeController();
     }
-
-
 }
+
+

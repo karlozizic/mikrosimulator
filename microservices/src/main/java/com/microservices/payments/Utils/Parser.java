@@ -27,7 +27,7 @@ public class Parser {
         ArrayList<Uredaj> uredajiList = new ArrayList<>();
         for (int i = 0; i < uredaji.length(); i++) {
             JSONObject uredaj = uredaji.getJSONObject(i);
-            uredajiList.add(new Uredaj(uredaj.getLong("id"), uredaj.getInt("uredajtype"), uredaj.getString("name"), uredaj.getLong("naplatnaTockaId")));
+            uredajiList.add(new Uredaj(uredaj.getLong("id"), uredaj.getInt("uredajtype"), uredaj.getString("name"), uredaj.getLong("naplatnaTockaId"), uredaj.getInt("kvar"), uredaj.getString("razinaPouzdanosti")));
         }
         return uredajiList;
     }

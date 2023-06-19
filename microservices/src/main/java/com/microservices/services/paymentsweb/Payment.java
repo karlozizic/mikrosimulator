@@ -7,21 +7,14 @@ import java.util.Objects;
 
 @JsonRootName("Payment")
 public class Payment {
-
     private Long id;
-
     private Timestamp vrijemeOcitanja;
-
     private String uredaj;
-
     private String naplatnaTocka;
-
     private String kategorija;
 
     private int idENC;
-
     private String registracijskaOznaka;
-
     public Payment(Long id, Timestamp vrijemeOcitanja, String uredaj, String naplatnaTocka, String kategorija, int idENC, String registracijskaOznaka) {
         super();
         this.id = id;

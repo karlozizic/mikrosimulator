@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Button, Card, CardBody, Col, Container, Form, FormGroup, Row } from 'reactstrap';
+import {Button, Card, CardBody, CardTitle, Col, Container, Form, FormGroup, Input, Label, Row} from 'reactstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import {getEkorazred, ekorazredEdit} from "../../utils/axios/backendCalls/ekorazredEndpoints";
-import "../allCss/create-update.css"
 
 const UpdateEkorazredComponent = () => {
     const [naziv, setNaziv] = useState('');
@@ -38,33 +37,27 @@ const UpdateEkorazredComponent = () => {
 
 
     return (
-        <div className="component">
-            <Container>
-                <Row>
-                    <Card>
-                        <Col>
-                            <h3>Update Ekorazred</h3>
-                            <CardBody>
-                                <Form>
-                                    <FormGroup style={{ padding: '1em' }}>
-                                        <label>Naziv:</label>
-                                        <input name="naziv" className="form-control" value={naziv} onChange={changeHandler}></input>
-                                    </FormGroup>
-                                    <div className="buttonGroup">
-                                        <Button color="success" onClick={updateFunction}>
-                                            Save
-                                        </Button>
-                                        <Button color="danger" onClick={cancel} style={{marginLeft: "1em"}}>
-                                            Cancel
-                                        </Button>
-                                    </div>
-                                </Form>
-                            </CardBody>
-                        </Col>
-                    </Card>
-                </Row>
-            </Container>
-        </div>
+        <Container className="d-flex justify-content-center align-items-center">
+                <Card style={{width: '500px'}}>
+                    <CardBody>
+                        <CardTitle className={"text-center mb-4"}>
+                            <h3>Edit Ekorazred</h3>
+                        </CardTitle>
+                        <Form>
+                            <FormGroup style={{ padding: '1em' }}>
+                                <Label>Naziv:</Label>
+                                <Input name="naziv" className="form-control" value={naziv} onChange={changeHandler} style={{ width: '80%', margin: '0 auto'}}></Input>
+                            </FormGroup>
+                                <Button color="success" onClick={updateFunction}>
+                                    Save
+                                </Button>
+                                <Button color="danger" onClick={cancel} style={{marginLeft: "1em"}}>
+                                    Cancel
+                                </Button>
+                        </Form>
+                    </CardBody>
+                </Card>
+        </Container>
     );
 };
 

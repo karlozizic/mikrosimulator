@@ -13,6 +13,8 @@ export const uredajEdit = async (uredaj) => {
     const response = await axios.put("/spring/uredaj/update", {
         id: uredaj.id,
         name: uredaj.name,
+        kvar: uredaj.kvar,
+        razinaPouzdanosti: uredaj.razinaPouzdanosti
     });
     return response.data;
 };
@@ -21,7 +23,9 @@ export const uredajRegister = async (uredaj) => {
     const response = await axios.post("/spring/uredaj/register", {
         uredajtype: uredaj.uredajtype,
         name: uredaj.name,
-        naplatnaTockaId: uredaj.naplatnaTockaId
+        naplatnaTockaId: uredaj.naplatnaTockaId,
+        kvar: uredaj.kvar,
+        razinaPouzdanosti: uredaj.razinaPouzdanosti
     });
     return response.data;
 };

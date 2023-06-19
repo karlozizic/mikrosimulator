@@ -1,6 +1,7 @@
 package com.microservices.vehicles;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -40,10 +41,12 @@ public class Vehicle implements Serializable {
 
     private float prosjecnaBrzina;
 
+    private Timestamp vrijeme;
+
     public Vehicle(Long id, String nacinNaplate, String boja, int brojOsovina, String VIN, int idENC,
                    String registracijskaOznaka, String ekoRazred, String kategorija,
                    String drzavaRegistracije, String oznakaAutoceste, String pocetnaDionicaOznaka,
-                   Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId, float prosjecnaBrzina) {
+                   Long pocetnaDionicaId, String zavrsnaDionicaOznaka, Long zavrsnaDionicaId, float prosjecnaBrzina, Timestamp vrijeme) {
         super();
         this.id = id;
         this.nacinNaplate = nacinNaplate;
@@ -61,6 +64,7 @@ public class Vehicle implements Serializable {
         this.zavrsnaDionicaOznaka = zavrsnaDionicaOznaka;
         this.zavrsnaDionicaId = zavrsnaDionicaId;
         this.prosjecnaBrzina = prosjecnaBrzina;
+        this.vrijeme = vrijeme;
     }
 
     public Vehicle() {
@@ -189,6 +193,14 @@ public class Vehicle implements Serializable {
 
     public float getProsjecnaBrzina() {
         return prosjecnaBrzina;
+    }
+
+    public Timestamp getVrijeme() {
+        return vrijeme;
+    }
+
+    public void setVrijeme(Timestamp vrijeme) {
+        this.vrijeme = vrijeme;
     }
 
     public void setProsjecnaBrzina(float prosjecnaBrzina) {

@@ -8,17 +8,25 @@ public class NoviUredaj {
 
     private Long naplatnaTockaId;
 
-    public NoviUredaj(int uredajtype, String name, Long naplatnaTockaId) {
+    private int kvar;
+
+    private String razinaPouzdanosti;
+
+    public NoviUredaj(int uredajtype, String name, Long naplatnaTockaId, int kvar, String razinaPouzdanosti) {
         this.uredajtype = uredajtype;
         this.name = name;
         this.naplatnaTockaId = naplatnaTockaId;
+        this.kvar = kvar;
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 
-    public NoviUredaj(int uredajtype, String name, Long id, Long naplatnaTockaId) {
+    public NoviUredaj(int uredajtype, String name, Long id, Long naplatnaTockaId, int kvar, String razinaPouzdanosti) {
         this.uredajtype = uredajtype;
         this.name = name;
         this.id = id;
         this.naplatnaTockaId = naplatnaTockaId;
+        this.kvar = kvar;
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 
     public NoviUredaj() {
@@ -55,6 +63,22 @@ public class NoviUredaj {
 
     public void setNaplatnaTockaId(Long naplatnaTockaId) {
         this.naplatnaTockaId = naplatnaTockaId;
+    }
+
+    public int getKvar() {
+        return kvar;
+    }
+
+    public void setKvar(int kvar) {
+        this.kvar = kvar;
+    }
+
+    public String getRazinaPouzdanosti() {
+        return razinaPouzdanosti;
+    }
+
+    public void setRazinaPouzdanosti(String razinaPouzdanosti) {
+        this.razinaPouzdanosti = razinaPouzdanosti;
     }
 }
 

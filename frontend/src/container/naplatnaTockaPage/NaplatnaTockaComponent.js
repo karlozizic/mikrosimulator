@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Button, Row, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import {getAllNaplatneTocke} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import {deleteNaplatnaTocka} from "../../utils/axios/backendCalls/naplatnaTockaEndpoints";
 import { useNavigate } from "react-router-dom";
@@ -31,21 +31,23 @@ const NaplatnaTockaComponent = () => {
     };
 
     return (
-        <div style={{ margin: '0 4em' }}>
-            <h2 className="text-center" style={{padding:"1em"}}>Naplatna Tocka List</h2>
+        <Container style={{ display: 'flex', flexDirection: 'column', maxWidth: '1600px'}}>
+            <Row style={{ fontSize: '24px', textAlign: 'left'}}>
+                <p style={{fontWeight: 'bold'}}>Naplatna Tocka List</p>
+            </Row>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addNaplatnaTocka}>Add Naplatna Tocka</Button>
             </div>
-            <Row className="my-4">
-                <Table striped bordered responsive hover>
+            <div>
+                <Table striped bordered responsive hover className="my-4" size={"sm"}>
                     <thead>
                     <tr>
                         <th>Naplatna Tocka ID</th>
                         <th>Oznaka</th>
                         <th>Naziv</th>
                         <th>Stacionaza</th>
-                        <th>Geografska Duzina</th>
-                        <th>Geografska Sirina</th>
+                        {/*<th>Geografska Duzina</th>*/}
+                        {/*<th>Geografska Sirina</th>*/}
                         <th>Usmjerenje</th>
                         <th>Oznaka Dionice</th>
                     </tr>
@@ -57,8 +59,8 @@ const NaplatnaTockaComponent = () => {
                             <td>{naplatnaTocka.oznaka}</td>
                             <td>{naplatnaTocka.naziv}</td>
                             <td>{naplatnaTocka.stacionaza}</td>
-                            <td>{naplatnaTocka.geografskaDuzina}</td>
-                            <td>{naplatnaTocka.geografskaSirina}</td>
+                            {/*<td>{naplatnaTocka.geografskaDuzina}</td>*/}
+                            {/*<td>{naplatnaTocka.geografskaSirina}</td>*/}
                             <td>{naplatnaTocka.usmjerenje}</td>
                             <td>{naplatnaTocka.dionica.oznaka}</td>
                             <td>
@@ -73,8 +75,8 @@ const NaplatnaTockaComponent = () => {
                     ))}
                     </tbody>
                 </Table>
-            </Row>
-        </div>
+            </div>
+        </Container>
     );
 };
 

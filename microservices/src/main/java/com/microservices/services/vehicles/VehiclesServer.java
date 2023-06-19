@@ -22,15 +22,11 @@ public class VehiclesServer {
     protected Logger logger = Logger.getLogger(VehiclesServer.class.getName());
 
     public static void main(String[] args) {
-        // Default to registration server on localhost
         if (System.getProperty(RegistrationServer.REGISTRATION_SERVER_HOSTNAME) == null)
             System.setProperty(RegistrationServer.REGISTRATION_SERVER_HOSTNAME, "localhost");
 
-        // Tell server to look for accounts-server.properties or
-        // accounts-server.yml
         System.setProperty("spring.config.name", "vehicles-server");
         SpringApplication.run(VehiclesServer.class, args);
     }
-
 
 }

@@ -19,3 +19,4 @@ public interface VehicleRepository extends Repository<Vehicle, Long> {
     @Query("SELECT max(id) from Vehicle")
     public Long lastId();
 }
+

@@ -21,8 +21,6 @@
 				<tr>
 					<th>Vehicle Id</th>
 					<th>Vehicle Nacin Naplate</th>
-					<th>Vehicle Boja</th>
-					<th>Broj Osovina</th>
 					<th>VIN</th>
 					<th>ID ENC</th>
 					<th>Registracijska Oznaka</th>
@@ -41,8 +39,6 @@
 						th:href="@{|/vehicles/${vehicle.id}|}"
 						th:text="|${vehicle.id}|"></a></td>
 					<td th:text="${vehicle.nacinNaplate}">nacinNaplate</td>
-					<td th:text="${vehicle.boja}">boja</td>
-					<td th:text="${vehicle.brojOsovina}">brojOsovina</td>
 					<td th:text="${vehicle.VIN}">VIN</td>
 					<td th:text="${vehicle.idENC}">idENC</td>
 					<td th:text="${vehicle.registracijskaOznaka}">registracijskaOznaka</td>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Button, Row, Table } from 'reactstrap';
+import {Button, Container, Row, Table} from 'reactstrap';
 import {getAllUredaji} from "../../utils/axios/backendCalls/uredajEndpoints";
 import {deleteUredaj} from "../../utils/axios/backendCalls/uredajEndpoints";
 import { useNavigate } from "react-router-dom";
@@ -32,19 +32,23 @@ const UredajComponent = () => {
     };
 
     return (
-        <div style={{ margin: '0 4em' }}>
-            <h2 className="text-center" style={{padding:"1em"}}>Uredaj List</h2>
+        <Container style={{ display: 'flex', flexDirection: 'column', maxWidth: '1600px'}}>
+            <Row style={{ fontSize: '24px', textAlign: 'left'}}>
+                <p style={{fontWeight: 'bold'}}>Uredaj List</p>
+            </Row>
             <div style={{textAlign:'left'}}>
                 <Button color="primary" onClick={addUredaj}>Add Uredaj</Button>
             </div>
-            <Row className="my-4">
-                <Table striped bordered responsive hover>
+            <div>
+                <Table striped bordered responsive hover className="my-4" size={"sm"}>
                     <thead>
                     <tr>
                         <th>Uredaj ID</th>
                         <th>Naziv</th>
                         <th>Type</th>
                         <th>Naplatna Tocka Id</th>
+                        <th>Kvar</th>
+                        <th>Razina pouzdanosti</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -54,6 +58,8 @@ const UredajComponent = () => {
                             <td>{uredaj.name}</td>
                             <td>{uredaj.uredajtype === 1 ? 'Kamera' : uredaj.uredajtype === 2 ? 'Primopredajnik' : 'Klasifikator'}</td>
                             <td>{uredaj.naplatnaTockaId}</td>
+                            <td>{uredaj.kvar === 1 ? 'Da' : 'Ne'}</td>
+                            <td>{uredaj.razinaPouzdanosti}</td>
                             <td>
                                 <Button onClick={() => editUredaj(uredaj.id)} color="primary">
                                     Update
@@ -66,8 +72,8 @@ const UredajComponent = () => {
                     ))}
                     </tbody>
                 </Table>
-            </Row>
-        </div>
+            </div>
+        </Container>
     );
 };
 

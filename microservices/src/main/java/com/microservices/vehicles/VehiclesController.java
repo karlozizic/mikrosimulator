@@ -1,6 +1,7 @@
 package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
+import com.microservices.payments.models.Vrijeme;
 import com.microservices.vehicles.Utils.BrojOsovinaUtils;
 import com.microservices.vehicles.Utils.JsonReader;
 import com.microservices.vehicles.Utils.Parser;
@@ -13,12 +14,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -57,8 +57,8 @@ public class VehiclesController {
         return vehicles;
     }
 
-    @GetMapping(path = "/vehicles/generate/{number}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void generateVehicles(@PathVariable("number") String number) {
+    @PostMapping(path = "/vehicles/generate/{number}")//, produces = MediaType.APPLICATION_JSON_VALUE)
+    public void generateVehicles(@PathVariable("number") String number, @RequestBody Vrijeme vrijeme, @RequestParam(name="intenzitet") String intenzitetParam) {
 
         int num = Integer.parseInt(number);
 
@@ -85,6 +85,25 @@ public class VehiclesController {
             JSONArray oznake = (JSONArray) oznakeAutocestaJSON.get("oznake"); //JSONArray
             ArrayList<String> oznakeAutocesta = Parser.parseOznake(oznake);
 
+            Timestamp pocetnoVrijeme;
+            Timestamp zavrsnoVrijeme;
+            int intenzitet;
+            Map kategorijeMap = new HashMap<Kategorija, Integer>();
+            if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
+                pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
+                zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+                int brojSati = (int) ((zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime()) / (1000 * 60 * 60));
+                intenzitet = Integer.parseInt(intenzitetParam);
+                for(Kategorija k : kategorijeArray) {
+                    kategorijeMap.put(k, intenzitet * brojSati);
+                }
+
+            } else {
+                pocetnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000);
+                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1); // + 1 da ne bi bilo isto vrijeme
+                intenzitet = -1;
+            }
+
             for (int i = 0; i < num; i++) {
                 String nacinNaplate = naciniNaplate.get(new Random().nextInt(naciniNaplate.size()));
                 String boja = boje.get(new Random().nextInt(boje.size()));
@@ -101,7 +120,19 @@ public class VehiclesController {
                     idENC = 0;
                 }
                 Ekorazred randomEkoRazred =  ekorazrediArray.get(new Random().nextInt(ekorazrediArray.size()));
-                Kategorija randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                Kategorija randomKategorija = null;
+                if (intenzitet == -1) {
+                    randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                } else {
+                    boolean finished = false;
+                    while (!finished) {
+                        randomKategorija = kategorijeArray.get(new Random().nextInt(kategorijeArray.size()));
+                        if ((Integer) kategorijeMap.get(randomKategorija) > 0) {
+                            kategorijeMap.put(randomKategorija, (Integer) kategorijeMap.get(randomKategorija) - 1);
+                            finished = true;
+                        } 
+                    }
+                }
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));
 
                 String oznaka = oznakeAutocesta.get(new Random().nextInt(oznakeAutocesta.size()));
@@ -117,7 +148,11 @@ public class VehiclesController {
                 //registracijska oznaka - ovisno o drzavi registracije (grad?)
                 String registracijskaOznaka = RegistracijaUtils.generateRegistracija(randomDrzavaRegistracije);
                 float brzina = new Random().nextFloat(90, 130);
-                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), oznaka, pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId(), brzina);
+
+                long vrijemeIzmedu = zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime();
+                Timestamp randomVrijeme = new Timestamp(pocetnoVrijeme.getTime() +  new Random().nextLong(vrijemeIzmedu));
+
+                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), oznaka, pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId(), brzina, randomVrijeme);
                 id += 1;
                 vehicleRepository.save(generatedVozilo);
             }

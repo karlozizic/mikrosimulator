@@ -42,7 +42,8 @@ public class UredajController{
 		} else {
 			name = ((Klasifikator) uredajFromDB).getName();
 		}
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId());
+		int kvarInt = uredajFromDB.isKvar() ? 1 : 0;
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId(), kvarInt, uredajFromDB.getRazinaPouzdanosti());
 
 		if(uredajFromDB == null) {
 			ResponseUredaj data = new ResponseUredaj(null, null, false, "Neuspjesno dohvacanje uredaja!");
@@ -65,7 +66,8 @@ public class UredajController{
 		}
 
 		int tipUredaja = uredajService.dohvatiTipUredaja(uredajFromDB.getUredajId());
-
+		boolean kvar = updatedUredaj.getKvar() == 1 ? true : false;
+		int kvarInt = kvar ? 1 : 0;
 		if(tipUredaja == 1) {
 			uredajFromDB = (Kamera) uredajFromDB;
 			((Kamera) uredajFromDB).setName(updatedUredaj.getName());
@@ -76,13 +78,15 @@ public class UredajController{
 			uredajFromDB = (Klasifikator) uredajFromDB;
 			((Klasifikator) uredajFromDB).setName(updatedUredaj.getName());
 		}
+		uredajFromDB.setKvar(kvar);
+		uredajFromDB.setRazinaPouzdanosti(updatedUredaj.getRazinaPouzdanosti());
 
 		Uredaj uredaj = uredajService.updateUredaja(uredajFromDB);
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, updatedUredaj.getName(), uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId()	);
+
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, updatedUredaj.getName(), uredajFromDB.getUredajId(), uredajFromDB.getNaplatnaTocka().getNaplatnaTockaId(), kvarInt, updatedUredaj.getRazinaPouzdanosti());
 
 		ResponseUredaj data = new ResponseUredaj(noviUredaj, null, true, "Uspjesno updateanje uredaja!");
 		return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
-
 
 	}
 
@@ -91,18 +95,19 @@ public class UredajController{
 
 		Uredaj uredajFromDB = null;
 		String name = "";
+		boolean kvar = noviUredaj.getKvar() == 1 ? true : false;
 		NaplatnaTocka naplatnaTocka = naplatnaTockaService.dohvatiNaplatnuTockuPoId(noviUredaj.getNaplatnaTockaId());
 		if (noviUredaj.getUredajtype() == 1) {
-			Kamera uredaj = new Kamera(noviUredaj.getName(), naplatnaTocka);
+			Kamera uredaj = new Kamera(noviUredaj.getName(), naplatnaTocka, kvar, noviUredaj.getRazinaPouzdanosti());
 			uredajFromDB =  uredajService.stvoriUredaj(uredaj);
 			name = ((Kamera) uredajFromDB).getName();
 		}
 		else if (noviUredaj.getUredajtype() == 2) {
-			Primopredajnik uredaj = new Primopredajnik(noviUredaj.getName(), naplatnaTocka);
+			Primopredajnik uredaj = new Primopredajnik(noviUredaj.getName(), naplatnaTocka, kvar, noviUredaj.getRazinaPouzdanosti());
 			uredajFromDB = (Primopredajnik) uredajService.stvoriUredaj(uredaj);
 			name = ((Primopredajnik) uredajFromDB).getName();
 		} else if (noviUredaj.getUredajtype() == 3) {
-			Klasifikator uredaj = new Klasifikator(noviUredaj.getName(), naplatnaTocka);
+			Klasifikator uredaj = new Klasifikator(noviUredaj.getName(), naplatnaTocka, kvar, noviUredaj.getRazinaPouzdanosti());
 			uredajFromDB = (Klasifikator) uredajService.stvoriUredaj(uredaj);
 			name = ((Klasifikator) uredajFromDB).getName();
 		}
@@ -112,7 +117,8 @@ public class UredajController{
 		}
 
 		int tipUredaja = uredajService.dohvatiTipUredaja(uredajFromDB.getUredajId());
-		noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), naplatnaTocka.getNaplatnaTockaId());
+		int kvarInt = uredajFromDB.isKvar() ? 1 : 0;
+		noviUredaj = new NoviUredaj(tipUredaja, name, uredajFromDB.getUredajId(), naplatnaTocka.getNaplatnaTockaId(), kvarInt, uredajFromDB.getRazinaPouzdanosti());
 
 		ResponseUredaj data = new ResponseUredaj(noviUredaj, null, true, "Uspjesno stvaranje uredaja!");
 		return new ResponseEntity<ResponseUredaj>(data, HttpStatus.OK);
@@ -133,8 +139,8 @@ public class UredajController{
 			name = ((Klasifikator) uredajFromDB).getName();
 		}
 		Uredaj uredaj = uredajService.obrisiUredaj(uredajId);
-
-		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
+		int kvarInt = uredajFromDB.isKvar() ? 1 : 0;
+		NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId(), kvarInt, uredaj.getRazinaPouzdanosti());
 
 		if(uredaj == null) {
 			ResponseUredaj data = new ResponseUredaj(null, null, false, "Neuspjesno brisanje uredaja!");
@@ -167,7 +173,8 @@ public class UredajController{
 				} else {
 					name = ((Klasifikator) uredaj).getName();
 				}
-				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
+				int kvarInt = uredaj.isKvar() ? 1 : 0;
+				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId(), kvarInt, uredaj.getRazinaPouzdanosti());
 				listaNovihUredaja.add(noviUredaj);
 			}
 			ResponseUredaj data = new ResponseUredaj(null, listaNovihUredaja, true, "Dohvacanje uspjesno!");
@@ -196,7 +203,8 @@ public class UredajController{
 				} else {
 					name = ((Klasifikator) uredaj).getName();
 				}
-				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId());
+				int kvarInt = uredaj.isKvar() ? 1 : 0;
+				NoviUredaj noviUredaj = new NoviUredaj(tipUredaja, name, uredaj.getUredajId(), uredaj.getNaplatnaTocka().getNaplatnaTockaId(), kvarInt, uredaj.getRazinaPouzdanosti());
 				listaNovihUredaja.add(noviUredaj);
 			}
 

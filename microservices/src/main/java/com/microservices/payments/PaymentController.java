@@ -3,10 +3,8 @@ package com.microservices.payments;
 import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.Utils.DionicaUtils;
 import com.microservices.payments.Utils.Parser;
-import com.microservices.payments.models.Dionica;
-import com.microservices.payments.models.NaplatnaTocka;
-import com.microservices.payments.models.Uredaj;
-import com.microservices.payments.models.Vehicle;
+import com.microservices.payments.Utils.OcitanjeUtils;
+import com.microservices.payments.models.*;
 import com.microservices.vehicles.Utils.JsonReader;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,6 +68,10 @@ public class PaymentController {
             JSONArray oznake = oznakeAutocestaJSON.getJSONArray("oznake");
             ArrayList<String> oznakeAutocesta = Parser.parseOznake(oznake);
 
+            JSONObject kategorijeJSON = (JSONObject) JsonReader.getJson("http://localhost:8080/spring/kategorija/all");
+            JSONArray kategorije = (JSONArray) kategorijeJSON.get("listaKategorija"); //JSONArray
+            ArrayList<String> kategorijeArray = OcitanjeUtils.parseKategorije(kategorije);
+
             Map<String, List<Dionica>> dioniceMap = new HashMap<String, List<Dionica>>();
             Map<Dionica, List<NaplatnaTocka>> naplatneTockeMap = new HashMap<Dionica, List<NaplatnaTocka>>();
             Map<NaplatnaTocka, List<Uredaj>> uredajiMap = new HashMap<NaplatnaTocka, List<Uredaj>>();
@@ -101,7 +103,7 @@ public class PaymentController {
 
             for (Vehicle v: vehicles) {
                 List<Dionica> dionicaList = DionicaUtils.getDionice(dioniceMap.get(v.getOznakaAutoceste()), v);
-                Date pocetnoVrijeme = new Date();
+                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime() - (long) (2 * 60 * 60 * 1000)); //zbog vremenske zone
                 for (Dionica d: dionicaList) {
                     List<NaplatnaTocka> naplatnaTockaList = naplatneTockeMap.get(d);
                     for (NaplatnaTocka n: naplatnaTockaList) {
@@ -111,22 +113,50 @@ public class PaymentController {
                             //izracunaj vrijeme ocitanja prema stacionazama i prosjecnoj brzini vozila
                             Double put = d.getZavrsnaStacionaza() - d.getPocetnaStacionaza();
                             Double vrijeme = put / v.getProsjecnaBrzina();
-                            pocetnoVrijeme = new java.sql.Date(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
-                            java.sql.Date vrijemeOcitanja = (java.sql.Date) pocetnoVrijeme;
+                            Timestamp vrijemeOcitanja = new Timestamp(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
 
                             for (Uredaj u : uredajList) {
                                 Long id = paymentRepository.lastId() == null ? Long.valueOf(1) : paymentRepository.lastId() + 1;
-                                Timestamp t = new Timestamp(vrijemeOcitanja.getTime() + 2 * 60 * 60 * 1000); //dodajemo 2 sata zbog vremenske zone
-                                if (u.getUredajType() == 1) { // Kamera - registracija
-                                    paymentRepository.save(new Payment(id, t, "Kamera: " + u.getName(), n.getNaziv(), null, 0, v.getRegistracijskaOznaka()));
-                                } else if (u.getUredajType() == 2) { // Primopredajnik - ID ENC (ako postoji)
-                                    if (v.getIdENC() != 0) {
-                                        paymentRepository.save(new Payment(id, t, "Primopredajnik: " + u.getName(), n.getNaziv(), null, v.getIdENC(), null));
-                                    }
-                                } else { // Klasifikator - kategorija
-                                    paymentRepository.save(new Payment(id, t, "Klasifikator: " + u.getName(), n.getNaziv(), v.getKategorija(), 0, null));
+                                int kvar = u.getKvar();
+                                double razinaPouzdanosti;
+                                if (u.getRazinaPouzdanosti() != "") {
+                                    razinaPouzdanosti = Double.parseDouble(u.getRazinaPouzdanosti());
+                                } else {
+                                    razinaPouzdanosti = 1;
                                 }
-                                System.out.println("Payment saved");
+
+                                if (kvar == 0) {
+                                    if (u.getUredajType() == 1) { // Kamera - registracija
+                                        String registracija;
+                                        if (razinaPouzdanosti < 1) {
+                                            registracija = OcitanjeUtils.getOcitanjeRegistracije(v.getRegistracijskaOznaka(), razinaPouzdanosti);
+                                        } else {
+                                            registracija = v.getRegistracijskaOznaka();
+                                        }
+                                        paymentRepository.save(new Payment(id, vrijemeOcitanja, "Kamera: " + u.getName(), n.getNaziv(), null, 0, registracija));
+
+                                    } else if (u.getUredajType() == 2) { // Primopredajnik - ID ENC (ako postoji)
+                                        if (v.getIdENC() != 0) {
+                                            int idENC;
+                                            if (razinaPouzdanosti < 1) {
+                                                idENC = OcitanjeUtils.getOcitanjeENC(v.getIdENC(), razinaPouzdanosti);
+                                            } else {
+                                                idENC = v.getIdENC();
+                                            }
+                                            paymentRepository.save(new Payment(id, vrijemeOcitanja, "Primopredajnik: " + u.getName(), n.getNaziv(), null, idENC, null));
+                                        }
+
+                                    } else { // Klasifikator - kategorija
+                                        String kategorija;
+                                        if (razinaPouzdanosti < 1) {
+                                            kategorija = OcitanjeUtils.getOcitanjeKategorije(kategorijeArray, razinaPouzdanosti, v.getKategorija());
+                                        } else {
+                                            kategorija = v.getKategorija();
+                                        }
+                                        paymentRepository.save(new Payment(id, vrijemeOcitanja, "Klasifikator: " + u.getName(), n.getNaziv(), kategorija, 0, null));
+                                    }
+                                    System.out.println("Payment saved");
+                                }
                             }
                         }
                     }
