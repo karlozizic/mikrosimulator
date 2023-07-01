@@ -14,12 +14,15 @@ public class DionicaUtils {
         for (Dionica d: dionice) {
             if (v.getPocetnaDionicaId() == d.getDionicaId()) {
                 pocInd = dionice.indexOf(d);
-            } else if (v.getZavrsnaDionicaId() == d.getDionicaId()) {
+            }
+        }
+        for (Dionica d: dionice) {
+            if (v.getZavrsnaDionicaId() == d.getDionicaId()) {
                 zavInd = dionice.indexOf(d);
             }
         }
 
-        List<Dionica> dionicaList = dionice.subList(pocInd, zavInd);
+        List<Dionica> dionicaList = dionice.subList(pocInd, zavInd + 1); // bez +1 ne ukljucuje zavrsnu dionicu
         return dionicaList;
     }
 }

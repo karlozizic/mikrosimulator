@@ -36,8 +36,33 @@ const Mikrosimulator = () => {
     };
 
     const generateOcitanje = async () => {
-        const response = await axios.get('/generate')
+        const response = await axios.get('/payments/generate');
     };
+    //https://stackoverflow.com/questions/68890870/how-to-download-excel-in-response-from-api-react-js
+    const excelVozila = async () => {
+        await axios.get('/vehicles/excel', {
+            responseType: 'blob'
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `Vehicles.xlsx`);
+            document.body.appendChild(link);
+            link.click();
+        });
+    }
+    const excelOcitanja = async () => {
+        await axios.get('/payments/excel', {
+            responseType: 'blob'
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `Payments.xlsx`);
+            document.body.appendChild(link);
+            link.click();
+        });
+    }
 
     const changeHandler = (event) => {
         const { name, value } = event.target;
@@ -73,7 +98,7 @@ const Mikrosimulator = () => {
                                 </Input>
                             </Col>
                             <Col>
-                                <Label>Intenzitet</Label>
+                                <Label>Intenzitet (Broj vozila svake kategorije po satu)</Label>
                                 <Input name={"intenzitet"} onChange={changeHandler} style={{ width: '80%', margin: '0 auto', marginBottom: '2em'}}>
                                 </Input>
                             </Col>
@@ -91,14 +116,20 @@ const Mikrosimulator = () => {
                         </Row>
                         <Row className={"m-4"}>
                             <Col>
-                                <Button color={"primary"} onClick={generateVozila}>Generiraj Vozila</Button>
+                                <Button color={"primary"} onClick={generateVozila}>Generiraj vozila</Button>
                                 <a href="http://localhost:3333/vehicles/all">
-                                    <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled Vozila</Button>
+                                    <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled vozila</Button>
                                 </a>
-                                <Button style={{marginLeft: "1.25em"}} color={"primary"} onClick={generateOcitanje}>Generiraj Očitanja</Button>
+                                <Button style={{marginLeft: "1.25em"}} color={"primary"} onClick={generateOcitanje}>Generiraj očitanja</Button>
                                 <a href="http://localhost:5555/payments/all">
-                                    <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled Očitanja</Button>
+                                    <Button style={{marginLeft: "1.25em"}} color={"primary"}>Pregled očitanja</Button>
                                 </a>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button style={{marginLeft: "1.25em"}} color={"primary"} onClick={excelVozila}>Excel vozila</Button>
+                                <Button style={{marginLeft: "1.25em"}}  color={"primary"} onClick={excelOcitanja}>Excel očitanja</Button>
                             </Col>
                         </Row>
                     </CardBody>

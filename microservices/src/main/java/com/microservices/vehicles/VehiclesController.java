@@ -2,20 +2,22 @@ package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.models.Vrijeme;
-import com.microservices.vehicles.Utils.BrojOsovinaUtils;
-import com.microservices.vehicles.Utils.JsonReader;
-import com.microservices.vehicles.Utils.Parser;
-import com.microservices.vehicles.Utils.RegistracijaUtils;
+import com.microservices.vehicles.Utils.*;
 import com.microservices.vehicles.models.Dionica;
 import com.microservices.vehicles.models.Drzava;
 import com.microservices.vehicles.models.Ekorazred;
 import com.microservices.vehicles.models.Kategorija;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -49,12 +51,30 @@ public class VehiclesController {
         }
     }
 
+//    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vehicle> all() {
         logger.info("vehicles-service all() invoked: ");
         List<Vehicle> vehicles = vehicleRepository.findAll();
         logger.info("vehicles-service all() found: " + vehicles);
         return vehicles;
+    }
+    //https://stackoverflow.com/questions/51684550/how-to-download-an-excel-file-in-spring-restcontroller
+    @GetMapping (path="/vehicles/excel")
+    public ResponseEntity<ByteArrayResource> allExcel() throws Exception{
+    	try {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            XSSFWorkbook workbook = ExcelGenerator.generateExcel(vehicleRepository.findAll());
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(new MediaType("application", "force-download"));
+            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Vehicles.xlsx");
+            workbook.write(stream);
+            workbook.close();
+            return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
+                    header, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(path = "/vehicles/generate/{number}")//, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,8 +110,8 @@ public class VehiclesController {
             int intenzitet;
             Map kategorijeMap = new HashMap<Kategorija, Integer>();
             if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
-                pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
-                zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+                pocetnoVrijeme = new Timestamp(vrijeme.getPocetnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
+                zavrsnoVrijeme = new Timestamp(vrijeme.getZavrsnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
                 int brojSati = (int) ((zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime()) / (1000 * 60 * 60));
                 intenzitet = Integer.parseInt(intenzitetParam);
                 for(Kategorija k : kategorijeArray) {
@@ -99,8 +119,8 @@ public class VehiclesController {
                 }
 
             } else {
-                pocetnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000);
-                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1); // + 1 da ne bi bilo isto vrijeme
+                pocetnoVrijeme = new Timestamp(System.currentTimeMillis());
+                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 1); // + 1 da ne bi bilo isto vrijeme
                 intenzitet = -1;
             }
 
@@ -130,7 +150,7 @@ public class VehiclesController {
                         if ((Integer) kategorijeMap.get(randomKategorija) > 0) {
                             kategorijeMap.put(randomKategorija, (Integer) kategorijeMap.get(randomKategorija) - 1);
                             finished = true;
-                        } 
+                        }
                     }
                 }
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));
@@ -141,7 +161,7 @@ public class VehiclesController {
                 List<Dionica> dioniceList = Parser.parseDionice(dioniceArray);
                 dioniceList.sort(Comparator.comparing(Dionica::getPocetnaStacionaza)); //sortirane dionice po pocetnoj stacionazi
                 Dionica pocetnaDionica = dioniceList.get(new Random().nextInt(dioniceList.size() - 1)); //ne moze biti zadnja dionica
-                Dionica zavrsnaDionica = dioniceList.get(new Random().nextInt(dioniceList.indexOf(pocetnaDionica) + 1, dioniceList.size()));
+                Dionica zavrsnaDionica = dioniceList.get(new Random().nextInt(dioniceList.indexOf(pocetnaDionica), dioniceList.size())); // dioniceList.indexOf + 1 iskljucuje pocetnu dionicu
 
                 //broj osovina - ovisno o kategoriji (vidi po kategorijama)
                 int brojOsovina = BrojOsovinaUtils.generateBrojOsovina(randomKategorija);

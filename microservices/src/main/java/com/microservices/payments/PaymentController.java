@@ -2,18 +2,26 @@ package com.microservices.payments;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.Utils.DionicaUtils;
+import com.microservices.payments.Utils.ExcelGenerator;
 import com.microservices.payments.Utils.Parser;
 import com.microservices.payments.Utils.OcitanjeUtils;
 import com.microservices.payments.models.*;
 import com.microservices.vehicles.Utils.JsonReader;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
@@ -43,6 +51,23 @@ public class PaymentController {
         return payments;
     }
 
+    @GetMapping(path="/payments/excel")
+    public ResponseEntity<ByteArrayResource> allExcel() throws Exception{
+        try {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            XSSFWorkbook workbook = ExcelGenerator.generateExcel(paymentRepository.findAll());
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(new MediaType("application", "force-download"));
+            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Payments.xlsx");
+            workbook.write(stream);
+            workbook.close();
+            return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
+                    header, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @RequestMapping(path = "/payments/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Payment byId(@PathVariable("id") String id) {
         logger.info("payments-service byId() invoked: " + id);
@@ -57,7 +82,7 @@ public class PaymentController {
         }
     }
 
-    @RequestMapping(path = "/generate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping (path = "/payments/generate", produces = MediaType.APPLICATION_JSON_VALUE)
     public void all() {
         logger.info("payment-service all() invoked");
 
@@ -103,7 +128,7 @@ public class PaymentController {
 
             for (Vehicle v: vehicles) {
                 List<Dionica> dionicaList = DionicaUtils.getDionice(dioniceMap.get(v.getOznakaAutoceste()), v);
-                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime() - (long) (2 * 60 * 60 * 1000)); //zbog vremenske zone
+                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime()); //zbog vremenske zone
                 for (Dionica d: dionicaList) {
                     List<NaplatnaTocka> naplatnaTockaList = naplatneTockeMap.get(d);
                     for (NaplatnaTocka n: naplatnaTockaList) {
@@ -114,6 +139,7 @@ public class PaymentController {
                             Double put = d.getZavrsnaStacionaza() - d.getPocetnaStacionaza();
                             Double vrijeme = put / v.getProsjecnaBrzina();
                             Timestamp vrijemeOcitanja = new Timestamp(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
+                            pocetnoVrijeme = vrijemeOcitanja;
 
                             for (Uredaj u : uredajList) {
                                 Long id = paymentRepository.lastId() == null ? Long.valueOf(1) : paymentRepository.lastId() + 1;
