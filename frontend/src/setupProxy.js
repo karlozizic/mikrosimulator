@@ -18,7 +18,7 @@ module.exports = function (app) {
     );
 
     app.use(
-        "/generate",
+        "/payments",
         createProxyMiddleware({
             target: "http://localhost:4444/",
             changeOrigin: true,

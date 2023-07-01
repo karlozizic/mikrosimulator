@@ -59,7 +59,7 @@ public class VehiclesController {
         logger.info("vehicles-service all() found: " + vehicles);
         return vehicles;
     }
-
+    //https://stackoverflow.com/questions/51684550/how-to-download-an-excel-file-in-spring-restcontroller
     @GetMapping (path="/vehicles/excel")
     public ResponseEntity<ByteArrayResource> allExcel() throws Exception{
     	try {
@@ -150,7 +150,7 @@ public class VehiclesController {
                         if ((Integer) kategorijeMap.get(randomKategorija) > 0) {
                             kategorijeMap.put(randomKategorija, (Integer) kategorijeMap.get(randomKategorija) - 1);
                             finished = true;
-                        } 
+                        }
                     }
                 }
                 Drzava randomDrzavaRegistracije = drzaveArray.get(new Random().nextInt(drzaveArray.size()));

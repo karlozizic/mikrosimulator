@@ -82,7 +82,7 @@ public class PaymentController {
         }
     }
 
-    @RequestMapping(path = "/generate", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping (path = "/payments/generate", produces = MediaType.APPLICATION_JSON_VALUE)
     public void all() {
         logger.info("payment-service all() invoked");
 
