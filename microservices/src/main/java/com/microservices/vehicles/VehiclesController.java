@@ -49,7 +49,8 @@ public class VehiclesController {
         }
     }
 
-    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vehicle> all() {
         logger.info("vehicles-service all() invoked: ");
         List<Vehicle> vehicles = vehicleRepository.findAll();
@@ -90,8 +91,8 @@ public class VehiclesController {
             int intenzitet;
             Map kategorijeMap = new HashMap<Kategorija, Integer>();
             if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
-                pocetnoVrijeme = vrijeme.getPocetnoVrijeme();
-                zavrsnoVrijeme = vrijeme.getZavrsnoVrijeme();
+                pocetnoVrijeme = new Timestamp(vrijeme.getPocetnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
+                zavrsnoVrijeme = new Timestamp(vrijeme.getZavrsnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
                 int brojSati = (int) ((zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime()) / (1000 * 60 * 60));
                 intenzitet = Integer.parseInt(intenzitetParam);
                 for(Kategorija k : kategorijeArray) {
@@ -99,8 +100,8 @@ public class VehiclesController {
                 }
 
             } else {
-                pocetnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000);
-                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 2 * 60 * 60 * 1000 + 1); // + 1 da ne bi bilo isto vrijeme
+                pocetnoVrijeme = new Timestamp(System.currentTimeMillis());
+                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 1); // + 1 da ne bi bilo isto vrijeme
                 intenzitet = -1;
             }
 
@@ -141,7 +142,7 @@ public class VehiclesController {
                 List<Dionica> dioniceList = Parser.parseDionice(dioniceArray);
                 dioniceList.sort(Comparator.comparing(Dionica::getPocetnaStacionaza)); //sortirane dionice po pocetnoj stacionazi
                 Dionica pocetnaDionica = dioniceList.get(new Random().nextInt(dioniceList.size() - 1)); //ne moze biti zadnja dionica
-                Dionica zavrsnaDionica = dioniceList.get(new Random().nextInt(dioniceList.indexOf(pocetnaDionica) + 1, dioniceList.size()));
+                Dionica zavrsnaDionica = dioniceList.get(new Random().nextInt(dioniceList.indexOf(pocetnaDionica), dioniceList.size())); // dioniceList.indexOf + 1 iskljucuje pocetnu dionicu
 
                 //broj osovina - ovisno o kategoriji (vidi po kategorijama)
                 int brojOsovina = BrojOsovinaUtils.generateBrojOsovina(randomKategorija);

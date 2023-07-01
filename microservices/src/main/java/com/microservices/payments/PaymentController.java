@@ -103,7 +103,7 @@ public class PaymentController {
 
             for (Vehicle v: vehicles) {
                 List<Dionica> dionicaList = DionicaUtils.getDionice(dioniceMap.get(v.getOznakaAutoceste()), v);
-                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime() - (long) (2 * 60 * 60 * 1000)); //zbog vremenske zone
+                Timestamp pocetnoVrijeme = new Timestamp(v.getVrijeme().getTime()); //zbog vremenske zone
                 for (Dionica d: dionicaList) {
                     List<NaplatnaTocka> naplatnaTockaList = naplatneTockeMap.get(d);
                     for (NaplatnaTocka n: naplatnaTockaList) {
@@ -114,6 +114,7 @@ public class PaymentController {
                             Double put = d.getZavrsnaStacionaza() - d.getPocetnaStacionaza();
                             Double vrijeme = put / v.getProsjecnaBrzina();
                             Timestamp vrijemeOcitanja = new Timestamp(pocetnoVrijeme.getTime() + (long) (vrijeme * 60 * 60 * 1000));
+                            pocetnoVrijeme = vrijemeOcitanja;
 
                             for (Uredaj u : uredajList) {
                                 Long id = paymentRepository.lastId() == null ? Long.valueOf(1) : paymentRepository.lastId() + 1;
