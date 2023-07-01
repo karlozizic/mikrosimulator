@@ -2,18 +2,26 @@ package com.microservices.payments;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.Utils.DionicaUtils;
+import com.microservices.payments.Utils.ExcelGenerator;
 import com.microservices.payments.Utils.Parser;
 import com.microservices.payments.Utils.OcitanjeUtils;
 import com.microservices.payments.models.*;
 import com.microservices.vehicles.Utils.JsonReader;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.*;
@@ -41,6 +49,23 @@ public class PaymentController {
         List<Payment> payments = paymentRepository.findAll();
         logger.info("payment-service payments() found: " + payments.size() + " payments");
         return payments;
+    }
+
+    @GetMapping(path="/payments/excel")
+    public ResponseEntity<ByteArrayResource> allExcel() throws Exception{
+        try {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            XSSFWorkbook workbook = ExcelGenerator.generateExcel(paymentRepository.findAll());
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(new MediaType("application", "force-download"));
+            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Payments.xlsx");
+            workbook.write(stream);
+            workbook.close();
+            return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
+                    header, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(path = "/payments/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
