@@ -2,20 +2,22 @@ package com.microservices.vehicles;
 
 import com.microservices.exceptions.VehicleNotFoundException;
 import com.microservices.payments.models.Vrijeme;
-import com.microservices.vehicles.Utils.BrojOsovinaUtils;
-import com.microservices.vehicles.Utils.JsonReader;
-import com.microservices.vehicles.Utils.Parser;
-import com.microservices.vehicles.Utils.RegistracijaUtils;
+import com.microservices.vehicles.Utils.*;
 import com.microservices.vehicles.models.Dionica;
 import com.microservices.vehicles.models.Drzava;
 import com.microservices.vehicles.models.Ekorazred;
 import com.microservices.vehicles.models.Kategorija;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -50,12 +52,29 @@ public class VehiclesController {
     }
 
 //    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
-@RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vehicle> all() {
         logger.info("vehicles-service all() invoked: ");
         List<Vehicle> vehicles = vehicleRepository.findAll();
         logger.info("vehicles-service all() found: " + vehicles);
         return vehicles;
+    }
+
+    @GetMapping (path="/vehicles/excel")
+    public ResponseEntity<ByteArrayResource> allExcel() throws Exception{
+    	try {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            XSSFWorkbook workbook = ExcelGenerator.generateExcel(vehicleRepository.findAll());
+            HttpHeaders header = new HttpHeaders();
+            header.setContentType(new MediaType("application", "force-download"));
+            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Vehicles.xlsx");
+            workbook.write(stream);
+            workbook.close();
+            return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
+                    header, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping(path = "/vehicles/generate/{number}")//, produces = MediaType.APPLICATION_JSON_VALUE)
