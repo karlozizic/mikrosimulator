@@ -49,7 +49,7 @@ public class WebPaymentsService {
         Payment[] payments = null;
 
         try {
-            payments = restTemplate.getForObject(serviceUrl + "/payments", Payment[].class, (Object) null);
+            payments = restTemplate.getForObject(serviceUrl + "/payments/all", Payment[].class, (Object) null);
         } catch (HttpClientErrorException e) {
             // 404 Not Found
         }

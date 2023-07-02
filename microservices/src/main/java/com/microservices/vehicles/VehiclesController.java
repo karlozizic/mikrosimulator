@@ -52,7 +52,7 @@ public class VehiclesController {
     }
 
 //    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    @RequestMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/vehicles/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Vehicle> all() {
         logger.info("vehicles-service all() invoked: ");
         List<Vehicle> vehicles = vehicleRepository.findAll();

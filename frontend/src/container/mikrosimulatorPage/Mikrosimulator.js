@@ -64,6 +64,31 @@ const Mikrosimulator = () => {
         });
     }
 
+    const jsonVozila = async () => {
+        await axios.get('/vehicles/all', {
+            responseType: 'blob'
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `vehicles.json`);
+            document.body.appendChild(link);
+            link.click();
+        });
+    }
+
+    const jsonOcitanja = async () => {
+        await axios.get('/payments/all', {
+            responseType: 'blob'
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `payments.json`);
+            document.body.appendChild(link);
+            link.click();
+        });
+    }
     const changeHandler = (event) => {
         const { name, value } = event.target;
         switch (name) {
@@ -128,8 +153,10 @@ const Mikrosimulator = () => {
                         </Row>
                         <Row>
                             <Col>
-                                <Button style={{marginLeft: "1.25em"}} color={"primary"} onClick={excelVozila}>Excel vozila</Button>
+                                <Button color={"primary"} onClick={excelVozila}>Excel vozila</Button>
                                 <Button style={{marginLeft: "1.25em"}}  color={"primary"} onClick={excelOcitanja}>Excel očitanja</Button>
+                                <Button style={{marginLeft: "1.25em"}}  color={"primary"} onClick={jsonVozila}>JSON vozila</Button>
+                                <Button style={{marginLeft: "1.25em"}}  color={"primary"} onClick={jsonOcitanja}>JSON očitanja</Button>
                             </Col>
                         </Row>
                     </CardBody>

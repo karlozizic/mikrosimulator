@@ -43,7 +43,7 @@ public class PaymentController {
         this.paymentRepository = paymentRepository;
     }
 
-    @RequestMapping(path = "/payments", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/payments/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Payment> payments(){
         logger.info("payment-service payments() invoked");
         List<Payment> payments = paymentRepository.findAll();
