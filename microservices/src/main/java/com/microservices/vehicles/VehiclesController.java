@@ -9,6 +9,7 @@ import com.microservices.vehicles.models.Ekorazred;
 import com.microservices.vehicles.models.Kategorija;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.bouncycastle.asn1.cms.Time;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 import java.util.logging.Logger;
@@ -105,23 +105,28 @@ public class VehiclesController {
             JSONArray oznake = (JSONArray) oznakeAutocestaJSON.get("oznake"); //JSONArray
             ArrayList<String> oznakeAutocesta = Parser.parseOznake(oznake);
 
-            Timestamp pocetnoVrijeme;
-            Timestamp zavrsnoVrijeme;
             int intenzitet;
+            Timestamp pocetnoVrijeme = null;
+            Timestamp zavrsnoVrijeme = null;
+            boolean currentTime = false;
             Map kategorijeMap = new HashMap<Kategorija, Integer>();
+            Map<String, Timestamp> dioniceTimeMap = new HashMap<String, Timestamp>();
             if (vrijeme.getPocetnoVrijeme() != null && vrijeme.getZavrsnoVrijeme() != null) {
                 pocetnoVrijeme = new Timestamp(vrijeme.getPocetnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
                 zavrsnoVrijeme = new Timestamp(vrijeme.getZavrsnoVrijeme().getTime() - (long) 2 * 60 * 60 * 1000);
                 int brojSati = (int) ((zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime()) / (1000 * 60 * 60));
-                intenzitet = Integer.parseInt(intenzitetParam);
+                if (intenzitetParam.equals("-1")) {
+                    intenzitet = -1;
+                } else {
+                    intenzitet = Integer.parseInt(intenzitetParam);
+                }
                 for(Kategorija k : kategorijeArray) {
                     kategorijeMap.put(k, intenzitet * brojSati);
                 }
 
             } else {
-                pocetnoVrijeme = new Timestamp(System.currentTimeMillis());
-                zavrsnoVrijeme = new Timestamp(System.currentTimeMillis() + 1); // + 1 da ne bi bilo isto vrijeme
                 intenzitet = -1;
+                currentTime = true;
             }
 
             for (int i = 0; i < num; i++) {
@@ -168,11 +173,23 @@ public class VehiclesController {
                 //registracijska oznaka - ovisno o drzavi registracije (grad?)
                 String registracijskaOznaka = RegistracijaUtils.generateRegistracija(randomDrzavaRegistracije);
                 float brzina = new Random().nextFloat(90, 130);
+                Timestamp vrijemeGeneriranja = null;
+                if (currentTime) {
+                    if (dioniceTimeMap.containsKey(pocetnaDionica.getOznaka())) {
+                        vrijemeGeneriranja = dioniceTimeMap.get(pocetnaDionica.getOznaka());
+                        int randomInterval = new Random().nextInt(30, 60) * 1000;
+                        vrijemeGeneriranja = new Timestamp(vrijemeGeneriranja.getTime() + randomInterval);
+                        dioniceTimeMap.put(pocetnaDionica.getOznaka(), vrijemeGeneriranja);
+                    } else {
+                        vrijemeGeneriranja = new Timestamp(System.currentTimeMillis());
+                        dioniceTimeMap.put(pocetnaDionica.getOznaka(), vrijemeGeneriranja);
+                    }
+                } else {
+                    long vrijemeIzmedu = zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime();
+                    vrijemeGeneriranja = new Timestamp(pocetnoVrijeme.getTime() +  new Random().nextLong(vrijemeIzmedu));
+                }
 
-                long vrijemeIzmedu = zavrsnoVrijeme.getTime() - pocetnoVrijeme.getTime();
-                Timestamp randomVrijeme = new Timestamp(pocetnoVrijeme.getTime() +  new Random().nextLong(vrijemeIzmedu));
-
-                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), oznaka, pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId(), brzina, randomVrijeme);
+                Vehicle generatedVozilo = new Vehicle(id, nacinNaplate, boja, brojOsovina, VIN, idENC, registracijskaOznaka, randomEkoRazred.getNaziv(), randomKategorija.getNaziv(), randomDrzavaRegistracije.getNaziv(), oznaka, pocetnaDionica.getOznaka(), pocetnaDionica.getDionicaId(), zavrsnaDionica.getOznaka(), zavrsnaDionica.getDionicaId(), brzina, vrijemeGeneriranja);
                 id += 1;
                 vehicleRepository.save(generatedVozilo);
             }
